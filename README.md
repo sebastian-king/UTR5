@@ -16,4 +16,5 @@
 | One 1⁄4” x 3’ x 7’ clear acrylic sheet                               |       | 1        |              |      |
 | one 1⁄4” x 4’ x 7’ clear acrylic sheet                               |       | 1        |              |      |
 
-[Image of an assembled field](http://imgur.com/a/lrKux.jpg)
+![Image of an assembled field](http://imgur.com/a/lrKux.jpg)
+
