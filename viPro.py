@@ -20,12 +20,12 @@ for c in cnts:
 mask = np.zeros_like(gray_image)
 cv2.drawContours(mask, candidates, 0, (255, 255, 255), -1)
 
-cv2.imshow("mask", mask)
+#cv2.imshow("mask", mask)
 
 out = np.zeros_like(gray_image)
 out[mask == 255] = gray_image[mask == 255]
 
-cv2.imshow("woo", out)
+#cv2.imshow("woo", out)
 ret,filter_image = cv2.threshold(gray_image, 150, 255, cv2.THRESH_BINARY)
 ret,filter_maskimage = cv2.threshold(out, 150, 255, cv2.THRESH_BINARY)
 
@@ -43,5 +43,5 @@ try:
     cv2.waitKey(0)
 except:
     from matplotlib import pyplot as plt
-    plt.imshow(th, cmap = 'gray')
+    plt.imshow(filter_maskimage, cmap = 'gray')
     plt.show()
