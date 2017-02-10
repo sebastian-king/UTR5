@@ -29,6 +29,10 @@ cv2.imshow("woo", out)
 ret,filter_image = cv2.threshold(gray_image, 150, 255, cv2.THRESH_BINARY)
 ret,filter_maskimage = cv2.threshold(out, 150, 255, cv2.THRESH_BINARY)
 
+dots = cv2.bilateralFilter(filter_maskimage, 11, 17, 17)
+_, cnts, _ = cv2.findContours(dots, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE) 
+print(len(cnts)-1) # -1 because the die itself counts
+
 try:
     cv2.imshow("mask", mask)
     cv2.imshow("woo", out)
