@@ -1,0 +1,91 @@
+# Rough algorithm in pseudo code
+
+# starting point is always A7, must end on A7 (20 pts.)
+# there must be no obstructions or dead ends on the field perimeter and no infrastructure on starting point
+# therefore first thing to do is find the closest objective tunnel ending (and therefore cache location)
+# let's start by going clockwise, because why not
+# let's call NORTH/SOUTH moving on the y (numerical) axis and EAST/WEST moving on the x (alphabetical) axis
+# forward must be determined somehow at the start depending on the direction of the arm
+
+position = (A,7)
+
+FACING_DIRECTION = NORTH; # (NORTH|EAST), maybe have a button to tell the robot this
+
+LOOP # this is tested in findOTtest.py
+	      IF FACING NORTH:
+                IF (position_x == A AND position_y == 7) THEN
+                        MOVE NORTH
+                ELSE IF (position_x == A AND pos_y == 0) THEN
+                        MOVE EAST
+                ELSE IF (position_x == G AND position_y == 0) THEN
+                        EXIT # uh oh, since we were supposed to be facing the cache and have traversed half of the perimeter, something has gone wrong.
+                ELSE IF (position_y == 0) THEN
+                        MOVE EAST
+                ELSE IF (position_x == 0) THEN
+                        MOVE NORTH
+        ELSE
+                IF (position_x == A AND pos_y == 7) THEN
+                        MOVE EAST
+                ELSE IF (position_x == G AND position_y == 7) THEN
+                        MOVE NORTH
+                ELSE IF (position_x == G and position_y == 0) THEN
+                        EXIT # uh oh, since we were supposed to be facing the cache and have traversed half of the perimeter, something has gone wrong.
+                ELSE IF (position_y == 7) THEN
+						MOVE EAST
+                ELSE IF (position_x == G) THEN
+						MOVE NORTH
+	IF (test for infrastructure below == true) THEN
+		BREAK OUT OF THE LOOP
+	END IF
+END LOOP
+
+# We are now sitting on top of the cache square.
+# Because it is possible to extrapolate the end of the path if we encounter the maximum number of corners,
+# it is therefore best to use the time now to open the cache as we have moved the least amount and thus,
+# should be more accurately positioned.
+# Also, the robot will not turn and we are only going to face the direction of one of the caches
+
+IF (FACING_DIRECTION == NORTH) {
+	MOVE SOUTH 4.5 INCHES # robot is 9x9 inches
+ELSE
+	MOVE WEST 4.5 INCHES
+END IF
+
+LOWER THE ARM
+
+RAISE THE ARM
+
+INSPECT DIE WITH VISUAL PROCESSING
+
+DISPLAY THE DIE VALUE ON 7 SEGMENT DISPLAY
+
+# since infrastructure cannot be in the perimeter the path must continue perpendicular to the side,
+# and since we know which way we are facing we can continue in the correct direction
+
+# the following procedure attempts to follow the live path (TODO)
+# while following the live path the robot will check every spot that is next to the OT to look for dead ends
+
+# PLEASE IGNORE THE BELOW CODE FOR NOW
+IF (position x == A) THEN
+	LOOP
+		MOVE RIGHT
+		IF (test for infrastructure below == false) THEN
+			MOVE LEFT # going back to where we had infrastructure below us
+			MOVE UP
+			IF (test for infrastructure below == false) THEN
+				MOVE DOWN
+				MOVE DOWN # x2
+				IF (test for infrastructure == false) THEN
+					# we have tried all possibilities (UP,DOWN,LEFT,RIGHT and found no more infrastructure, error, stop.
+				ELSE
+					
+			END IF
+		END IF
+	END LOOP
+ELSE IF (position x == G) THEN
+	MOVE LEFT
+ELSE IF (position y == 1) THEN
+	MOVE DOWN
+ELSE
+	MOVE UP
+END IF
