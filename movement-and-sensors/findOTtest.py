@@ -2,11 +2,11 @@
 import sys
 import time
 
-pos_x, pos_y = 0, 6;
-w, h = 7, 7
-Map = [[0 for a in range(w)] for b in range(h)]
+pos_x, pos_y = 0, 6; # Position on Field
+w, h = 7, 7 # Field width and height
+Map = [[0 for a in range(w)] for b in range(h)] # Empty field of w width and h height
 
-FACING = int(sys.argv[1]) # 1 = NORTH, 0 = EAST
+FACING = int(sys.argv[1]) # 1 = NORTH, 0 = EAST 
 
 def x(str):
         return ord(str)-65
