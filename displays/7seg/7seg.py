@@ -3,6 +3,7 @@
 import RPi.GPIO as GPIO
 import os, sys
 
+# usage: python 7seg.py 4; displays the number 4; passing 10 as the display number will clear the display
 NUMBER = int(sys.argv[1])
 
 GPIO.setwarnings(False)
