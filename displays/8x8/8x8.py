@@ -3,7 +3,7 @@
 import RPi.GPIO as GPIO
 import time
 
-# what to drive pins 1-4 do??
+# what do drive pins 1-4 do??
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
