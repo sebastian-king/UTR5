@@ -4,10 +4,10 @@ apt-get update
 apt-get upgrade
 apt-get dist-upgrade
 
-apt-get install git
+apt-get install git python-opencv python-numpy
 cd /usr/src/
 
-git clone https://github.com/afloresescarcega/UTR5.git
+git clone https://github.com/afloresescarcega/UTR5.git # perhaps ignore thiso file
 
 adduser r5 --home /home/r5 -q --disabled-password --gecos GECOS
 
