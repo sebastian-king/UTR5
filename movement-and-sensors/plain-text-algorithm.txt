@@ -6,7 +6,7 @@ Legend: C=Cache, O=(Live) Objective Tunnel, E=Dead Ends, B=Obstruction
                 NORTH
           A  B  C  D  E  F  G
         1    C
-        2    O           Q
+        2    O           B
         3    O  O  B  E  E
 WEST    4          O            EAST
         5       B  O
