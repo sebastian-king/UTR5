@@ -2,7 +2,7 @@ Our method for the competition:
 
 Field diagram example (always 7x7):
 
-Legend: C=Cache, O=(Live) Objective Tunnel, E=Dead Ends, B=Obstruction
+Legend: C=Cache, O=(Live) Objective Tunnel, E=Dead Ends, B=Obstruction, X=Start and End point
                 NORTH
           A  B  C  D  E  F  G
         1    C
