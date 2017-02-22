@@ -2,11 +2,14 @@
 import sys
 import time
 
-pos_x, pos_y = 0, 6; # Position on Field
+pos_x, pos_y = 0, 6; # Position on Field, == x('A'),y(7)
 w, h = 7, 7 # Field width and height
-Map = [[0 for a in range(w)] for b in range(h)] # Empty field of w width and h height
+Map = [[0 for a in range(w)] for b in range(h)] # Create empty matrix for field of w width and h height
 
-FACING = int(sys.argv[1]) # 1 = NORTH, 0 = EAST 
+#FACING = int(sys.argv[1]) # 1 = NORTH, 0 = EAST 
+FACING = 1 # Always start facing NORTH because we are now rotating to pick up the cache
+
+# TODO: remove the EAST codes as we are now always facing north
 
 def x(str):
         return ord(str)-65
