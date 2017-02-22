@@ -1,16 +1,19 @@
 Our method for the competition:
 
-Feild diagram (7x7):
-                 NORTH
+Field diagram example (always 7x7):
+
+Legend: C=Cache, O=(Live) Objective Tunnel, E=Dead Ends, B=Obstruction
+                NORTH
           A  B  C  D  E  F  G
-        1
-        2
-        3
-WEST    4                       EAST
-        5
-        6
+        1    C
+        2    O           Q
+        3    O  O  B  E  E
+WEST    4          O            EAST
+        5       B  O
+        6          O  O  O  C
         7 X
                  SOUTH
+
 Step 0: Place the robot down in the middle of A7 facing NORTH (marked as X)
 
 Step 1: Move around the perimeter of the field until we detect an EM field.
@@ -21,15 +24,16 @@ Step 2: If an EM field has been found, position the robot now to pick up the cac
         
 Step 3: Pick up the lid of the cache, read the value of the die and display that value on the 7 segment display.
 
-Step 4: Time to follow the live path using the EM field detector, the path must continue perpendicular from where we are standing right now so let's turn 180 degrees.
+Step 4: Time to follow the live path using the EM field detector, the path must continue perpendicular from where we are standing right now so let's go in the 180 degrees direction (but no need to rotate, of course).
 
 Step 5: Move forward to the first step of the path, but if this is a round that has dead ends: after having moved forward we will strafe left and right to check using the sonar and IR for dead end tunnels. If we find a dead end tunnel, we will follow it using the IR and sonar until its end, then return to where the dead end started to continue following the live tunnel.
-  If there is an obsticle in front of us at any time, we will manouver all of the around the obsticle (clockwise, why not) until the EM field detector or sonar/IR finds the path that we were looing for again.
+  If there is an obsticle in front of us at any time, we will manouver all around the obsticle (clockwise, why not) until the EM field detector or sonar/IR finds the path that we were looking for again.
     -- There may be obsticles that are not over any path.
         Repeat this until either:
           We move away from the EM field, and have therefore encountered a corner and look at the adjacent spots for the next leg
           We reach the end of the path (we find the perimeter)
           We reach the maximum number of 90 degree turns that a path in this round can have, in which case we extrapolate the rest of the path as it must continue straight to the end from where we have it currently mapped
+        Every time we make a move, we update the map with what we have learned from this new spot on the 8x8 display
    Note: when searching around obsticles, we may need to factor in that a dead end could spawn from under an obsticle over a live path, unless the rules mention that this won't happen.
           
 Step 6: Return to the spot A7 for the final 20 points.
