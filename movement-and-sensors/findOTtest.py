@@ -9,7 +9,7 @@ Map = [[0 for a in range(w)] for b in range(h)] # Create empty matrix for field 
 #FACING = int(sys.argv[1]) # 1 = NORTH, 0 = EAST 
 FACING = 1 # Always start facing NORTH because we are now rotating to pick up the cache
 
-# TODO: remove the EAST codes as we are now always facing north
+# TODO: remove the EAST codes as we are now always facing north, maybe
 
 def x(str):
         return ord(str)-65
