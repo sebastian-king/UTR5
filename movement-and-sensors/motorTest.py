@@ -22,7 +22,7 @@ motors[6] = 20 # motor 4
 motors[7] = 16
 
 def motor(number):
-	return number-2+number;
+	return 2*number-2;
 
 for motor in motors:
 	io.setup(motor, io.OUT)
