@@ -73,9 +73,9 @@ def motor_run(motor_number, direction, speed, degree)
 				clockwise(motor_number, speed)		# run motor in clockwise direction with user defined speed
 			else:
 				counter_clockwise(motor_number, speed)
-			if initA != encoderA[motor_number-1] || initB != encoderB[motor_number-1]:	# continue run until state change
+			if initA != encoderA[motor_number-1] or initB != encoderB[motor_number-1]:	# continue run until state change
 				break
-		countAB++				# increment counter for each state change
+		countAB += 1				# increment counter for each state change
 	stop(motor_number)
 
 def motor_run(motor_number, direction, speed, degree)
@@ -100,10 +100,10 @@ def motor_run(motor_number, direction, speed, degree)
                                 clockwise(motor_number, speed)          # run motor in clockwise direction with user defined speed
                         else:
                                 counter_clockwise(motor_number, speed)
-                        if initA != encoderA[motor_number-1] || initB != encoderB[motor_number-1]:    # continue run until state change
+                        if initA != encoderA[motor_number-1] or initB != encoderB[motor_number-1]:    # continue run until state change
                                 break
-                countAB++                               # increment counter for each state change
-		stopA = encoderA[motor_number-1]       # get current A value -- overshoot depends on load and speed of the motor
+                countAB += 1				# increment counter for each state change
+		stopA = encoderA[motor_number-1]	# get current A value -- overshoot depends on load and speed of the motor
 		stopB = encoderB[motor_number-1]
 
 	# once program exit the previous while loop
@@ -117,7 +117,7 @@ def motor_run(motor_number, direction, speed, degree)
 			else:
 				stop(motor_number)		# brake the motor
 				countstop += 1			# stop counter increment by 1
-			if stopA != A || stopB != B || end != 0:
+			if stopA != A or stopB != B or end != 0:
 				break				# loop if states do not change
 		# if states change,meaning overshoot occur
 		countover += 1	# increment overshoot counter
