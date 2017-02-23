@@ -16,7 +16,7 @@ WEST    4          O            EAST
 
 Step 0: Place the robot down in the middle of A7 facing NORTH (marked as X)
 
-Step 1: Move around the perimeter of the field until we detect an EM field.
+Step 1: Move around the perimeter of the field (clockwise, why not) until we detect an EM field.
   -- There will be no obsticles, dead ends or other tunnels on the perimeter except for the two caches. There may be paper, but this will not affect the EM field.
   -- The python based algorithm for this is at https://github.com/afloresescarcega/UTR5/blob/master/movement-and-sensors/findOTtest.py
    
