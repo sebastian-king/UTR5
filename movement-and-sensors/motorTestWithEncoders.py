@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 # This is a very basic test to make the DC motors plugged into the L293D chip move forwards and backwards at variable speeds
-# the pi currently cannot interface with the encoders due to a lack of GPIO ports (extender needed, or we can use reserved pins)
+# need to figure out if encoders are going in reserved pins or an expander
 
 import sys
 import time
@@ -21,22 +21,23 @@ motors[5] = 21
 motors[6] = 20 # motor 4
 motors[7] = 16
 
-encodersA[0] = 1
-encodersB[0] = 2
-encodersA[1] = 3
-encodersB[1] = 4
-encodersA[2] = 5
-encodersB[2] = 6
-encodersA[3] = 7
-encodersB[3] = 8
+# mappings for direct access to the PI, but I cannot guarantee these pins won't be needed for other things
+encodersA[0] = 7
+encodersB[0] = 8
+encodersA[1] = 25
+encodersB[1] = 24
+encodersA[2] = 11
+encodersB[2] = 9
+encodersA[3] = 10
+encodersB[3] = 22
 
-countover[0] = 0;
-countover[1] = 1;
-countover[2] = 2;
-countover[3] = 3;
+countover[0] = 0
+countover[1] = 1
+countover[2] = 2
+countover[3] = 3
 
 def motor(number):
-	return number-2+number;
+	return number-2+number
 
 for motor in motors:
 	io.setup(motor, io.OUT)
@@ -52,16 +53,16 @@ def speed(speed):
 		wiringpi.pwmWrite(18, 0)
 
 def motor_run(motor_number, direction, speed, degree)
-	desire_angle = degree;
+	desire_angle = degree
 	# in this case gear ratio is 1:200
 	gear_ratio = 200;
 	# convert the desired angle to the total angle at the rear shaft (multiply gear ratio)
-	smalldegree = desire_angle * gear_ratio;
+	smalldegree = desire_angle * gear_ratio
 	# 12 count per revolution at the rear shaft
 	# meaning each count represent 30 degree
 	# to calculate how many counts needed for the desire angle
 	# we divide total angle at the rear shaft with 30 degree
-	limit = smalldegree / 30;
+	limit = smalldegree / 30
 
 	countAB=0; #reset the counter
 	while countAB < limit: # while counter is in the limit
