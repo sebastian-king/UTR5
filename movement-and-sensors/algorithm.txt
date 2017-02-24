@@ -9,7 +9,7 @@
 
 position = (A,7)
 
-FACING_DIRECTION = NORTH; # (NORTH|EAST), maybe have a button to tell the robot this
+FACING_DIRECTION = NORTH; # (NORTH|EAST), maybe have a button to tell the robot this #we decided against this right?
 
 LOOP # this is tested in findOTtest.py
 	      IF FACING NORTH:
