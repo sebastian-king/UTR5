@@ -10,6 +10,9 @@ TODO:
 
 connect to SSH/SFTP (configure password, hostname and networking)
 
+developing and testing (nano/sftp ide/wifi for testing)
+ -- and how to use github to develop
+
 flash images on (create boot and /)
 
 install robot from github (finish install-a-pi.sh)
