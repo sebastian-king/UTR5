@@ -11,7 +11,7 @@ TODO:
 connect to SSH/SFTP (configure password, hostname and networking)
 
 developing and testing (nano/sftp ide/wifi for testing)
- -- and how to use github to develop
+ -- and how to use github to develop -- could use github desktop + ide
 
 flash images on (create boot and /)
 
