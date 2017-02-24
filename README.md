@@ -2,6 +2,17 @@
 
 [The link to the Google Drive.](https://drive.google.com/drive/folders/0B3CkMkwtokGCRW9SM05Hc056OWc)
 
+--------------------------------------------------------------------------------------------------------------------------
+
+Guide for using the Pi (work in progress, bare with me):
+
+TODO:
+connect to SSH/SFTP (configure password, hostname and networking)
+flash images on (create boot and /)
+install robot from github (finish install-a-pi.sh)
+
+--------------------------------------------------------------------------------------------------------------------------
+
 ## Field Parts [WIP]
 
 [comment]: <> (Visit http://www.tablesgenerator.com/markdown_tables# to easily generate tables like the one below)
