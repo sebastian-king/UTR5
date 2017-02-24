@@ -148,3 +148,24 @@ def stop(motor_number):
         io.output(motors[motor_number+1], True)
 
 clockwise(motor(4), 512) # etc...
+
+
+
+
+#holonomic drive wrapper
+#this stuff should probably be in a seperate fie eventually
+
+def move_forward(distance):
+	#constant for the distance, in <unit of measurement>, that one wheel roation travels when wheel is straight
+	distRotRatio = 5
+	#constant for the distance, in <unit of measurement>, that one wheel roation travels when wheel is at a 45 degree angle
+	distRotRatioDiag = rotDistRatio / math.sqrt(2)
+	numRotations = distance / distRotRatioDiag
+	angle = rumRotations * 360
+
+	speed = 512		#not sure what speed to use
+	motor_run_with_overshoot(top_right, 1, speed, angle)
+	motor_run_with_overshoot(top_left, 0, speed, angle)
+	motor_run_with_overshoot(b_right, 1, speed, angle)
+	motor_run_with_overshoot(b_left, 0, speed, angle)
+
