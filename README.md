@@ -7,8 +7,11 @@
 Guide for using the Pi (work in progress, bare with me):
 
 TODO:
+
 connect to SSH/SFTP (configure password, hostname and networking)
+
 flash images on (create boot and /)
+
 install robot from github (finish install-a-pi.sh)
 
 --------------------------------------------------------------------------------------------------------------------------
