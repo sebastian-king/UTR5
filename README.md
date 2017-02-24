@@ -8,7 +8,7 @@ Guide for using the Pi (work in progress, bare with me):
 
 TODO:
 
-connect to SSH/SFTP (configure password, hostname and networking)
+connect to SSH/SFTP (configure password, hostname and networking -- crossover net)
 
 developing and testing (nano/sftp ide/wifi for testing)
  -- and how to use github to develop -- could use github desktop + ide
