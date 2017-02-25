@@ -19,7 +19,7 @@ install robot from github (finish install-a-pi.sh)
 
 images (TODO):
  basic configured SD:
-  * serial enaabled + diable BT for hard uart
+  * serial enabled + diable BT for hard uart
   * ssh enabled
   * hostname + local IP
   * username + password
