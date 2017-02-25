@@ -28,7 +28,8 @@ Images (All Raspbian Jessie, and Pi 3 B):
   * eth net ready -- yes, ICS
   * pi camera enabled -- raspi-config
   
-  ```network={
+  ```
+  network={
         ssid="2WIRE123"
         psk="QGKWMVVJ"
   }
