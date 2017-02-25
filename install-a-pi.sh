@@ -4,7 +4,7 @@ apt-get update
 apt-get upgrade
 apt-get dist-upgrade
 
-apt-get install git python-opencv python-numpy
+apt-get install git
 cd /usr/src/
 
 git clone https://github.com/afloresescarcega/UTR5.git # perhaps ignore thiso file
