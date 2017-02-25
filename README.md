@@ -14,8 +14,31 @@ developing and testing (nano/sftp ide/wifi for testing)
  -- and how to use github to develop -- could use github desktop + ide
 
 flash images on (create boot and /)
-
+d
 install robot from github (finish install-a-pi.sh)
+
+images (TODO):
+ basic configured SD:
+  serial enaabled + diable BT for hard uart
+  ssh enabled
+  hostname + local IP
+  username + password
+  not expanded
+  wifi ready
+  eth net ready
+  pi camera enabled
+ 
+ basic boot SD:
+  same as above but only 100Mb boot partition
+  
+ basic flash drive:
+  same as above but only the 4Gb root parition
+
+ opencv:
+  partition pre-configured same as the SD card but with opencv installed for compiling on the architechture
+ 
+ backup:
+  latest fully working status backed up as a .img file
 
 --------------------------------------------------------------------------------------------------------------------------
 
