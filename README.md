@@ -31,7 +31,8 @@ Images (All Raspbian Jessie, and Pi 3 B):
   ```network={
         ssid="2WIRE123"
         psk="QGKWMVVJ"
-  }```
+  }
+  ```
  
  basic boot SD:
   * same as above but only 100Mb boot partition
