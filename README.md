@@ -17,22 +17,27 @@ flash images on (create boot and /)
 d
 install robot from github (finish install-a-pi.sh)
 
-images (TODO):
+Images (All Raspbian Jessie, and Pi 3 B):
  basic configured SD:
-  * serial enabled + diable BT for hard uart
-  * ssh enabled
-  * hostname + local IP
-  * username + password
-  * not expanded
-  * wifi ready
-  * eth net ready
-  * pi camera enabled
+  * serial enabled + diable BT for hard uart -- dtoverlay=pi3-disable-bt >> /boot/config.txt
+  * ssh enabled -- raspi-config
+  * hostname + local IP -- raspi-config && ?
+  * username + password -- username: pi, passwd: `passwd`, no root:root login please, only pi:root.
+  * not expanded -- yes
+  * wifi ready -- use 2WIRE123 QGKWMVVJ, after enabling use `ifdown wlan0 && sleep 10 && ifup wlan0`
+  * eth net ready -- yes, ICS
+  * pi camera enabled -- raspi-config
+  
+  ```network={
+        ssid="2WIRE123"
+        psk="QGKWMVVJ"
+  }```
  
  basic boot SD:
   * same as above but only 100Mb boot partition
   
  basic flash drive:
-  * same as above but only the 4Gb root parition
+  * same as above but only the 4Gb root parition -- somehow unmounts boot post-post
 
  opencv:
   * partition pre-configured same as the SD card but with opencv installed for compiling on the architechture
