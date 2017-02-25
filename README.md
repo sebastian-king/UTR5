@@ -21,6 +21,7 @@ Images (All Raspbian Jessie, and Pi 3 B):
  basic configured SD:
   * serial enabled + diable BT for hard uart -- dtoverlay=pi3-disable-bt >> /boot/config.txt
   * ssh enabled -- raspi-config
+  * i2c enabled -- raspi-config
   * hostname + local IP -- raspi-config && keep local IP assigned by the PI so that eth requests on variable subnets work
   * username + password -- username: pi, passwd: `passwd`, no root:root login please, only pi:root.
   * not expanded -- yes
