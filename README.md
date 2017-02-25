@@ -23,13 +23,16 @@ Images (All Raspbian Jessie, and Pi 3 B):
   * ssh enabled -- raspi-config
   * i2c enabled -- raspi-config
   * hostname + local IP -- raspi-config && keep local IP assigned by the PI so that eth requests on variable subnets work
+  -- region5pi.local
   * username + password -- username: pi, passwd: `passwd`, no root:root login please, only pi:root.
+  -- pi:region5
   * not expanded -- yes
   * wifi ready -- use 2WIRE123 QGKWMVVJ, after enabling use `ifdown wlan0 && sleep 10 && ifup wlan0`
   * eth net ready -- yes, ICS
   * pi camera enabled -- raspi-config
   * disable dhcp on boot -- raspi-config (too slow to have it enabled)
-  
+  * raspi-config updated -- yes
+  * update--upgrade--dist-upgrade -- 25/2/17
   ```
   network={
         ssid="2WIRE123"
