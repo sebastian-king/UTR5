@@ -45,7 +45,7 @@ Images (All Raspbian Jessie, and Pi 3 B):
   * partition pre-configured same as the SD card but with opencv installed for compiling on the architechture
  
  backup:
-  * latest fully working status backed up as a .img file
+  * latest fully working status backed up as a .img file -- root partition only, a boot partition can be added when installing
 
 --------------------------------------------------------------------------------------------------------------------------
 
