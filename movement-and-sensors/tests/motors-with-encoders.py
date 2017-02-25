@@ -155,17 +155,42 @@ clockwise(motor(4), 512) # etc...
 #holonomic drive wrapper
 #this stuff should probably be in a seperate fie eventually
 
-def move_forward(distance):
-	#constant for the distance, in <unit of measurement>, that one wheel roation travels when wheel is straight
+#direction 1=fwd, 2=right, 3=back, 4=left
+def move(distance, direction):
+	#constant for ratio of the distance per rotation, in <unit of measurement>, that a wheel travels when wheel is straight
 	distRotRatio = 5
-	#constant for the distance, in <unit of measurement>, that one wheel roation travels when wheel is at a 45 degree angle
-	distRotRatioDiag = rotDistRatio / math.sqrt(2)
+	#constant for ratio of the distance per rotation, in <unit of measurement>, that a wheel travels when wheel is at a 45 degree angle
+	distRotRatioDiag = distRotRatio / math.sqrt(2)
 	numRotations = distance / distRotRatioDiag
 	angle = rumRotations * 360
 
+	if direction == 1:
+		FL = 0
+		FR = 1
+		BL = 0
+		BL = 1
+	if direction == 2:
+		FL = 1
+		FR = 0
+		BL = 1
+		BL = 0
+	if direction == 3:
+		FL = 1
+		FR = 1
+		BL = 0
+		BL = 0
+	if direction == 4:
+		FL = 0
+		FR = 0
+		BL = 1
+		BL = 1
+	
 	speed = 512		#not sure what speed to use
-	motor_run_with_overshoot(top_right, 1, speed, angle)
-	motor_run_with_overshoot(top_left, 0, speed, angle)
-	motor_run_with_overshoot(b_right, 1, speed, angle)
-	motor_run_with_overshoot(b_left, 0, speed, angle)
+	motor_run_with_overshoot(front_left, FL, speed, angle)
+	motor_run_with_overshoot(front_right, FR, speed, angle)
+	motor_run_with_overshoot(b_left, BL, speed, angle)
+	motor_run_with_overshoot(b_right, BR, speed, angle)
+
+
+
 
