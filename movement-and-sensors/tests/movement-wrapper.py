@@ -43,4 +43,34 @@ def move(distance, direction):
 
 
 
+#an idea for movement control based on coordinates
+
+#location [x,y] 0-7. [0,0] is bottom left (we can change this)
+loc = [1, 0]         #starting x, y
+blocklength = 10     #constant that we need to measure
+
+def isValidLoc(x, y):
+	return (0 <= x <= 7) and (0 <= y <= 7)
+
+#direction: 0=right, 1=fwd, 2=left, 3=back
+def move_one_block(direction):
+	x = loc[0]
+	y = loc[1]
+	if direction == 0:
+		x = x + 1
+	elif direction == 1:
+		y = y + 1
+	elif direction == 2:
+		x = x - 1
+	elif direction == 3:
+		y = y - 1
+
+	if isValidLoc(x, y):
+		loc[0] = x
+		loc[1] = y
+		move(blocklength, direction)
+	#else: error in movement algorithm
+
+
+
 
