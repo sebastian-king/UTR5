@@ -33,6 +33,7 @@ Images (All Raspbian Jessie, and Pi 3 B):
   * disable dhcp on boot -- raspi-config (too slow to have it enabled)
   * raspi-config updated -- yes
   * update--upgrade--dist-upgrade -- 25/2/17
+  
   ```
   network={
         ssid="2WIRE123"
