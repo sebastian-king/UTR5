@@ -14,11 +14,25 @@ developing and testing (nano/sftp ide/wifi for testing)
  -- and how to use github to develop -- could use github desktop + ide
 
 flash images on (create boot and /)
-d
+
 install robot from github (finish install-a-pi.sh)
 
-Images (All Raspbian Jessie, and Pi 3 B):
- basic configured SD:
+--------------------------------------------------------------------------------------------------------------------------------
+
+Images for the Raspberry Pi (All Raspbian Jessie-Pi 3 B v1.2):
+
+  All of the custom images can be found at https://sebs.tech/pi-images/r5/
+  
+  Guide:
+  First off, a little reason why we need these images is because Pi SD Cards become corrupted a lot, especially when the power input is not stable which is a common problem when on battery power, which a $0.75 is not efficient enough to account for. So don't be surprised when the Pi won't boot because the filesystem has become effectively gibberish. This is I have created a custom image to run the Pi from a flash drive, while only booting from a 100Mb SD Card.
+  The `opencv` image is for compiling on raspbian so a lightweight executable can be run by the robot's script for image processing.
+  
+  Boot image for SD Card (100Mb): 
+  Root image for Flash Drive (1.5Gb):
+  Basic image for SD Card-only configurations (1.6Gb)
+  SD Card-only image for `opencv` (ALOTGb): 
+
+  Basic Configured SD:
   * serial enabled + diable BT for hard uart -- dtoverlay=pi3-disable-bt >> /boot/config.txt
   * ssh enabled -- raspi-config
   * i2c enabled -- raspi-config
@@ -41,16 +55,16 @@ Images (All Raspbian Jessie, and Pi 3 B):
   }
   ```
  
- basic boot SD:
+ Basic Boot SD:
   * same as above but only 100Mb boot partition
   
- basic flash drive:
-  * same as above but only the 4Gb root parition -- somehow unmounts boot post-post
+ Basic Flash Drive:
+  * same as above but only the root parition -- somehow unmounts boot post-post
 
- opencv:
-  * partition pre-configured same as the SD card but with opencv installed for compiling on the architechture
+ `opencv` SD Card image:
+  * partition pre-configured same as the SD Card-only image but with `opencv` added
  
- backup:
+ Backup:
   * latest fully working status backed up as a .img file -- root partition only, a boot partition can be added when installing
 
 --------------------------------------------------------------------------------------------------------------------------
