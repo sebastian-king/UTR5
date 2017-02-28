@@ -28,7 +28,7 @@ install robot from github (finish install-a-pi.sh)
   The `opencv` image is for compiling on raspbian so a lightweight executable can be run by the robot's script for image processing.
   
 ###### Basic image for SD Card-only configurations (1.5Gb): https://sebs.tech/pi-images/r5/2017-01-11-raspbian-jessie-lite-pre-configured-full-min.img
-  * Serial over UART is enabled + BT is disabled for hardware UART: `dtoverlay=pi3-disable-bt >> /boot/config.txt`
+  * Serial over UART is enabled + BT is disabled for hardware UART: `raspi-config`, `dtoverlay=pi3-disable-bt >> /boot/config.txt`
   * SSH/SFTP is enabled: `raspi-config`
   * I2C is enabled: `raspi-config`
   * Pi Camera port is enabled: `raspi-config`
@@ -43,13 +43,15 @@ install robot from github (finish install-a-pi.sh)
   
 ###### Boot image for SD Card (100Mb): coming soon
   * Same as above but only the 100Mb boot partition
+  
 ###### Root image for Flash Drive (1.4Gb): coming soon
   * Same as above but only the root parition, it also unmounts the SD Card to help avoid corruption
+  
 ###### SD Card-only image for `opencv` (5.8Gb): https://sebs.tech/pi-images/r5/2017-01-11-raspbian-jessie-lite-pre-configured-full-opencv-min.img
   * Pre-configured same as the SD Card-only image but with `opencv`, `python3` and related dependencies installed
  
- Backup:
-  * latest fully working status backed up as a .img file -- root partition only, a boot partition can be added when installing
+###### Backup: coming soon
+  * Latest fully working status backed up as an .img file, root partition only, a boot partition can be added when installing
 
 --------------------------------------------------------------------------------------------------------------------------
 
