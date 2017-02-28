@@ -63,6 +63,10 @@ install robot from github (finish install-a-pi.sh)
   
 ###### SD Card-only image for `opencv` (5.8Gb): https://sebs.tech/pi-images/r5/2017-01-11-raspbian-jessie-lite-pre-configured-full-opencv-min.img
   * Pre-configured same as the SD Card-only image but with `opencv`, `python3` and related dependencies installed
+  * use `export PYTHONPATH=/usr/local/lib/python3/dist-packages/` to find `cv2.so`
+  * [Install script](https://gist.githubusercontent.com/willprice/c216fcbeba8d14ad1138/raw/6e9024162b2645989d5eca6db19f81df49a6accd/install-opencv.sh)
+  * +`apt-get install pip3`
+  * +`pip3 install numpy`
  
 ###### Backup: coming soon
   * Latest fully working status backed up as an .img file, root partition only, a boot partition can be added when installing
