@@ -4,10 +4,24 @@
 
 --------------------------------------------------------------------------------------------------------------------------
 
-Guide for using the Pi (work in progress, bare with me):
+## Guide for using the Pi (work in progress, bare with me):
 
-TODO:
+#### Step 0. Installing the Pi
+* If you have an SD Card and a Flash drive, please see the boot and root SD Card images, flash the boot image to the SD Card and the root image to the flash drive then boot the Pi with both plugged in. (The SD Card only needs to be 100Mb or larger, the SD Card must be 4Gb or larger)  
+* If you have only an SD Card--it must be 4Gb or larger--you can simply flash the 'basic pre-configured' image to the SD Card.  
+* To flash images, use [Win32DiskImager](https://sourceforge.net/projects/win32diskimager/) on Windows, and `dd if=example.img of=/dev/sdcard bs=4k` on Linux
 
+#### Step 1. Connecting to the Pi
+Now, there are many ways of connecting to the Pi with different features, I am going to list each of the *sensible* ones and their scenarios.
+##### 1. The easiest: Using a UART to USB Cable
+By using a UART to USB cable, it is a simple process of plugging in the RX, TX and GND pins, then connecting via a terminal emulator i.e. [PuTTY](http://www.putty.org/).  
+Connect GND to pin 6
+Connect RX to pin 8
+Connect TX to pin 10
+Please see [this diagram](http://www.jameco.com/Jameco/workshop/circuitnotes/raspberry_pi_circuit_note_fig2a.jpg) if you are unsure on pin numbers
+Once the pins are connected properly, you can launch PuTTY and click on Serial ([pic](https://i.stack.imgur.com/XgR6I.png)), then you must figured out which COM port the UART cable has been assigned to on your system. The best way to do this is to go to the device manager and go to the `Ports (COM & LPT)` section and find your adaptor ([pic](http://www.usconverters.com/images/xs1000-article/device-manager.jpg))
+##### 2. Using ethernet (this can provide internet too)
+##### 3. Using WiFi
 connect to SSH/SFTP (configure password, hostname and networking -- crossover net)
 
 developing and testing (nano/sftp ide/wifi for testing)
