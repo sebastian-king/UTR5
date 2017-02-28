@@ -93,6 +93,7 @@ Alternatively, instead of using SFTP you can push your code to a github experime
   * Srunken filesystem: yes
   * `raspi-config` updated: yes
   * update, upgrade, dist-upgrade: yes, 25/2/17
+  * TODO: must do something about hciuart service
   
 ###### Boot image for SD Card (63Mb): https://sebs.tech/pi-images/r5/2017-01-11-raspbian-jessie-lite-pre-configured-boot-min.img
   * Same as above but only the boot partition
