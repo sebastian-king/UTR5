@@ -72,3 +72,6 @@ local.properties
 .scala_dependencies
 .worksheet
 
+# installer
+install-a-pi.sh
+
