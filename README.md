@@ -6,6 +6,8 @@
 
 ## Guide for using the Pi (work in progress, bare with me):
 
+*DM me (@seb) in the Slack for help*
+
 #### Step 0. Installing the Pi
 * If you have an SD Card and a Flash drive, please see the boot and root SD Card images, flash the boot image to the SD Card and the root image to the flash drive then boot the Pi with both plugged in. (The SD Card only needs to be 100Mb or larger, the SD Card must be 4Gb or larger)  
 * If you have only an SD Card--it must be 4Gb or larger--you can simply flash the 'basic pre-configured' image to the SD Card.  
