@@ -6,7 +6,7 @@
 import sys
 import time
 import RPi.GPIO as io
-import wiringpi2 as wiringpi #apt-get install wiringpi
+import wiringpi
 io.setmode(io.BCM)
 wiringpi.wiringPiSetupGpio()
 wiringpi.pinMode(18,2)
