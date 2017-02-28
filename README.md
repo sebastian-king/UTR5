@@ -19,50 +19,34 @@ install robot from github (finish install-a-pi.sh)
 
 --------------------------------------------------------------------------------------------------------------------------------
 
-Images for the Raspberry Pi (All Raspbian Jessie-Pi 3 B v1.2):
+## Images for the Raspberry Pi (All Raspbian Jessie-Pi 3 B v1.2):
 
   All of the custom images can be found at https://sebs.tech/pi-images/r5/
   
-  Guide:
-  First off, a little reason why we need these images is because Pi SD Cards become corrupted a lot, especially when the power input is not stable which is a common problem when on battery power, which a $0.75 is not efficient enough to account for. So don't be surprised when the Pi won't boot because the filesystem has become effectively gibberish. This is I have created a custom image to run the Pi from a flash drive, while only booting from a 100Mb SD Card.
+#### Guide for flashing Pi images:
+  First off, a little reason why we need these images is because Pi SD Cards become corrupted a lot, especially when the power input is not stable which is a common problem when on battery power, which a $0.75 is not efficient enough to account for. So don't be surprised when the Pi won't boot because the filesystem has become effectively gibberish. This is why I have created a custom image to run the Pi from a flash drive, while only booting from a 100Mb SD Card, when the card becomes corrupted just re-flash the 100Mb boot partition and away you go.
   The `opencv` image is for compiling on raspbian so a lightweight executable can be run by the robot's script for image processing.
   
-  Boot image for SD Card (100Mb): 
-  Root image for Flash Drive (1.5Gb):
-  Basic image for SD Card-only configurations (1.6Gb)
-  SD Card-only image for `opencv` (ALOTGb): 
-
-  Basic Configured SD:
-  * serial enabled + diable BT for hard uart -- dtoverlay=pi3-disable-bt >> /boot/config.txt
-  * ssh enabled -- raspi-config
-  * i2c enabled -- raspi-config
-  * hostname + local IP -- raspi-config && keep local IP assigned by the PI so that eth requests on variable subnets work
-  -- region5pi.local
-  * username + password -- username: pi, passwd: `passwd`, no root:root login please, only pi:root.
-  -- pi:region5
-  * not expanded -- yes
-  * wifi ready -- use 2WIRE123 QGKWMVVJ, after enabling use `ifdown wlan0 && sleep 10 && ifup wlan0`
-  * eth net ready -- yes, ICS
-  * pi camera enabled -- raspi-config
-  * disable dhcp on boot -- raspi-config (too slow to have it enabled)
-  * raspi-config updated -- yes
-  * update--upgrade--dist-upgrade -- 25/2/17
+###### Basic image for SD Card-only configurations (1.5Gb): https://sebs.tech/pi-images/r5/2017-01-11-raspbian-jessie-lite-pre-configured-full-min.img
+  * Serial over UART is enabled + BT is disabled for hardware UART: `dtoverlay=pi3-disable-bt >> /boot/config.txt`
+  * SSH/SFTP is enabled: `raspi-config`
+  * I2C is enabled: `raspi-config`
+  * Pi Camera port is enabled: `raspi-config`
+  * Hostname/local IP is configured: `raspi-config`, the local IP is dynamically assigned via ethernet, the hostname is `region5pi.local`
+  * Username and password is configured: Username: `pi`, password: `region5`, pi is an admin user and has sudo access, but please no root login
+  * Wifi ready: use SSID `2WIRE123` and PSK `QGKWMVVJ`, after enabling use `ifdown wlan0 && sleep 10 && ifup wlan0` and the Pi should pick up and IP address
+  * Ethernet ready for ICS: yes
+  * Disabled DHCP on boot: `raspi-config` (too slow to have it enabled)
+  * Srunken filesystem: yes
+  * `raspi-config` updated: yes
+  * update, upgrade, dist-upgrade: yes, 25/2/17
   
-  ```
-  network={
-        ssid="2WIRE123"
-        psk="QGKWMVVJ"
-  }
-  ```
- 
- Basic Boot SD:
-  * same as above but only 100Mb boot partition
-  
- Basic Flash Drive:
-  * same as above but only the root parition -- somehow unmounts boot post-post
-
- `opencv` SD Card image:
-  * partition pre-configured same as the SD Card-only image but with `opencv` added
+###### Boot image for SD Card (100Mb): coming soon
+  * Same as above but only the 100Mb boot partition
+###### Root image for Flash Drive (1.4Gb): coming soon
+  * Same as above but only the root parition, it also unmounts the SD Card to help avoid corruption
+###### SD Card-only image for `opencv` (5.8Gb): https://sebs.tech/pi-images/r5/2017-01-11-raspbian-jessie-lite-pre-configured-full-opencv-min.img
+  * Pre-configured same as the SD Card-only image but with `opencv`, `python3` and related dependencies installed
  
  Backup:
   * latest fully working status backed up as a .img file -- root partition only, a boot partition can be added when installing
