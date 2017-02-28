@@ -46,14 +46,18 @@ The steps for ICS are as follows:
 
 ##### 3. Using WiFi
 Obviously to use the WiFi, it has to be first configured on the Pi. The images I have provided have the WiFi pre-configured to connect to a network called `2WIRE123` with the password `QGKWMVVJ`. If you have a phone capable of making a hotspot, you can create a hotspot with these details and the Pi will connect to your phone, then connect your laptop to your phone and try to connect to `region5pi.local` via PuTTY. *The same problems with resolving `region5pi.local` exist as for the ethernet connections, see the italicised part of that section for details.*  
-If a phone is not a workable solution, due to not being able to change the name of the broadcast network or something, a little WiFi router or bridge can be set up using these details for the Pi. A WiFi router would let us develop from laptops while the robot runs around on the test field, it might be a good idea to look into setting that up.  
-And last, you can of course change the WiFi details to match your hotspot, these can be modified in `/etc/wpa_supplicant/wpa_supplicant.conf` and changing the details should be easy.
+
+If a phone is not a workable solution--due to not being able to change the name of the broadcast network or something--a little WiFi router or bridge can be set up using these details for the Pi. A WiFi router would let us develop from laptops while the robot runs around on the test field, it might be a good idea to look into setting that up.  
+
+And last, you can of course change the WiFi details to match your hotspot, these can be modified in `/etc/wpa_supplicant/wpa_supplicant.conf` by quickly plugging into the Serial connection, or your preferred method.
 
 #### Step 2. Configuring the Pi
-I have created a script to install and configure the Pi
-install robot from github (finish install-a-pi.sh)
+I have created a script that will put the robot code onto the Pi so that it will be immediately ready to run and develop on it.
+Simply download the [script from this repository](https://raw.githubusercontent.com/afloresescarcega/UTR5/master/install-a-pi.sh) and run it on the Pi.
 
 #### Step 3. Developing on the Pi
+
+Now that you have completed Steps 0-2, you are ready to test and code.
 
 developing and testing (nano/sftp ide/wifi for testing)
  -- and how to use github to develop -- could use github desktop + ide
