@@ -9,6 +9,8 @@
 *DM me (@seb) in the Slack for help*
 
 #### Step 0. Installing the Pi
+*SD Card images and instructions are found in the section below this*
+
 * If you have an SD Card and a Flash drive, please see the boot and root SD Card images, flash the boot image to the SD Card and the root image to the flash drive then boot the Pi with both plugged in. (The SD Card only needs to be 100Mb or larger, the SD Card must be 4Gb or larger)  
 * If you have only an SD Card--it must be 4Gb or larger--you can simply flash the 'basic pre-configured' image to the SD Card.  
 * To flash images, use [Win32DiskImager](https://sourceforge.net/projects/win32diskimager/) on Windows, and `dd if=example.img of=/dev/sdcard bs=4k` on Linux
@@ -92,11 +94,11 @@ Alternatively, instead of using SFTP you can push your code to a github experime
   * `raspi-config` updated: yes
   * update, upgrade, dist-upgrade: yes, 25/2/17
   
-###### Boot image for SD Card (100Mb): coming soon
-  * Same as above but only the 100Mb boot partition
+###### Boot image for SD Card (63Mb): https://sebs.tech/pi-images/r5/2017-01-11-raspbian-jessie-lite-pre-configured-boot-min.img
+  * Same as above but only the boot partition
   
-###### Root image for Flash Drive (1.4Gb): coming soon
-  * Same as above but only the root parition, it also unmounts the SD Card to help avoid corruption
+###### Root image for Flash Drive (1.5Gb): https://sebs.tech/pi-images/r5/2017-01-11-raspbian-jessie-lite-pre-configured-root-min.img
+  * Same as above but only the root parition, it also unmounts the SD Card to help avoid corruption *soon*
   
 ###### SD Card-only image for `opencv` (5.8Gb): https://sebs.tech/pi-images/r5/2017-01-11-raspbian-jessie-lite-pre-configured-full-opencv-min.img
   * Pre-configured same as the SD Card-only image but with `opencv`, `python3` and related dependencies installed
@@ -105,7 +107,7 @@ Alternatively, instead of using SFTP you can push your code to a github experime
   * +`apt-get install pip3`
   * +`pip3 install numpy`
  
-###### Backup: coming soon
+###### Backup: coming soon, once we have a working set up to back up
   * Latest fully working status backed up as an .img file, root partition only, a boot partition can be added when installing
 
 --------------------------------------------------------------------------------------------------------------------------
