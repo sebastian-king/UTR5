@@ -15,21 +15,41 @@
 Now, there are many ways of connecting to the Pi with different features, I am going to list each of the *sensible* ones and their scenarios.
 ##### 1. The easiest: Using a UART to USB Cable
 By using a UART to USB cable, it is a simple process of plugging in the RX, TX and GND pins, then connecting via a terminal emulator i.e. [PuTTY](http://www.putty.org/).  
-Connect GND to pin 6
-Connect RX to pin 8
-Connect TX to pin 10
-Please see [this diagram](http://www.jameco.com/Jameco/workshop/circuitnotes/raspberry_pi_circuit_note_fig2a.jpg) if you are unsure on pin numbers
-Once the pins are connected properly, you can launch PuTTY and click on Serial ([pic](https://i.stack.imgur.com/XgR6I.png)), then you must figured out which COM port the UART cable has been assigned to on your system. The best way to do this is to go to the device manager and go to the `Ports (COM & LPT)` section and find your adaptor ([pic](http://www.usconverters.com/images/xs1000-article/device-manager.jpg))
+* Connect GND to pin 6
+* Connect RX to pin 8
+* Connect TX to pin 10
+
+Please see [this diagram](http://www.jameco.com/Jameco/workshop/circuitnotes/raspberry_pi_circuit_note_fig2a.jpg) if you are unsure on pin numbers.  
+You can also power the Pi using the UART cable, using the `VCC` pin, however, ***MAKE ABSOLUTELY SURE YOU KNOW WHAT PIN YOU ARE PLUGGING THE VCC INTO***, if you plug the 5V `VCC` pin into the 3.3V pin that's next to it, it's probably goodbye to the Pi. The correct 5V pin should be on the outside row of pins, and is pin 2.  
+Or, the Pi can also be powered via the conventional Micro USB, then just leave the `VCC` unplugged.
+Once the pins are connected properly, you can launch PuTTY and click on Serial ([pic](https://i.stack.imgur.com/XgR6I.png)), then you must figure out which COM port the UART cable has been assigned to on your system. The best way to do this is to go to Device Manager and go to the `Ports (COM & LPT)` section and find your adaptor ([pic](http://www.usconverters.com/images/xs1000-article/device-manager.jpg)).  
+Type that into PuTTY, e.g. COM3, then enter 115200 as the speed/baudrate, then click Open.  
+You should now have a blank, black terminal. Although it is blank, type in `pi` and hit enter, you should then be prompted for the password.  
+A nice bonus to this method is also that the connection will survive reboots and allow you to debug failed boots.  
+The downside will be providing internet, although we can connect the Pi to UT's WiFi for downloading packages quickly if using a Serial connection. We simply can't use UT's WiFi for connecting to the Pi. UT's WiFi requires MS CHAPv2 auth encryption. Also, the Serial connection will not give us the filesystem access that SFTP gives us.  
+
 ##### 2. Using ethernet (this can provide internet too)
+*Note:* These instructions are for configuring via Windows, Linux people should know how to Linux.  
+First, obviously, power up the Pi and plug in the ethernet between the Pi and your computer.  
+Now, do you want to provide internet for the Pi or just connect to it?  
+If we just want to connect to the Pi, we can connect to it by going to PuTTY and making an SSH connection to `region5pi.local`. However, this requires the computer knowing what `region5pi.local` resolves to. There are two ways to do this, the first is by using iTunes' Bonjour service--this is just a little mDNS resolver that will qualify the hostname. You can just install iTunes and never open it. The second method is by using something like WireShark and finding the hostname's IP address yourself. Or, as a last resort, you can manually set your ethernet adaptor's details and try to connect using that IP to the Pi.  
+If we want to provide internet to the Pi as well as connecting via SSH/SFTP. We can use Window's ICS (Internet Connection Sharing), this is very simple and easy to set up and will give the Pi an IP address assigned from your computer so you don't need the iTunes/WireShark methods. Your computer can of course remain using it's own internet meanwhile providing internet to the Pi.  
+The steps are as follows:  
+Make your WiFi connection shared with your ethernet, described here: http://www.countrymilewifi.com/how-to-share-computers-wifi-with-ethernet-devices.aspx  
+Open the command prompt, and type in `ipconfig`. Keep typing it in until the ethernet adaptor shows an IP address like `192.168.137.X`.  
+Connect to that IP or `region5pi.local` using PuTTY.
+
 ##### 3. Using WiFi
 connect to SSH/SFTP (configure password, hostname and networking -- crossover net)
 
-developing and testing (nano/sftp ide/wifi for testing)
- -- and how to use github to develop -- could use github desktop + ide
-
-flash images on (create boot and /)
+#### Step 2. Configuring the Pi
 
 install robot from github (finish install-a-pi.sh)
+
+#### Step 3. Developing on the Pi
+
+developing and testing (nano/sftp ide/wifi for testing)
+ -- and how to use github to develop -- could use github desktop + ide
 
 --------------------------------------------------------------------------------------------------------------------------------
 
