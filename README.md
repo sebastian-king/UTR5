@@ -24,7 +24,7 @@ install robot from github (finish install-a-pi.sh)
   All of the custom images can be found at https://sebs.tech/pi-images/r5/
   
 #### Guide for flashing Pi images:
-  First off, a little reason why we need these images is because Pi SD Cards become corrupted a lot, especially when the power input is not stable which is a common problem when on battery power, which a $0.75 is not efficient enough to account for. So don't be surprised when the Pi won't boot because the filesystem has become effectively gibberish. This is why I have created a custom image to run the Pi from a flash drive, while only booting from a 100Mb SD Card, when the card becomes corrupted just re-flash the 100Mb boot partition and away you go.
+  First off, a little reason why we need these images is because Pi SD Cards become corrupted a lot, especially when the power input is not stable which is a common problem when on battery power, which a $0.75 voltage regulator is not efficient enough to account for. So don't be surprised when the Pi won't boot because the filesystem has become effectively gibberish. This is why I have created a custom image to run the Pi from a flash drive, while only booting from a 100Mb SD Card, when the card becomes corrupted just re-flash the 100Mb boot partition and away you go.
   The `opencv` image is for compiling on raspbian so a lightweight executable can be run by the robot's script for image processing.
   
 ###### Basic image for SD Card-only configurations (1.5Gb): https://sebs.tech/pi-images/r5/2017-01-11-raspbian-jessie-lite-pre-configured-full-min.img
