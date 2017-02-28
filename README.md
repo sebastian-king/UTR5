@@ -19,7 +19,8 @@ By using a UART to USB cable, it is a simple process of plugging in the RX, TX a
 * Connect RX to pin 8
 * Connect TX to pin 10
 
-Please see [this diagram](http://www.jameco.com/Jameco/workshop/circuitnotes/raspberry_pi_circuit_note_fig2a.jpg) if you are unsure on pin numbers.  
+Please see [this diagram](http://www.jameco.com/Jameco/workshop/circuitnotes/raspberry_pi_circuit_note_fig2a.jpg) if you are unsure on pin numbers.
+
 You can also power the Pi using the UART cable, using the `VCC` pin, however, ***MAKE ABSOLUTELY SURE YOU KNOW WHAT PIN YOU ARE PLUGGING THE VCC INTO***, if you plug the 5V `VCC` pin into the 3.3V pin that's next to it, it's probably goodbye to the Pi. The correct 5V pin should be on the outside row of pins, and is pin 2.  
 Or, the Pi can also be powered via the conventional Micro USB, then just leave the `VCC` unplugged.
 Once the pins are connected properly, you can launch PuTTY and click on Serial ([pic](https://i.stack.imgur.com/XgR6I.png)), then you must figure out which COM port the UART cable has been assigned to on your system. The best way to do this is to go to Device Manager and go to the `Ports (COM & LPT)` section and find your adaptor ([pic](http://www.usconverters.com/images/xs1000-article/device-manager.jpg)).  
@@ -29,10 +30,14 @@ A nice bonus to this method is also that the connection will survive reboots and
 The downside will be providing internet, although we can connect the Pi to UT's WiFi for downloading packages quickly if using a Serial connection. We simply can't use UT's WiFi for connecting to the Pi. UT's WiFi requires MS CHAPv2 auth encryption. Also, the Serial connection will not give us the filesystem access that SFTP gives us.  
 
 ##### 2. Using ethernet (this can provide internet too)
-*Note:* These instructions are for configuring via Windows, Linux people should know how to Linux.  
-First, obviously, power up the Pi and plug in the ethernet between the Pi and your computer.  
-Now, do you want to provide internet for the Pi or just connect to it?  
-If we just want to connect to the Pi, we can connect to it by going to PuTTY and making an SSH connection to `region5pi.local`.  *However, this requires the computer knowing what `region5pi.local` resolves to. There are four ways to do this, the first is by using iTunes' Bonjour service--this is just a little mDNS resolver that will qualify the hostname. You can just install iTunes and never open it. The second method is by using something like WireShark and finding the hostname's IP address yourself, this isn't very intuitive for those who don't understand networking. Or, as a last resort, you can manually set your ethernet adaptor's details and try to connect using that IP to the Pi, or maybe even try to ping the whole ethernet adaptor's subnet.*  
+*Note:* These instructions are for configuring via Windows, Linux people should know how to Linux.
+
+First, obviously, power up the Pi and plug in the ethernet between the Pi and your computer.
+
+Now, do you want to provide internet for the Pi or just connect to it?
+
+If we just want to connect to the Pi, we can connect to it by going to PuTTY and making an SSH connection to `region5pi.local`.  *However, this requires the computer knowing what `region5pi.local` resolves to. There are four ways to do this, the first is by using iTunes' Bonjour service--this is just a little mDNS resolver that will qualify the hostname. You can just install iTunes and never open it. The second method is by using something like WireShark and finding the hostname's IP address yourself, this isn't very intuitive for those who don't understand networking. Or, as a last resort, you can manually set your ethernet adaptor's details and try to connect using that IP to the Pi, or maybe even try to ping the whole ethernet adaptor's subnet.*
+
 If we want to provide internet to the Pi as well as connecting via SSH/SFTP. We can use Window's ICS (Internet Connection Sharing), this is very simple and easy to set up and will give the Pi an IP address assigned from your computer so you don't need the iTunes/WireShark methods. Your computer can of course remain using it's own internet meanwhile providing internet to the Pi.  
 The steps for ICS are as follows:
 * Make your WiFi connection shared with your ethernet, described here: http://www.countrymilewifi.com/how-to-share-computers-wifi-with-ethernet-devices.aspx
