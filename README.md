@@ -25,7 +25,8 @@ You can also power the Pi using the UART cable, using the `VCC` pin, however, **
 Or, the Pi can also be powered via the conventional Micro USB, then just leave the `VCC` unplugged.
 Once the pins are connected properly, you can launch PuTTY and click on Serial ([pic](https://i.stack.imgur.com/XgR6I.png)), then you must figure out which COM port the UART cable has been assigned to on your system. The best way to do this is to go to Device Manager and go to the `Ports (COM & LPT)` section and find your adaptor ([pic](http://www.usconverters.com/images/xs1000-article/device-manager.jpg)).  
 Type that into PuTTY, e.g. COM3, then enter 115200 as the speed/baudrate, then click Open.  
-You should now have a blank, black terminal. Although it is blank, type in `pi` and hit enter, you should then be prompted for the password.  
+You should now have a blank, black terminal. Although it is blank, type in `pi` and hit enter, you should then be prompted for the password.
+
 A nice bonus to this method is also that the connection will survive reboots and allow you to debug failed boots.  
 The downside will be providing internet, although we can connect the Pi to UT's WiFi for downloading packages quickly if using a Serial connection. We simply can't use UT's WiFi for connecting to the Pi. UT's WiFi requires MS CHAPv2 auth encryption. Also, the Serial connection will not give us the filesystem access that SFTP gives us.  
 
@@ -59,8 +60,11 @@ Simply download the [script from this repository](https://raw.githubusercontent.
 
 Now that you have completed Steps 0-2, you are ready to test and code.
 
-developing and testing (nano/sftp ide/wifi for testing)
- -- and how to use github to develop -- could use github desktop + ide
+My preferred way of developing on the Pi is generally not liked by most people, but I think it is very convenien;t. I just pop up a WiFi hotspot, login to the Pi via SSH and develop using `nano` and it's very-very-limited syntax checking. But this method means that I can work from any device (even the terminal on my phone) without having to install anything, and I can do it wirelessly. I can also just save the file in `nano` and run the script on the Pi where it needs to be really quickly and easily.
+
+However, this is not really a great option if you're writing something long or complicated, because you don't have a mouse and scrolling takes ages, plus there is no wrapping (overflow is cut off and takes a lot of scrolling to see). If you are writing something hefty, I would suggest an IDE on your laptop, of course. Something like Subline or the good-old-fashioned Notepad++ will do fine since can't test the code on your laptops (you're writing for Pi-arch-only libraries). Along with this IDE, you can use the SFTP that works along side SSH (so long as you have SSH working, you can use SFTP) this is a great way to push your code to the Pi, login with the same details as you would with SSH using a program such as FileZilla (or some IDEs come with FTP support and a key bind to push to the code) and you can just upload and test code that way.
+
+Alternatively, instead of using SFTP you can push your code to a github experimental branch and pull that branch onto the Pi and try things that way. GitHub desktop would work nicely for that, and maintain version control for you and your coding comrades.
 
 --------------------------------------------------------------------------------------------------------------------------------
 
