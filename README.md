@@ -33,6 +33,7 @@ You should now have a blank, black terminal. Although it is blank, type in `pi` 
 
 A nice bonus to this method is also that the connection will survive reboots and allow you to debug failed boots.  
 The downside will be providing internet, although we can connect the Pi to UT's WiFi for downloading packages quickly if using a Serial connection. We simply can't use UT's WiFi for connecting to the Pi. UT's WiFi requires MS CHAPv2 auth encryption. Also, the Serial connection will not give us the filesystem access that SFTP gives us.  
+**NOTE: I'm not completely sure if the UART cable gives the Pi enough current to boot with an SD Card and flash drive together.**
 
 ##### 2. Using ethernet (this can provide internet too)
 *Note:* These instructions are for configuring via Windows, Linux people should know how to Linux.
