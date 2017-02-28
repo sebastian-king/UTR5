@@ -32,18 +32,20 @@ The downside will be providing internet, although we can connect the Pi to UT's 
 *Note:* These instructions are for configuring via Windows, Linux people should know how to Linux.  
 First, obviously, power up the Pi and plug in the ethernet between the Pi and your computer.  
 Now, do you want to provide internet for the Pi or just connect to it?  
-If we just want to connect to the Pi, we can connect to it by going to PuTTY and making an SSH connection to `region5pi.local`. However, this requires the computer knowing what `region5pi.local` resolves to. There are two ways to do this, the first is by using iTunes' Bonjour service--this is just a little mDNS resolver that will qualify the hostname. You can just install iTunes and never open it. The second method is by using something like WireShark and finding the hostname's IP address yourself. Or, as a last resort, you can manually set your ethernet adaptor's details and try to connect using that IP to the Pi.  
+If we just want to connect to the Pi, we can connect to it by going to PuTTY and making an SSH connection to `region5pi.local`.  *However, this requires the computer knowing what `region5pi.local` resolves to. There are four ways to do this, the first is by using iTunes' Bonjour service--this is just a little mDNS resolver that will qualify the hostname. You can just install iTunes and never open it. The second method is by using something like WireShark and finding the hostname's IP address yourself, this isn't very intuitive for those who don't understand networking. Or, as a last resort, you can manually set your ethernet adaptor's details and try to connect using that IP to the Pi, or maybe even try to ping the whole ethernet adaptor's subnet.*  
 If we want to provide internet to the Pi as well as connecting via SSH/SFTP. We can use Window's ICS (Internet Connection Sharing), this is very simple and easy to set up and will give the Pi an IP address assigned from your computer so you don't need the iTunes/WireShark methods. Your computer can of course remain using it's own internet meanwhile providing internet to the Pi.  
-The steps are as follows:  
-Make your WiFi connection shared with your ethernet, described here: http://www.countrymilewifi.com/how-to-share-computers-wifi-with-ethernet-devices.aspx  
-Open the command prompt, and type in `ipconfig`. Keep typing it in until the ethernet adaptor shows an IP address like `192.168.137.X`.  
-Connect to that IP or `region5pi.local` using PuTTY.
+The steps for ICS are as follows:
+* Make your WiFi connection shared with your ethernet, described here: http://www.countrymilewifi.com/how-to-share-computers-wifi-with-ethernet-devices.aspx
+* Open the command prompt, and type in `ipconfig`. Keep typing it in until the ethernet adaptor shows an IP address like `192.168.137.X`.
+* Connect to that IP or `region5pi.local` using PuTTY.
 
 ##### 3. Using WiFi
-connect to SSH/SFTP (configure password, hostname and networking -- crossover net)
+Obviously to use the WiFi, it has to be first configured on the Pi. The images I have provided have the WiFi pre-configured to connect to a network called `2WIRE123` with the password `QGKWMVVJ`. If you have a phone capable of making a hotspot, you can create a hotspot with these details and the Pi will connect to your phone, then connect your laptop to your phone and try to connect to `region5pi.local` via PuTTY. *The same problems with resolving `region5pi.local` exist as for the ethernet connections, see the italicised part of that section for details.*  
+If a phone is not a workable solution, due to not being able to change the name of the broadcast network or something, a little WiFi router or bridge can be set up using these details for the Pi. A WiFi router would let us develop from laptops while the robot runs around on the test field, it might be a good idea to look into setting that up.  
+And last, you can of course change the WiFi details to match your hotspot, these can be modified in `/etc/wpa_supplicant/wpa_supplicant.conf` and changing the details should be easy.
 
 #### Step 2. Configuring the Pi
-
+I have created a script to install and configure the Pi
 install robot from github (finish install-a-pi.sh)
 
 #### Step 3. Developing on the Pi
