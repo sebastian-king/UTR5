@@ -38,11 +38,7 @@ def move(distance, direction):
 	
 		speed = 512     #not sure what speed to use
 		#need to figure out wheel numbers
-		#currently in move and turn, the wheels aren't moving at the same time, maybe we should have another motor method
-		motors-with-encoders.motor_run_with_overshoot(front_left, FL, speed, angle)
-		motors-with-encoders.motor_run_with_overshoot(front_right, FR, speed, angle)
-		motors-with-encoders.motor_run_with_overshoot(b_left, BL, speed, angle)
-		motors-with-encoders.motor_run_with_overshoot(b_right, BR, speed, angle)
+		motors-with-encoders.run_all_motors(speed, degree, FL, FR, BL, BR)
 
 
 def turn(degrees);
@@ -56,11 +52,8 @@ def turn(degrees);
 			angle = degrees * -1
 		speed = 512     #not sure what speed to use
 		#need to figure out wheel numbers
-		motors-with-encoders.motor_run_with_overshoot(front_left, dir, speed, angle)
-		motors-with-encoders.motor_run_with_overshoot(front_right, dir, speed, angle)
-		motors-with-encoders.motor_run_with_overshoot(b_left, dir, speed, angle)
-		motors-with-encoders.motor_run_with_overshoot(b_right, dir, speed, angle)
-
+		motors-with-encoders.run_all_motors(speed, angle, dir, dir, dir, dir)
+	
 
 
 

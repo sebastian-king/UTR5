@@ -52,6 +52,39 @@ def speed(speed):
 	else:
 		wiringpi.pwmWrite(18, 0)
 
+#i think this should work for running 4 motors at once but correct this if its wrong
+def run_all_motors(speed, degree, dir1, dir2, dir3, dir4):
+	desire_angle = degree
+	# in this case gear ratio is 1:200
+	gear_ratio = 200;
+	# convert the desired angle to the total angle at the rear shaft (multiply gear ratio)
+	smalldegree = desire_angle * gear_ratio
+	# 12 count per revolution at the rear shaft
+	# meaning each count represent 30 degree
+	# to calculate how many counts needed for the desire angle
+	# we divide total angle at the rear shaft with 30 degree
+	limit = smalldegree / 30
+
+	countAB=0; #reset the counter
+	while countAB < limit: # while counter is in the limit
+				# motor will overshoot because it can not sudden stop
+		#im not sure what to do with the encoders, is checking only one okay or does it need to be checked for each motor?
+		initA = encoderA[0]	# get current A value -- overshoot depends on load and speed of the motor
+		initB = encoderB[0]	# get current B value
+		while True:
+			rotate(1, speed, dir1)
+			rotate(2, speed, dir2)
+			rotate(3, speed, dir3)
+			rotate(4, speed, dir4)
+			if initA != encoderA[motor_number-1] or initB != encoderB[motor_number-1]:	# continue run until state change
+				break
+		countAB += 1				# increment counter for each state change
+	stop(1)
+	stop(2)
+	stop(3)
+	stop(4)
+
+
 def motor_run(motor_number, direction, speed, degree)
 	desire_angle = degree
 	# in this case gear ratio is 1:200
@@ -70,6 +103,7 @@ def motor_run(motor_number, direction, speed, degree)
 		initA = encoderA[motor_number-1]	# get current A value -- overshoot depends on load and speed of the motor
 		initB = encoderB[motor_number-1]	# get current B value
 		while True:
+			
 			if direction == 1:
 				clockwise(motor_number, speed)		# run motor in clockwise direction with user defined speed
 			else:
@@ -131,6 +165,12 @@ def encoderA(motor_number):
 
 def encoderB(motor_number):
 	return GPIO.input(encodersB[motor_number-1])
+
+def rotate(motor_number, speed, dir):
+	if dir == 1
+		clockwise(motor_number, speed)
+	else
+		counter_clockwise(motor_number, speed)
 
 def clockwise(motor_number, speed):
 	speed(speed)
