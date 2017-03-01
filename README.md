@@ -88,7 +88,7 @@ Alternatively, instead of using SFTP you can push your code to a github experime
   * Pi Camera port is enabled: `raspi-config`
   * Hostname/local IP is configured: `raspi-config`, the local IP is dynamically assigned via ethernet, the hostname is `region5pi.local`
   * Username and password is configured: Username: `pi`, password: `region5`, pi is an admin user and has sudo access, but please no root login
-  * Wifi ready: use SSID `2WIRE123` and PSK `QGKWMVVJ`, after enabling use `ifdown wlan0 && sleep 10 && ifup wlan0` and the Pi should pick up and IP address
+  * Wifi ready: use SSID `2WIRE123` and PSK `QGKWMVVJ`, after enabling use `ifdown wlan0 && sleep 10 && ifup wlan0` and the Pi should pick up an IP address
   * Ethernet ready for ICS: yes
   * Disabled DHCP on boot: `raspi-config` (too slow to have it enabled)
   * Srunken filesystem: yes
