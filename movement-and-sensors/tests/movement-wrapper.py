@@ -3,8 +3,8 @@
 #holonomic drive wrapper
 
 import motors-with-encoders
+import map_data
 
-current_direction = 90      #startng direction. 0 to 360 0=+x, 90=+y,, etc
 
 #direction: 0=right, 1=fwd, 2=left, 3=back	relative to current direction
 def move(distance, direction):
@@ -67,18 +67,13 @@ def turn(degrees);
 
 #an idea for movement control based on coordinates
 
-#location [x,y] 0-7. [0,0] is bottom left (we can change this)
-loc = [1, 0]         #starting x, y
 
 blocklength = 10     #constant that we need to measure
 
-def is_valid_loc(x, y):
-	return (0 <= x <= 7) and (0 <= y <= 7)
-
 #strafe one block no turning. direction: 0=right, 1=fwd, 2=left, 3=back
 def strafe_one_block(direction):
-	x = loc[0]
-	y = loc[1]
+	x = map_data.getX
+	y = map_data.getY
 	if direction == 0:
 		x = x + 1
 	elif direction == 1:
@@ -89,17 +84,17 @@ def strafe_one_block(direction):
 		y = y - 1
 
 	if is_valid_loc(x, y):
-		loc[0] = x
-		loc[1] = y
+		map_data.setX(x)
+		map_data.setX(y)
 		move(blocklength, direction)
 	#else: error in movement algorithm
 
 
 #move to a block with turning, no diagonals
 def move_to_block(x, y):
-	if is_valid_loc(x, y):
-		x_diff = x - loc[0]
-		y_diff = y - loc[1]
+	if map_data.is_valid_loc(x, y):
+		x_diff = x - map_data.getLoc[0]
+		y_diff = y - map_data.getLoc[1]
 		
 		//x movement
 		turn_angle = 0
@@ -114,7 +109,7 @@ def move_to_block(x, y):
 			turn_angle = turn_angle * (-1/3)
 		turn(turn_angle)
 		move(distance, 1)
-		loc[0] = x
+		map_data.setX(x)
 
 		//y movement
 		turn_angle = 0
@@ -129,7 +124,7 @@ def move_to_block(x, y):
 			turn_angle = turn_angle * (-1/3)
 		turn(turn_angle)
 		move(distance, 1)
-		loc[1] = y
+		map_data.setX(y)
 		
 			
 
