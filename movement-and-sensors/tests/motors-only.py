@@ -12,8 +12,8 @@ wiringpi.wiringPiSetupGpio()
 wiringpi.pinMode(18,2)
 wiringpi.pwmWrite(18, 0)
 
-motors[0] = 5 # motor 1
-motors[1] = 6
+motors[0] = 15 # motor 1
+motors[1] = 16
 motors[2] = 13 # motor 2
 motors[3] = 19
 motors[4] = 26 # motor 3
@@ -43,4 +43,4 @@ def counter_clockwise(motor_number, speed):
 	io.output(motors[motor_number], False)
 	io.output(motors[motor_number+1], True)
 
-clockwise(motor(4), 512) # etc...
+clockwise(motor(1), 512) # etc...
