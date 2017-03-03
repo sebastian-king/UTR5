@@ -100,7 +100,7 @@ Alternatively, instead of using SFTP you can push your code to a github experime
   * Same as above but only the boot partition
   
 ###### Root image for Flash Drive (1.5Gb): https://sebs.tech/pi-images/r5/2017-01-11-raspbian-jessie-lite-pre-configured-root-min.img
-  * Same as above but only the root parition, it also unmounts the SD Card to help avoid corruption *soon*
+  * Same as above but only the root parition, it also unmounts the SD Card to help avoid corruption using `noauto`
   
 ###### SD Card-only image for `opencv` (5.8Gb): https://sebs.tech/pi-images/r5/2017-01-11-raspbian-jessie-lite-pre-configured-full-opencv-min.img
   * Pre-configured same as the SD Card-only image but with `opencv`, `python3` and related dependencies installed
