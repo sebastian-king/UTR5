@@ -6,11 +6,16 @@
 import sys
 import time
 import RPi.GPIO as io
-import wiringpi2 as wiringpi #apt-get install wiringpi
+import wiringpi #apt-get install wiringpi
+
+#io.cleanup()
+
 io.setmode(io.BCM)
 wiringpi.wiringPiSetupGpio()
 wiringpi.pinMode(18,2)
 wiringpi.pwmWrite(18, 0)
+
+motors = [0 for a in range(8)]
 
 motors[0] = 15 # motor 1
 motors[1] = 16
@@ -27,6 +32,8 @@ def motor(number):
 for motor in motors:
 	io.setup(motor, io.OUT)
 
+#io.cleanup();
+
 def speed(speed):
 	if 0 <= speed <= 1024:
 		wiringpi.pwmWrite(18, speed)
@@ -40,7 +47,9 @@ def clockwise(motor_number, speed):
 
 def counter_clockwise(motor_number, speed):
 	speed(speed)
-	io.output(motors[motor_number], False)
-	io.output(motors[motor_number+1], True)
+	#io.output(motors[motor_number], False)
+	#io.output(motors[motor_number+1], True)
 
 clockwise(motor(1), 512) # etc...
+
+io.cleanup()
