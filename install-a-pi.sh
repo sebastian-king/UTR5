@@ -22,8 +22,8 @@ git clone https://github.com/afloresescarcega/UTR5.git # perhaps ignore this fil
 #su r5
 #cd ~
 
-sudo sudo apt-get -y install python python-pip python-dev python3 python-pip3 python3-dev
-sudo pip install wiringpi
-sudo pip install wiringpi2
+#sudo sudo apt-get -y install python python-pip python-dev python3 python-pip3 python3-dev #3/3 removed for switch to soft PWM
+#sudo pip install wiringpi
+#sudo pip install wiringpi2
 
 sudo reboot
