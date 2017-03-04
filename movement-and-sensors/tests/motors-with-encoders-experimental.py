@@ -1,13 +1,8 @@
-#!/usr/bin/env python
-
-# This is a very basic test to make the DC motors plugged into the L293D chip move forwards and backwards at variable speeds
-# the pi currently cannot interface with the encoders due to a lack of GPIO ports (extender needed, or we can use reserved pins)
-
 import sys
 import time
-import RPi.GPIO as io
+import RPi.GPIO as GPIO
 
-io.setmode(io.BCM)
+GPIO.setmode(GPIO.BCM)
 
 motors = [0 for a in range(8)]
 motorPWM = [0 for a in range(4)]
@@ -34,10 +29,10 @@ def motor(number):
 	return 2*number-2;
 
 for mtr in motors:
-	io.setup(mtr, io.OUT)
+	GPIO.setup(mtr, GPIO.OUT)
 
 for mtrPWM in motorPWM:
-        io.setup(mtrPWM, io.OUT)
+        GPIO.setup(mtrPWM, GPIO.OUT)
 
 i=0;
 for mtrPWM in motorPWM:
@@ -46,35 +41,35 @@ for mtrPWM in motorPWM:
 	i+=1
 
 for encoder in encodersA:
-        io.setup(encoder, io.IN)
+        GPIO.setup(encoder, GPIO.IN)
 
 for encoder in encodersB:
-        io.setup(encoder, io.IN)
+        GPIO.setup(encoder, GPIO.IN)
 
 def encoderA(motor_number):
-        return io.input(encodersA[motor_number])
+        return GPIO.input(encodersA[motor_number])
 
 def encoderB(motor_number):
-        return io.input(encodersB[motor_number])
+        return GPIO.input(encodersB[motor_number])
 
 def set_speed(motor_number, speed):
 	motorPWM[motor_number].ChangeDutyCycle(speed);
 
 def clockwise(motor_number, speed):
 	set_speed(motor_number, speed)
-	io.output(motors[motor_number], io.LOW)
-	io.output(motors[motor_number+1], io.HIGH)
+	GPIO.output(motors[motor_number], GPIO.LOW)
+	GPIO.output(motors[motor_number+1], GPIO.HIGH)
 
 def counter_clockwise(motor_number, speed):
 	print "CCW"
 	set_speed(motor_number, speed)
-	io.output(motors[motor_number], io.HIGH)
-	io.output(motors[motor_number+1], io.LOW)
+	GPIO.output(motors[motor_number], GPIO.HIGH)
+	GPIO.output(motors[motor_number+1], GPIO.LOW)
 
 def stop(motor_number):
 	set_speed(motor_number, 0)
-        io.output(motors[motor_number], io.LOW)
-        io.output(motors[motor_number+1], io.LOW)
+        GPIO.output(motors[motor_number], GPIO.LOW)
+        GPIO.output(motors[motor_number+1], GPIO.LOW)
 
 def motor_run(motor_number, direction, speed, degree):
         desire_angle = degree
@@ -99,26 +94,14 @@ def motor_run(motor_number, direction, speed, degree):
 		countAB += 1
 	stop(motor_number)
 
-#motor_run(motor(1), 0, 45, 360)
+motor_run(motor(1), 0, 45, 360)
 
 #clockwise(0, 45) # etc...
-
 #time.sleep(2)
 
-#set_speed(0, 45)
-motorPWM[0].ChangeDutyCycle(45);
-#motorPWM[1].ChangeDutyCycle(45);
-io.output(motors[0], io.HIGH)
-io.output(motors[1], io.LOW)
-
-#time.sleep(2)
-
-#counter_clockwise(motor(1), 45)
-
-time.sleep(500)
-
+#print "STOPPING"
 #stop(motor(1));
-
+#print "STOPPED"
 #time.sleep(1)
 
-io.cleanup()
+GPIO.cleanup()
