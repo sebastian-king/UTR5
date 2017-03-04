@@ -19,8 +19,8 @@ GPIO.setup(18,GPIO.OUT) # attacbed to pin 28
 p1 = GPIO.PWM(17, 1024)
 p2 = GPIO.PWM(18, 1024)
 
-p1.start(50)
-p2.start(50)
+p1.start(40)
+p2.start(40)
 
 print "1"
 #wiringpi.pwmWrite(18, 400)
@@ -43,11 +43,11 @@ time.sleep(2)
 print "1"
 GPIO.output(22,GPIO.LOW)
 GPIO.output(27,GPIO.HIGH)
-time.sleep(1)
+time.sleep(2)
 print "2"
 GPIO.output(22,GPIO.HIGH)
 GPIO.output(27,GPIO.LOW)
-time.sleep(1)
+time.sleep(2)
 print "3"
 
 GPIO.output(22,GPIO.LOW)
