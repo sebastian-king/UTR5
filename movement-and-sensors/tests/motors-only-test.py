@@ -24,6 +24,8 @@ motors[3] = 26
 
 motorPWM[0] = 17
 motorPWM[1] = 18
+#motorPWM[2] = 0
+#motorPWM[3] = 0
 
 def motor(number):
 	return 2*number-2;
@@ -33,15 +35,15 @@ for mtr in motors:
 
 for mtrPWM in motorPWM:
         io.setup(mtrPWM, io.OUT)
-i=0;
 
+i=0;
 for mtrPWM in motorPWM:
 	motorPWM[i] = io.PWM(mtrPWM, 1024)
 	motorPWM[i].start(0)
 	i+=1
 
 def set_speed(motor_number, speed):
-	motorPWM[motor_number].ChangeDutyCycle(speed);
+	motorPWM[motor_number/2].ChangeDutyCycle(speed);
 
 def clockwise(motor_number, speed):
 	set_speed(motor_number, speed)
@@ -58,20 +60,15 @@ def stop(motor_number):
         io.output(motors[motor_number], io.LOW)
         io.output(motors[motor_number+1], io.LOW)
 
-clockwise(motor(1), 45) # etc...
-
-#set_speed(motor(1), 25)
-#io.output(motors[0], io.LOW)
-#io.output(motors[1], io.HIGH)
-
+print "CW"
+clockwise(motor(1), 45)
 time.sleep(2)
-
+print "CCW"
 counter_clockwise(motor(1), 45)
-
 time.sleep(2)
-
+print "STOP"
 stop(motor(1));
-
-time.sleep(1)
-
+time.sleep(2)
+print "CLEANUP"
 io.cleanup()
+print "DONE"
