@@ -87,3 +87,6 @@ robot-runit/stop/*
 !robot-runit/stop/log
 !robot-runit/stop/log/run
 !robot-runit/stop/log/main
+
+buttons/start_button.pyc
+buttons/stop_button.pyc
