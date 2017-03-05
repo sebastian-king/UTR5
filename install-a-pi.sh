@@ -17,13 +17,18 @@ sudo apt-get -y install git
 cd ~
 git clone https://github.com/afloresescarcega/UTR5.git # perhaps ignore this file
 
+sudo ln -s /home/pi/UTR5/robot-runit/start /etc/sv/
+sudo ln -s /home/pi/UTR5/robot-runit/stop /etc/sv/
+sudo ln -s /home/pi/UTR5/robot-runit/start /etc/service/
+sudo ln -s /home/pi/UTR5/robot-runit/stop /etc/service/
+
 #adduser r5 --home /home/r5 -q --disabled-password --gecos GECOS
 
 #su r5
 #cd ~
 
-sudo sudo apt-get -y install python python-pip python-dev python3 python-pip3 python3-dev
-sudo pip install wiringpi
-sudo pip install wiringpi2
+#sudo sudo apt-get -y install python python-pip python-dev python3 python-pip3 python3-dev #3/3 removed for switch to soft PWM
+#sudo pip install wiringpi
+#sudo pip install wiringpi2
 
 sudo reboot
