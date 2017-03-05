@@ -17,7 +17,6 @@ tags
 
 
 .metadata
-bin/
 tmp/
 *.tmp
 *.bak
