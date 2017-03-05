@@ -57,10 +57,6 @@ def turn(degrees);
 
 
 
-
-#an idea for movement control based on coordinates
-
-
 blocklength = 10     #constant that we need to measure
 
 #strafe one block no turning. direction: 0=right, 1=fwd, 2=left, 3=back
@@ -76,7 +72,7 @@ def strafe_one_block(direction):
 	elif direction == 3:
 		y = y - 1
 
-	if is_valid_loc(x, y):
+	if map-data.is_valid_loc(x, y):
 		map-data.setX(x)
 		map-data.setX(y)
 		move(blocklength, direction)
