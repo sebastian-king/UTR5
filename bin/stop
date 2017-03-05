@@ -19,7 +19,7 @@ print "STOP BUTTON HAS BEEN PRESSED"
 #time.sleep(60)
 
 import subprocess
-subprocess.call(dir + '/./emergency-stop')
+subprocess.call(dir + '/emergency-stop')
 
 print "END"
 
