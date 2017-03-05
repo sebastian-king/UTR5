@@ -73,4 +73,17 @@ local.properties
 .worksheet
 
 # installer
-install-a-pi.sh
+#install-a-pi.sh
+
+robot-runit/start/*
+robot-runit/stop/*
+
+!robot-runit/start/run
+!robot-runit/start/log
+!robot-runit/start/log/run
+!robot-runit/start/log/main
+
+!robot-runit/stop/run
+!robot-runit/stop/log
+!robot-runit/stop/log/run
+!robot-runit/stop/log/main
