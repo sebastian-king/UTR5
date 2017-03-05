@@ -19,7 +19,7 @@ print "STOP BUTTON HAS BEEN PRESSED"
 #time.sleep(60)
 
 import subprocess
-subprocess.call(dir + '/./emergency-stop')
+subprocess.call(dir + '/emergency-stop') #set and unset all GPIO pins and force kill the start thread with the kernel
 
 print "END"
 
