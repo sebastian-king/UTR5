@@ -37,10 +37,11 @@ def find_live_tunnel_perimeter():
                         	movement-wrapper.strafe_one_block(1)
 	else:
 		#should not call if not facing north
+		pass
 
 def is_infrastructure_below():
-	live-wire = false
-        if (live-wire)	#need to import sensor functions for em field, true if live wire
+	live_wire = false
+        if (live_wire):	#need to import sensor functions for em field, true if live wire
                 map-data.set_live_wire_here(true)
 		map-data.set_cache_here(true)
 		return true
