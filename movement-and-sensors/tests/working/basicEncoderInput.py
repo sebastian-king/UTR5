@@ -2,7 +2,7 @@
 # Test program to read encoders on the motors
 # 	currently only tested by manual movement of the motor
 
-# We will constantly poll the pin and output if there is a change
+# We will constantly poll the pin and output the result
 # In order for the pi to actually read anything, a pull-up resistor must be used
 # 	Not completely sure how this works, but it does
 #	What this also does is that it causes the input read to be HIGH 
