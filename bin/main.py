@@ -1,4 +1,3 @@
-
 #make sure these imports are correct
 sys.path.append(os.path.dirname(os.path.realpath(__file__)) + "/bin-imports/")
 import map_data
@@ -43,7 +42,7 @@ def is_infrastructure_below():
 	live_wire = false
         if (live_wire):	#need to import sensor functions for em field, true if live wire
                 map-data.set_live_wire_here(true)
-		map-data.set_cache_here(true)
+		map_data.set_cache_here(true)
 		return true
         else:
                 return false
