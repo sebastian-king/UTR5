@@ -13,6 +13,14 @@ import movement_wrapper
 
 def main():
 	find_live_tunnel_perimeter()
+	# do some fancy stuff
+	# assume we are now at the cache tile
+	arm.lower()
+	arm.raise()
+	count = vipro.analyze(takePicture())
+	display.showNumber(count)
+	# map out rest of plane
+	displays.drawField(map_data.grid)
 
 #TODO this algorithm should be going around the whole field
 def find_live_tunnel_perimeter():
