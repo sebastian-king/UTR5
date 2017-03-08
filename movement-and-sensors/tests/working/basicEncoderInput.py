@@ -1,14 +1,14 @@
 # basicEncoderInput.py
 # Test program to read encoders on the motors
-# 	currently only tested by manual movement of the motor
+# Note that if you power the motor, it will output really quickly because the encoder
+# 	values are changing at a rapid pace. Use manual(with like... pliers...) to
+#	get a better feel for it
 
 # We will poll the pin and output the result if something changed
 # In order for the pi to actually read anything, a pull-up resistor must be used
-# 	Not completely sure how this works, but it does
-#	What this also does is that it causes the input default to be HIGH 
+# 	Not completely sure why this works, but it does.
 
 import RPi.GPIO as GPIO # Allows use of pins on the Pi
-import time # Time delay function to not kill the processor =\
 
 GPIO.setmode(GPIO.BOARD) # Refer to pins on the board by their number (reference pin schematic)
 encoderA = 5 # Set the input on pin 5
@@ -19,27 +19,25 @@ encoderB = 7 # Set the input on pin 7
 GPIO.setup(encoderA, GPIO.IN, GPIO.PUD_UP)
 GPIO.setup(encoderB, GPIO.IN, GPIO.PUD_UP)
 
-# Infinite loop to print out HIGH or LOW depending on encoder input
-# By default the pin will be high because of the pull-up resistor
+# State save to tell if something changes, will either be a 0 or 1 so I default
+# to 0 as the initial state
+stateASave = 0
+stateBSave = 0
+
+# Infinite loop to print out 1 or 0 depending on encoder input
 while True:
 	# Read the encoder input
 	stateA = GPIO.input(encoderA)
 	stateB = GPIO.input(encoderB)
 
-	# State save to tell if something changes
-	stateASave = GPIO.HIGH
-	stateBSave = GPIO.HIGH
-	
-	# Print both states if something changes and update the current state
-	# must cast the state as a string
-	if stateA != stateASave:
-		print ("A: " , str(stateA)),
-		print ("B: " , str(stateB))
+	# Print both states if something changes in either state and update the
+	# 	current state
+	# Also casts the states as a string to remove ambiguity. Likely not needed
+	if str(stateA) != str(stateASave):
+		print ("A: " , stateA),
+		print ("B: " , stateB)
 		stateASave = stateA
-
-	if stateB != stateBSave:
-		print ("A: " , str(stateA)),
-		print ("B: " , str(stateB))
+	if str(stateB) != str(stateBSave):
+		print ("A: " , stateA),
+		print ("B: " , stateB)
 		stateBSave = stateB
-
-	time.sleep(.5) # Tells the pi to chill for half a second
