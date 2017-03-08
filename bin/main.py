@@ -2,6 +2,8 @@
 sys.path.append(os.path.dirname(os.path.realpath(__file__)) + "/bin-imports/")
 import map_data
 import movement_wrapper
+import displays
+import vipro
 
 #movement-wrapper.strafe_one_block(dir)
 #strafe one block no turning. direction: 0=right, 1=fwd, 2=left, 3=back.
@@ -17,8 +19,8 @@ def main():
 	# assume we are now at the cache tile
 	arm.lower()
 	arm.raise()
-	count = vipro.analyze(takePicture())
-	display.showNumber(count)
+	count = vipro.analyze(takePicture()) # takePicture() should return a path to an image
+	displays.showNumber(count)
 	# map out rest of plane
 	displays.drawField(map_data.grid)
 
@@ -36,7 +38,7 @@ def find_live_tunnel_perimeter():
                         	movement_wrapper.strafe_one_block(0)
                 	elif pos_x == 6 and pos_y == 0:
                         	print "E: Was not able to locate OT"
-                        	sys.exit(0) 
+                        	sys.exit(0)
 				# uh oh, since we were supposed to be facing the cache and have traversed half of the perimeter, something has gone wrong.
                 	elif pos_y == 0:
                        		movement_wrapper.strafe_one_block(0)
