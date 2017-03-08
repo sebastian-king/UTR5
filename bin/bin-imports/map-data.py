@@ -68,24 +68,23 @@ def has_cache_for_loc(x, y, object):
 #for testing purposes
 #Legend: C=Cache, O=(Live) Objective Tunnel, E=Dead Ends, B=Obstruction, X=Start and End point, H=bot
 def print_map():
-        print "---------------"
-        print "  A B C D E F G"
-        for y in range(0, gridsize):
-	print y+1,
-                for x in range(0, gridsize):
+    print "---------------"
+    print "  A B C D E F G"
+    for y in range(0, gridsize):
+		print y+1,
+		for x in range(0, gridsize):
 			if (x == getX() and y == getY()):
 				print "H",
-			else if (x == 0 and y == 6):
+			elif (x == 0 and y == 6):
 				print "X",
-			else if has_cache_for_loc(x, y):
+			elif has_cache_for_loc(x, y):
 				print "C",
-			else if has_obstacle_for_loc(x, y):
+			elif has_obstacle_for_loc(x, y):
 				print "B",
-			else if has_live_wire_for_loc(x, y):
+			elif has_live_wire_for_loc(x, y):
 				print "O",
-			else if has_tunnel_for_loc(x, y):
-				print "E",
-                        
+			elif has_tunnel_for_loc(x, y):
+				print "E",                
 		print
 
 class Map_Block():

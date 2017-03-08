@@ -2,7 +2,7 @@
 #make sure these imports are correct
 sys.path.append(os.path.dirname(os.path.realpath(__file__)) + "/bin-imports/")
 import map_data
-import movement-wrapper
+import movement_wrapper
 
 #movement-wrapper.strafe_one_block(dir)
 #strafe one block no turning. direction: 0=right, 1=fwd, 2=left, 3=back.
