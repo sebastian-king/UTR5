@@ -85,7 +85,7 @@ def run_all_motors(speed, degree, dir1, dir2, dir3, dir4):
 	stop(4)
 
 
-def motor_run(motor_number, direction, speed, degree)
+def motor_run(motor_number, direction, speed, degree):
 	desire_angle = degree
 	# in this case gear ratio is 1:200
 	gear_ratio = 200;
@@ -113,7 +113,7 @@ def motor_run(motor_number, direction, speed, degree)
 		countAB += 1				# increment counter for each state change
 	stop(motor_number)
 
-def motor_run_with_overshoot(motor_number, direction, speed, degree)
+def motor_run_with_overshoot(motor_number, direction, speed, degree):
         desire_angle = degree;
         # in this case gear ratio is 1:200
         gear_ratio = 200;
@@ -167,9 +167,9 @@ def encoderB(motor_number):
 	return GPIO.input(encodersB[motor_number-1])
 
 def rotate(motor_number, speed, dir):
-	if dir == 1
+	if dir == 1:
 		clockwise(motor_number, speed)
-	else
+	else:
 		counter_clockwise(motor_number, speed)
 
 def clockwise(motor_number, speed):
