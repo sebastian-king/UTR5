@@ -1,5 +1,5 @@
 # basicEncoderInput.py
-# Test program to read encoders on the motors
+# Test program to read the encoders on the motors
 # Note that if you power the motor, it will output really quickly because the encoder
 # 	values are changing at a rapid pace. Use manual(with like... pliers...) to
 #	get a better feel for it
