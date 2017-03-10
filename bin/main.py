@@ -22,7 +22,7 @@ def main():
 	count = vipro.analyze(takePicture()) # takePicture() should return a path to an image
 	displays.showNumber(count)
 	# map out rest of plane
-	displays.drawField(map_data.grid)
+	displays.drawField()
 
 #TODO this algorithm should be going around the whole field
 def find_live_tunnel_perimeter():
