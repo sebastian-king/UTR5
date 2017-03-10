@@ -56,7 +56,7 @@ def drawField():
 			GPIO.output(pinmap[rowpins[y]], GPIO.HIGH)
 			for x in range(0, md.gridsize):
 				r = pinmap[x+8]		#find the correct pin that corresponds to the color for the led in that column
-				g = pinmap[29-x]
+				g = pinmap[29-x] # we don't ever need green, for the yellow on A7 that should be always on, we should just ground that green pin, it doesn't need a GPIO
 				b = pinmap[x]
 				if (x == 0 and y == 6):
 					GPIO.output(r, GPIO.HIGH)
