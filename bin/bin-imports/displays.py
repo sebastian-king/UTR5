@@ -1,7 +1,16 @@
 #!/usr/bin/env python
 
 import RPi.GPIO as GPIO
-import os, sys
+import os, sys, time
+
+sys.path.append(os.path.dirname(os.path.realpath(__file__)) + "/bin-imports/")
+import map_data as md
+
+pinmap = range(1, 32)	#each led has 1 pin for on and 3 pins for rgb
+rowpins = [17, 18, 19, 20, 29, 30, 31, 32]	#these are the pins to turn on rows
+
+for pin in pinmap:
+	GPIO.setup(pin, GPIO.OUT)
 
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BOARD)
@@ -39,5 +48,21 @@ def showNumber(number):
 				GPIO.output(gpin[x], digit[x])
 
 # needs matrix display function
-def drawField(matrix):
-	# ¯\_(ツ)_/¯
+def drawField():
+	while True: # need to quit this at some point, maybe on button press or after time
+		for y in range(0, md.gridsize):
+			for pin in pinmap:
+				GPIO.output(pin, GPIO.LOW) # turn off everything
+			GPIO.output(pinmap[rowpins[y]], GPIO.HIGH)
+			for x in range(0, md.gridsize):
+				r = pinmap[x+8]		#find the correct pin that corresponds to the color for the led in that column
+				g = pinmap[29-x] # we don't ever need green, for the yellow on A7 that should be always on, we should just ground that green pin, it doesn't need a GPIO
+				b = pinmap[x]
+				if (x == 0 and y == 6):
+					GPIO.output(r, GPIO.HIGH)
+					GPIO.output(g, GPIO.HIGH)
+				elif md.has_live_wire_for_loc(x, y):
+					GPIO.output(b, GPIO.HIGH)
+				elif md.has_tunnel_for_loc(x, y):
+					GPIO.output(r, GPIO.HIGH)
+			time.sleep(0.001) # need to mess around to find good time
