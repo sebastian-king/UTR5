@@ -10,10 +10,11 @@ import map_data
 def move(distance, direction):
 	if distance > 0:
 		#constant for ratio of the distance per rotation, in <unit of measurement>, that a wheel travels when wheel is straight
-		wheel_circumference = 5    #need to measure
+		wheel_circumference = 5    #need to measure (what unit is this?)
 		#number of rotations needed to travel distance when wheels are at a 45 degree angle
 		num_rotations_diagonal = (distance * 1.414214) / wheel_circumference       # 1.414214=sqrt(2)
-		angle = num_rotations_diagonal * 360 
+		#angle = num_rotations_diagonal * 360
+		num_pulses = num_rotations_diagonal*600  #multiply by 600, the number of phase counts per revolution of the motor
 	
 		if direction == 0:    #right
 			FL = 0
@@ -36,9 +37,9 @@ def move(distance, direction):
 			BL = 1
 			BL = 0
 	
-		speed = 512     #not sure what speed to use
+		speed = 512     #not sure what speed to use (maybe max)
 		#need to figure out wheel numbers
-		motors_with_encoders.run_all_motors(speed, degree, FL, FR, BL, BR)
+		motors_with_encoders.run_all_motors(speed, num_pulses, FL, FR, BL, BR)
 
 
 def turn(degrees):

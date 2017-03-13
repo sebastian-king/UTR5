@@ -34,40 +34,40 @@ counts = 0
 def encodercount(term):
 # Infinite loop to print out 1 or 0 depending on encoder input
 # Read the encoder input
-stateA = GPIO.input(encoderA)
-stateB = GPIO.input(encoderB)
+	stateA = GPIO.input(encoderA)
+	stateB = GPIO.input(encoderB)
 
-# Print both states if something changes in either state and update the
-# 	current state
-# Also casts the states as a string to remove ambiguity. Likely not needed
-# if str(stateA) != str(stateASave):
-# 	print ("A: " , stateA),
-# 	print ("B: " , stateB)
-# 	stateASave = stateA
-# if str(stateB) != str(stateBSave):
-# 	print ("A: " , stateA),
-# 	print ("B: " , stateB)
-# 	stateBSave = stateB
-
-if ((stateA, stateB_old) == (1,0)) or ((stateA, stateB_old) == (0,1)):
-# IF clockwise rotation
-	counts += 1
-	print 'Encoder count is %s\nAB is %s %s' % (counts, stateA, stateB)
-
-elif ((stateA, stateB_old) == (1,1)) or ((stateA, stateB_old) == (0,0)):
-# IF counter-clockwise rotation
-	counts -= 1
-	print 'Encoder count is %s\nAB is %s %s' % (counts, stateA, stateB)
-
-else:
-# IF causes error	    
-	error += 1
-	print 'Error count is %s' %error
-
-stateA_old, stateB_old = stateA, stateB
-
-GPIO.add_event_detect(5, GPIO.BOTH, callback = encodercount)
-GPIO.add_event_detect(7, GPIO.BOTH, callback = encodercount)
-
-while True:
-	time.sleep(1)
+	# Print both states if something changes in either state and update the
+	# 	current state
+	# Also casts the states as a string to remove ambiguity. Likely not needed
+	# if str(stateA) != str(stateASave):
+	# 	print ("A: " , stateA),
+	# 	print ("B: " , stateB)
+	# 	stateASave = stateA
+	# if str(stateB) != str(stateBSave):
+	# 	print ("A: " , stateA),
+	# 	print ("B: " , stateB)
+	# 	stateBSave = stateB
+	
+	if ((stateA, stateB_old) == (1,0)) or ((stateA, stateB_old) == (0,1)):
+	# IF clockwise rotation
+		counts += 1
+		print 'Encoder count is %s\nAB is %s %s' % (counts, stateA, stateB)
+	
+	elif ((stateA, stateB_old) == (1,1)) or ((stateA, stateB_old) == (0,0)):
+	# IF counter-clockwise rotation
+		counts -= 1
+		print 'Encoder count is %s\nAB is %s %s' % (counts, stateA, stateB)
+	
+	else:
+	# IF causes error	    
+		error += 1
+		print 'Error count is %s' %error
+	
+	stateA_old, stateB_old = stateA, stateB
+	
+	GPIO.add_event_detect(5, GPIO.BOTH, callback = encodercount)
+	GPIO.add_event_detect(7, GPIO.BOTH, callback = encodercount)
+	
+	while True:
+		time.sleep(1)
