@@ -1,20 +1,14 @@
-# basicEncoderInput.py
-# Test program to read the encoders on the motors
-# Note that if you power the motor, it will output really quickly because the encoder
-# 	values are changing at a rapid pace. Use manual(with like... pliers...) to
-#	get a better feel for it
-
-# We will poll the pin and output the result if something changed
-# In order for the pi to actually read anything, a pull-up resistor must be used
-# 	Not completely sure why this works, but it does.
+# shaftRevolutions.py
+# Test program to translate encoder input to revolutions (specific to 17rpm motor)
+# We will poll the pin and update our revolutions if something changes
+# At the specified number of encoder state changes(600 in this case), we increment or
+#	decrement revolutions
 
 import RPi.GPIO as GPIO # Allows use of pins on the Pi
 
 GPIO.setmode(GPIO.BOARD) # Refer to pins on the board by their number (reference pin schematic)
 encoderA = 5 # Set the input on pin 5
 encoderB = 7 # Set the input on pin 7
-encoderA_old = 0
-encoderB_old = 0
 
 # Setup pins as input and activate pullup resistor
 GPIO.setup(encoderA, GPIO.IN, GPIO.PUD_UP)
@@ -32,12 +26,10 @@ rev_old = 0
 counts = 0
 
 while True:
-	# Infinite loop to print out 1 or 0 depending on encoder input
 	# Read the encoder input
 	stateA = GPIO.input(encoderA)
 	stateB = GPIO.input(encoderB)
 
-	# Print both states if something changes in either state and update the current state
 	# Also casts the states as a string to remove ambiguity. Likely not needed
 	if str(stateA) != str(stateA_old):
 		if ((stateA, stateB_old) == (0,0)) or ((stateA, stateB_old) == (1,1)):
