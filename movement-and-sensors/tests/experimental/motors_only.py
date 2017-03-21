@@ -6,6 +6,7 @@
 import sys
 import time
 import RPi.GPIO as io
+from time import clock
 
 io.setmode(io.BCM)
 
@@ -34,9 +35,9 @@ for mtr in motors:
 	io.setup(mtr, io.OUT)
 
 for mtrPWM in motorPWM:
-        io.setup(mtrPWM, io.OUT)
+    io.setup(mtrPWM, io.OUT)
 
-i=0;
+i=0
 for mtrPWM in motorPWM:
 	motorPWM[i] = io.PWM(mtrPWM, 1024)
 	motorPWM[i].start(0)
@@ -57,18 +58,27 @@ def counter_clockwise(motor_number, speed):
 
 def stop(motor_number):
 	set_speed(motor_number, 0)
-        io.output(motors[motor_number], io.LOW)
-        io.output(motors[motor_number+1], io.LOW)
+	io.output(motors[motor_number], io.LOW)
+ 	io.output(motors[motor_number+1], io.LOW)
 
 print "CW"
 clockwise(motor(1), 45)
-time.sleep(2)
+counter_clockwise(motor(2), 45)
+clockwise(motor(3), 45)
+counter_clockwise(motor(4),45)
+time.sleep(5)
 print "CCW"
 counter_clockwise(motor(1), 45)
-time.sleep(2)
+clockwise(motor(2), 45)
+counter_clockwise(motor(3), 45)
+clockwise(motor(4), 45)
+time.sleep(5)
 print "STOP"
-stop(motor(1));
-time.sleep(2)
+stop(motor(1))
+stop(motor(2))
+stop(motor(3))
+stop(motor(4))
+time.sleep(1)
 print "CLEANUP"
 io.cleanup()
 print "DONE"
