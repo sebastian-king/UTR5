@@ -2,7 +2,7 @@
 
 import RPi.GPIO as GPIO # Allows use of pins on the Pi
 
-class Encoder:
+class encoder:
     
     def __init__(self, pinA, pinB):
         GPIO.setmode(GPIO.BOARD)
