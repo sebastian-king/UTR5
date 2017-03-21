@@ -7,6 +7,8 @@ import movement_wrapper
 import displays
 import vipro
 
+import picamera
+
 #movement-wrapper.strafe_one_block(dir)
 #strafe one block no turning. direction: 0=right, 1=fwd, 2=left, 3=back.
 #sets its own new location, will not move if new location is off map
@@ -21,7 +23,9 @@ def main():
 	# assume we are now at the cache tile
 	arm.lower()
 	#arm.raise() #need to rename this method, raise is a reserved word in python -carson
-	count = vipro.analyze(takePicture()) # takePicture() should return a path to an image
+	camera = picamera.PiCamera()
+	camera.capture(myfolder+"image.jpg")
+	count = vipro.analyze(myfolder+"image.jpg")
 	# save the count and map to be displayed later
 	f = open(myfolder+"/finaldata", "w")
 	f.write(str(count)+"\n")
@@ -44,19 +48,18 @@ def find_live_tunnel_perimeter():
 			pos_x = map_data.getX()
 			pos_y = map_data.getY()
 			#this function is only for when bot facing north and in start position
-		
-                	if pos_x == 0 and pos_y == 6:
-                        	movement_wrapper.strafe_one_block(1) # MOVE NORTH
-                	elif pos_x == 0 and pos_y == 0:
-                        	movement_wrapper.strafe_one_block(0)
-                	elif pos_x == 6 and pos_y == 0:
-                        	print "E: Was not able to locate OT"
-                        	sys.exit(0)
-				# uh oh, since we were supposed to be facing the cache and have traversed half of the perimeter, something has gone wrong.
-                	elif pos_y == 0:
-                       		movement_wrapper.strafe_one_block(0)
-                	elif pos_x == 0:
-                        	movement_wrapper.strafe_one_block(1)
+        	if pos_x == 0 and pos_y == 6:
+            	movement_wrapper.strafe_one_block(1) # MOVE NORTH
+        	elif pos_x == 0 and pos_y == 0:
+            	movement_wrapper.strafe_one_block(0)
+        	elif pos_x == 6 and pos_y == 0:
+            	print "E: Was not able to locate OT"
+            	sys.exit(0)
+			# uh oh, since we were supposed to be facing the cache and have traversed half of the perimeter, something has gone wrong.
+        	elif pos_y == 0:
+           		movement_wrapper.strafe_one_block(0)
+        	elif pos_x == 0:
+            	movement_wrapper.strafe_one_block(1)
 	else:
 		#should not call if not facing north
 		pass

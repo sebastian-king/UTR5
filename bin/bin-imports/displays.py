@@ -3,7 +3,9 @@
 import RPi.GPIO as GPIO
 import os, sys, time
 
-sys.path.append(os.path.dirname(os.path.realpath(__file__)) + "/bin-imports/")
+myfolder = os.path.dirname(os.path.realpath(__file__))
+
+sys.path.append(myfolder + "/bin-imports/")
 import Adafruit_MCP230XX
 
 pinmap = range(1, 32)	#each led has 1 pin for on and 3 pins for rgb
@@ -40,10 +42,12 @@ d[9]=[0,0,0,1,1,0,0]
 gpin=[11,12,13,15,16,18,22]
 
 def show():
-	with open(os.path.dirname(os.path.realpath(__file__))+"/finaldata") as f:
+	with open(+"/finaldata") as f:
 		lines = f.readlines()
 	# you may also want to remove whitespace characters like `\n` at the end of each line
 	lines = [x.strip() for x in content]
+	os.remove(myfolder + "/finaldata")
+
 	#mcp = Adafruit_MCP230XX(busnum = 1, address = 0x20, num_gpios = 16)
 	#mcp.config(0, OUTPUT)
 	#mcp.config(1, OUTPUT)

@@ -8,23 +8,19 @@ import RPi.GPIO as GPIO
 dir=os.path.dirname(os.path.realpath(__file__))
 sys.path.append(dir + "/../buttons/")
 
-#from stop_button import listen_for_stop
+from stop_button import listen_for_stop
 	
-#print "RUNIT STOP SERVICE LISTENING"
+print "RUNIT STOP SERVICE LISTENING"
 
-#listen_for_stop()
+listen_for_stop()
 
 print "STOP BUTTON HAS BEEN PRESSED"
 
-#time.sleep(60)
+time.sleep(60)
 
 #import subprocess
 #subprocess.call(dir + '/emergency-stop') #set and unset all GPIO pins and force kill the start thread with the kernel
 
-#print "END"
+print "END"
 
-#GPIO.cleanup()
-
-sys.path.append(dir + "/bin-imports/")
-import displays
-displays.show()
+GPIO.cleanup()
