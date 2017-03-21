@@ -10,7 +10,9 @@ wiringpi.wiringPiSetupGpio()
 wiringpi.pinMode(18,2)
 wiringpi.pwmWrite(18, 0)
 
+
 #list of encoder objects
+#motor numbers: LF=0 RF=1 LB=2 RB=3
 motorEncoders = [0 for a in range(0, 3)]
 
 
@@ -30,8 +32,9 @@ def encoderHandlerRB(void):
 
 
 
-
+#sets up GPIO, encoders, interrupts
 def initMotors(void):
+    #TODO make sure gpio is set up right
     #set up GPIO
     for m in pins.motorEnableA:
         io.setup(m, io.OUT)
@@ -42,7 +45,7 @@ def initMotors(void):
     for i in range(0, 3):
         motorEncoders[i] = encoder(pins.motorEncoderA[i], pins.motorEncoderB[i])
     
-    #set up interrups
+    #set up interrupts
     GPIO.add_event_detect(pins.motorEncoderA[0], GPIO.BOTH, callback = encoderHandlerLF)
     GPIO.add_event_detect(pins.motorEncoderB[0], GPIO.BOTH, callback = encoderHandlerLF)
     GPIO.add_event_detect(pins.motorEncoderA[1], GPIO.BOTH, callback = encoderHandlerRF)
@@ -53,22 +56,23 @@ def initMotors(void):
     GPIO.add_event_detect(pins.motorEncoderB[3], GPIO.BOTH, callback = encoderHandlerRB)
 
 
-
-def run_all_motors(speed, pulses, dir1, dir2, dir3, dir4):    
-    #set distances to 0
+#TODO test this make sure it works
+#motor numbers: LF=0 RF=1 LB=2 RB=3
+def run_all_motors(speed, pulses, dir0, dir1, dir2, dir3):    
+    #set pulses to 0
     for e in motorEncoders:
         e.resetPulses()
     
-    rotate(0, speed, dir1)
-    rotate(1, speed, dir2)
-    rotate(2, speed, dir3)
-    rotate(3, speed, dir4)
+    rotate(0, speed, dir0)
+    rotate(1, speed, dir1)
+    rotate(2, speed, dir2)
+    rotate(3, speed, dir3)
     
     numMotorsRotating = 4
             
     while numMotorsRotating != 0:
         for i in range(0, 3):
-            if motorEncoders[i].getPulses() == pulses:
+            if motorEncoders[i].getPulses() >= pulses:
                 stop(i)
                 numMotorsRotating = numMotorsRotating - 1
             
@@ -92,10 +96,12 @@ def counter_clockwise(motor_number, speed):
     io.output(pins.motorEnableA[motor_number], True)
 
 def stop(motor_number):
+    #TODO im not sure why the speed is set to 254 in motors_with_encoders
     speed(254)
     io.output(pins.motorEnableA[motor_number], True)
     io.output(pins.motorEnableB[motor_number], True)
 
+#TODO im not sure how the speed works, originally from motors_with_encoders
 def speed(speed):
     if 0 <= speed <= 1024:
         wiringpi.pwmWrite(18, speed)
