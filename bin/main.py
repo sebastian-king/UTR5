@@ -20,7 +20,7 @@ def main():
 	# do some fancy stuff
 	# assume we are now at the cache tile
 	arm.lower()
-	arm.raise()
+	#arm.raise() #need to rename this method, raise is a reserved word in python -carson
 	count = vipro.analyze(takePicture()) # takePicture() should return a path to an image
 	# save the count and map to be displayed later
 	f = open(myfolder+"/finaldata", "w")

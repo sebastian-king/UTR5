@@ -1,5 +1,5 @@
 pseudocode for the 8x8 led display to flicker
-the display can only do one row at once so we need to quickly flicker through the rows 
+the display can only do one row at once so we need to quickly flicker through the rows. color is controlled by col
 i hope this will be fast enough, if anyone has a better plan please write it in here, this is very experimental
 use mapdata to get info about each spot grid location
 ledmatrix.py has imlementation

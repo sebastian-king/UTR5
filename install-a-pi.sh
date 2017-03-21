@@ -12,7 +12,7 @@ sudo apt-get update
 sudo apt-get upgrade
 sudo apt-get dist-upgrade
 
-sudo apt-get -y install git
+sudo apt-get -y install git runit
 
 cd ~
 git clone https://github.com/afloresescarcega/UTR5.git # perhaps ignore this file
@@ -21,6 +21,15 @@ sudo ln -s /home/pi/UTR5/runit/start /etc/sv/
 sudo ln -s /home/pi/UTR5/runit/stop /etc/sv/
 sudo ln -s /home/pi/UTR5/runit/start /etc/service/
 sudo ln -s /home/pi/UTR5/runit/stop /etc/service/
+
+systemctl disable hciuart.service # fix later in the image
+
+awk '/\/dev\/mmcblk0p1/{$4="defaults,noauto"}{print}' /etc/fstab > /tmp/fstab # noauto
+sudo -i << EOF
+cat /tmp/fstab > /etc/fstab
+EOF
+sudo rm /tmp/fstab
+mount -a
 
 #adduser r5 --home /home/r5 -q --disabled-password --gecos GECOS
 

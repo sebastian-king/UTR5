@@ -6,8 +6,8 @@ import os, sys, time
 sys.path.append(os.path.dirname(os.path.realpath(__file__)) + "/bin-imports/")
 import Adafruit_MCP230XX
 
-pinmap = range(1, 32)
-rowpins = [17, 18, 19, 20, 29, 30, 31, 32]
+pinmap = range(1, 32)	#each led has 1 pin for on and 3 pins for rgb
+rowpins = [17, 18, 19, 20, 29, 30, 31, 32]	#these are the pins to turn on rows
 
 for pin in pinmap:
 	GPIO.setup(pin, GPIO.OUT)
@@ -64,8 +64,8 @@ def show():
 				GPIO.output(pin, GPIO.LOW) # turn off everything
 			GPIO.output(pinmap[rowpins[y]], GPIO.HIGH)
 			for x in range(0, md.gridsize):
-				r = pinmap[x+8]
-				g = pinmap[29-x]
+				r = pinmap[x+8]		#find the correct pin that corresponds to the color for the led in that column
+				g = pinmap[29-x] # we don't ever need green, for the yellow on A7 that should be always on, we should just ground that green pin, it doesn't need a GPIO
 				b = pinmap[x]
 				if (x == 0 and y == 6):
 					GPIO.output(r, GPIO.HIGH)

@@ -53,22 +53,25 @@ def speed(speed):
 		wiringpi.pwmWrite(18, 0)
 
 #i think this should work for running 4 motors at once but correct this if its wrong
-def run_all_motors(speed, degree, dir1, dir2, dir3, dir4):
-	desire_angle = degree
+def run_all_motors(speed, pulses, dir1, dir2, dir3, dir4):
+	#desire_angle = degree
 	# in this case gear ratio is 1:200
-	gear_ratio = 200;
+	#gear_ratio = 200;
 	# convert the desired angle to the total angle at the rear shaft (multiply gear ratio)
-	smalldegree = desire_angle * gear_ratio
+	#smalldegree = desire_angle * gear_ratio
 	# 12 count per revolution at the rear shaft
 	# meaning each count represent 30 degree
 	# to calculate how many counts needed for the desire angle
 	# we divide total angle at the rear shaft with 30 degree
-	limit = smalldegree / 30
-
-	countAB=0; #reset the counter
-	while countAB < limit: # while counter is in the limit
+	#limit = smalldegree / 30
+	
+	# here is where we will implement PID loops to accurately move
+	
+	pulCount =0; #reset the counter (renamed this to revCount to reflect new implementation using revolutions of the wheel)
+	while pulCount < pulses: # while counter is in the limit
 				# motor will overshoot because it can not sudden stop
 		#im not sure what to do with the encoders, is checking only one okay or does it need to be checked for each motor?
+		#need to write an encoder driver to allow us to merely count revolutions here
 		initA = encoderA[0]	# get current A value -- overshoot depends on load and speed of the motor
 		initB = encoderB[0]	# get current B value
 		while True:
@@ -78,7 +81,7 @@ def run_all_motors(speed, degree, dir1, dir2, dir3, dir4):
 			rotate(4, speed, dir4)
 			if initA != encoderA[motor_number-1] or initB != encoderB[motor_number-1]:	# continue run until state change
 				break
-		countAB += 1				# increment counter for each state change
+		pulCount += 1				# increment counter for each state change
 	stop(1)
 	stop(2)
 	stop(3)
