@@ -27,4 +27,3 @@ rightRearMotorEnableA = 0
 rightRearMotorEnableB = 0
 rightRearEncoderChA = 0
 rightRearEncoderChB = 0
-
