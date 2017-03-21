@@ -38,6 +38,8 @@ motorEncoderA = [0 for a in range(0, 3)]
 motorEncoderB = [0 for a in range(0, 3)]
 motorEnableA = [0 for a in range(0, 3)]
 motorEnableB = [0 for a in range(0, 3)]
+motorPwm = [0 for a in range(0, 3)]
+
 
 motorEnableA[0] = pins.leftFrontMotorEnableA
 motorEnableA[1] = pins.rightFrontMotorEnableA
@@ -58,3 +60,8 @@ motorEncoderB[0] = pins.leftFrontEncoderChB
 motorEncoderB[1] = pins.rightFrontEncoderChA
 motorEncoderB[2] = pins.leftRearEncoderChB
 motorEncoderB[3] = pins.rightRearEncoderChB
+
+motorPwm[0] = pins.leftFrontMotorPWM
+motorPwm[1] = pins.rightFrontMotorPWM
+motorPwm[2] = pins.leftRearMotorPWM
+motorPwm[3] = pins.rightRearMotorPWM

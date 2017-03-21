@@ -7,8 +7,6 @@ import RPi.GPIO as io
 import wiringpi
 io.setmode(io.BCM)
 wiringpi.wiringPiSetupGpio()
-wiringpi.pinMode(18,2)
-wiringpi.pwmWrite(18, 0)
 
 
 #list of encoder objects
@@ -34,12 +32,21 @@ def encoderHandlerRB(void):
 
 #sets up GPIO, encoders, interrupts
 def initMotors(void):
+    #TODO make sure pwm is set up right
+    for m in pins.motorPwm:
+        wiringpi.pinMode(m,2)
+        wiringpi.pwmWrite(m, 0)     #set all speeds to 0
+    
     #TODO make sure gpio is set up right
     #set up GPIO
     for m in pins.motorEnableA:
         io.setup(m, io.OUT)
     for m in pins.motorEnableB:
         io.setup(m, io.OUT)
+    
+    #make sure bot is at rest
+    for i in range(0, 3):
+        stop(i)
     
     #create encoder list
     for i in range(0, 3):
@@ -101,9 +108,9 @@ def stop(motor_number):
     io.output(pins.motorEnableA[motor_number], True)
     io.output(pins.motorEnableB[motor_number], True)
 
-#TODO im not sure how the speed works, originally from motors_with_encoders
-def speed(speed):
+#TODO make sure this is right
+def speed(motor_number, speed):
     if 0 <= speed <= 1024:
-        wiringpi.pwmWrite(18, speed)
+        wiringpi.pwmWrite(pins.motorPwm[motor_number], speed)
     else:
-        wiringpi.pwmWrite(18, 0)
+        wiringpi.pwmWrite(pins.motorPwm[motor_number], 0)
