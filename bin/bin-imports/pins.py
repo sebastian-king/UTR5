@@ -1,4 +1,6 @@
-#a class for storing all wiring information and pin numbers
+#!/usr/bin/env python
+
+#a module for storing all wiring information and pin numbers
 
 #Left Front Motor Pins
 leftFrontMotorPWM = 0
@@ -27,3 +29,32 @@ rightRearMotorEnableA = 0
 rightRearMotorEnableB = 0
 rightRearEncoderChA = 0
 rightRearEncoderChB = 0
+
+
+
+
+#array versions
+motorEncoderA = [0 for a in range(0, 3)]
+motorEncoderB = [0 for a in range(0, 3)]
+motorEnableA = [0 for a in range(0, 3)]
+motorEnableB = [0 for a in range(0, 3)]
+
+motorEnableA[0] = pins.leftFrontMotorEnableA
+motorEnableA[1] = pins.rightFrontMotorEnableA
+motorEnableA[2] = pins.leftRearMotorEnableA
+motorEnableA[3] = pins.rightRearMotorEnableA
+
+motorEnableB[0] = pins.leftFrontMotorEnableB
+motorEnableB[1] = pins.rightFrontMotorEnableB
+motorEnableB[2] = pins.leftRearMotorEnableB
+motorEnableB[3] = pins.rightRearMotorEnableB
+
+motorEncoderA[0] = pins.leftFrontEncoderChA
+motorEncoderA[1] = pins.rightFrontEncoderChA
+motorEncoderA[2] = pins.leftRearEncoderChA
+motorEncoderA[3] = pins.rightRearEncoderChA
+
+motorEncoderB[0] = pins.leftFrontEncoderChB
+motorEncoderB[1] = pins.rightFrontEncoderChA
+motorEncoderB[2] = pins.leftRearEncoderChB
+motorEncoderB[3] = pins.rightRearEncoderChB

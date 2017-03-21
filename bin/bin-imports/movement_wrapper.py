@@ -2,9 +2,12 @@
 
 #holonomic drive wrapper
 
-import motors_with_encoders
+import motors
 import map_data
 
+#we don't want to have to include motors.py in main
+def initMotors(void):
+	motors.initMotors()
 
 #direction: 0=right, 1=fwd, 2=left, 3=back	relative to current direction
 def move(distance, direction):
@@ -39,7 +42,7 @@ def move(distance, direction):
 	
 		speed = 512     #not sure what speed to use (maybe max)
 		#need to figure out wheel numbers
-		motors_with_encoders.run_all_motors(speed, num_pulses, FL, FR, BL, BR)
+		motors.run_all_motors(speed, num_pulses, FL, FR, BL, BR)
 
 
 def turn(degrees):
@@ -53,7 +56,7 @@ def turn(degrees):
 			angle = degrees * -1
 		speed = 512     #not sure what speed to use
 		#need to figure out wheel numbers
-		motors_with_encoders.run_all_motors(speed, angle, dir, dir, dir, dir)
+		motors.run_all_motors(speed, angle, dir, dir, dir, dir)
 	
 
 

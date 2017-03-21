@@ -48,4 +48,9 @@ class encoder:
     
     #returns the accumulated distance in units of our choosing, 5 is a placeholder for wheel circumference in that unit
     def getDistance():
-        return self.pulses/600.0 * 5           
+        return self.pulses/600.0 * 5   
+    
+    def resetPulses(self):
+        self.pulses = 0    
+        
+            

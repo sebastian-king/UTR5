@@ -16,6 +16,8 @@ import vipro
 #also has functions for storing information about each location
 
 def main():
+	movement_wrapper.initMotors()
+	
 	find_live_tunnel_perimeter()
 	# do some fancy stuff
 	# assume we are now at the cache tile
