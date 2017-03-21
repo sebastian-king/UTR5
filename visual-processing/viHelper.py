@@ -3,6 +3,7 @@ import numpy as np
 import os,sys
 import imutils
 
+# you will need imutils to be downloaded
 
 path = "C:\Users\Sean\PycharmProjects\Processing_Region5"
 
