@@ -47,9 +47,15 @@ def clockwise(motor_number, speed):
 
 def counter_clockwise(motor_number, speed):
 	speed(speed)
-	#io.output(motors[motor_number], False)
-	#io.output(motors[motor_number+1], True)
+	io.output(motors[motor_number], False)
+	io.output(motors[motor_number+1], True)
 
-clockwise(motor(1), 512) # etc...
+start = time.clock()
+
+while (time.clock()-start < 3000):
+	clockwise(motor(1), 512) # etc...
+	clockwise(motor(2), 512)
+	clockwise(motor(3), 512)
+	clockwise(motor(4), 512)
 
 io.cleanup()
