@@ -1,5 +1,7 @@
+myfolder = os.path.dirname(os.path.realpath(__file__))
+
 #make sure these imports are correct
-sys.path.append(os.path.dirname(os.path.realpath(__file__)) + "/bin-imports/")
+sys.path.append(myfolder + "/bin-imports/")
 import map_data
 import movement_wrapper
 import displays
@@ -20,9 +22,20 @@ def main():
 	arm.lower()
 	arm.raise()
 	count = vipro.analyze(takePicture()) # takePicture() should return a path to an image
-	displays.showNumber(count)
-	# map out rest of plane
-	displays.drawField()
+	# save the count and map to be displayed later
+	f = open(myfolder+"/finaldata", "w")
+	f.write(str(count)+"\n")
+	for y in range(0, map_data.gridsize):
+		print y+1,
+		for x in range(0, map_data.gridsize):
+			if (x == 0 and y == 6):
+				f.write("S"),
+			elif map_data.has_live_wire_for_loc(x, y):
+				f.write("L"),
+			elif map_data.has_tunnel_for_loc(x, y):
+				f.write("T"),
+		f.write("\n")
+	f.close()
 
 #TODO this algorithm should be going around the whole field
 def find_live_tunnel_perimeter():
