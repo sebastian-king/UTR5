@@ -5,6 +5,10 @@ import encoder
 motorEncoders = [0 for a in range(4)]
 
 def initMotors(void):
+    motorEncoders[0] = encoder(pins.leftFrontEncoderChA, leftFrontEncoderChB)
+    motorEncoders[1] = encoder(pins.rightFrontEncoderChA, rightFrontEncoderChA)
+    motorEncoders[2] = encoder(pins.leftRearEncoderChA, leftRearEncoderChB)
+    motorEncoders[3] = encoder(pins.rightRearEncoderChA, rightRearEncoderChB)
 
 
 def encoderHandler(void):
