@@ -7,13 +7,22 @@ import movement_wrapper
 import displays
 import vipro
 
-#movement-wrapper.strafe_one_block(dir)
+#TUTORIAL FOR USING MOVEMENT FUNCTIONS TO MAKE ALGORITHMS
+
+#movement-wrapper.strafe_one_block(dir), strafe_to_block(x, y)
 #strafe one block no turning. direction: 0=right, 1=fwd, 2=left, 3=back.
-#sets its own new location, will not move if new location is off map
+#sets its own new location, will not move if new location is not valid
+#also have some code for turning the bot if needed
 
 #map_data has location functions
-#getX(), getY(), setX(x), setY(y), getDir(), setDir(dir)
+#	map_data.getX(), getY()
 #also has functions for storing information about each location
+#	map_data.has_tunnel_for_loc(x, y), set_tunnel_here(), set_live_wire_here(), set_obstacle_here(), set_cache_here()
+#if turning the bot there is code for get direction
+
+#END OF TUTORIAL
+
+
 
 def main():
 	movement_wrapper.initMotors()
