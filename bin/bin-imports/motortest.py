@@ -18,14 +18,14 @@ motorEncoders = [0 for a in range(4)]
 
 
     
-def encoderHandlerRF(void):
+def encoderHandlerRF():
     motorEncoders[1].monitor();
 
 
 
 
 #sets up GPIO, encoders, interrupts
-def initMotors(void):
+def initMotors():
     #TODO make sure pwm is set up right
     wiringpi.pinMode(pins.rightFrontMotorPWM, 2)
     wiringpi.pwmWrite(pins.rightFrontMotorPWM, 0)     #set all speeds to 0
@@ -73,18 +73,18 @@ def rotate(motor_number, speed, dir):
         counter_clockwise(motor_number, speed)
 
 def clockwise(motor_number, speed):
-    speed(speed)
+    speed(motor_number, speed)
     io.output(pins.motorEnableA[motor_number], True)
     io.output(pins.motorEnableB[motor_number], False)
 
 def counter_clockwise(motor_number, speed):
-    speed(speed)
+    speed(motor_number, speed)
     io.output(pins.motorEnableA[motor_number], False)
     io.output(pins.motorEnableA[motor_number], True)
 
 def stop(motor_number):
     #TODO im not sure why the speed is set to 254 in motors_with_encoders
-    speed(254)
+    speed(motor_number, 254)
     io.output(pins.motorEnableA[motor_number], True)
     io.output(pins.motorEnableB[motor_number], True)
 

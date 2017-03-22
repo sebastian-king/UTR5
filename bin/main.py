@@ -21,7 +21,7 @@ import numpy
 #map_data has location functions
 #	map_data.getX(), getY()
 #also has functions for storing information about each location
-#	map_data.has_tunnel_for_loc(x, y), set_tunnel_here(), set_live_wire_here(), set_obstacle_here(), set_cache_here()
+#	map_data.has_tunnel_for_loc(x, y), set_tunnel_here(True), set_live_wire_here(True), set_obstacle_here(True), set_cache_here(True)
 #if turning the bot there is code for get direction
 
 #END OF TUTORIAL
