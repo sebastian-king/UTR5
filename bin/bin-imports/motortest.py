@@ -42,8 +42,8 @@ def initMotors():
     motorEncoders[0] = encoder(pins.motorEncoderA[1], pins.motorEncoderB[1])
     
     #set up interrupts
-    io.add_event_detect(pins.motorEncoderA[1], GPIO.BOTH, callback = encoderHandlerRF)
-    io.add_event_detect(pins.motorEncoderB[1], GPIO.BOTH, callback = encoderHandlerRF)    
+    io.add_event_detect(pins.motorEncoderA[1], io.BOTH, callback = encoderHandlerRF)
+    io.add_event_detect(pins.motorEncoderB[1], io.BOTH, callback = encoderHandlerRF)    
 
 
 

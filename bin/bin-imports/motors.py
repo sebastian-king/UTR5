@@ -54,14 +54,14 @@ def initMotors():
         motorEncoders[i] = encoder(pins.motorEncoderA[i], pins.motorEncoderB[i])
     
     #set up interrupts
-    GPIO.add_event_detect(pins.motorEncoderA[0], GPIO.BOTH, callback = encoderHandlerLF)
-    GPIO.add_event_detect(pins.motorEncoderB[0], GPIO.BOTH, callback = encoderHandlerLF)
-    GPIO.add_event_detect(pins.motorEncoderA[1], GPIO.BOTH, callback = encoderHandlerRF)
-    GPIO.add_event_detect(pins.motorEncoderB[1], GPIO.BOTH, callback = encoderHandlerRF)    
-    GPIO.add_event_detect(pins.motorEncoderA[2], GPIO.BOTH, callback = encoderHandlerLB)
-    GPIO.add_event_detect(pins.motorEncoderB[2], GPIO.BOTH, callback = encoderHandlerLB)
-    GPIO.add_event_detect(pins.motorEncoderA[3], GPIO.BOTH, callback = encoderHandlerRB)
-    GPIO.add_event_detect(pins.motorEncoderB[3], GPIO.BOTH, callback = encoderHandlerRB)
+    io.add_event_detect(pins.motorEncoderA[0], io.BOTH, callback = encoderHandlerLF)
+    io.add_event_detect(pins.motorEncoderB[0], io.BOTH, callback = encoderHandlerLF)
+    io.add_event_detect(pins.motorEncoderA[1], io.BOTH, callback = encoderHandlerRF)
+    io.add_event_detect(pins.motorEncoderB[1], io.BOTH, callback = encoderHandlerRF)    
+    io.add_event_detect(pins.motorEncoderA[2], io.BOTH, callback = encoderHandlerLB)
+    io.add_event_detect(pins.motorEncoderB[2], io.BOTH, callback = encoderHandlerLB)
+    io.add_event_detect(pins.motorEncoderA[3], io.BOTH, callback = encoderHandlerRB)
+    io.add_event_detect(pins.motorEncoderB[3], io.BOTH, callback = encoderHandlerRB)
 
 
 #TODO test this make sure it works
