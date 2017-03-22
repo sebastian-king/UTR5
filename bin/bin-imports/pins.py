@@ -10,11 +10,11 @@ leftFrontEncoderChA = 0
 leftFrontEncoderChB =0
 
 #Right Front Motor Pins
-rightFrontMotorPWM = 26
-rightFrontMotorEnableA = 5
-rightFrontMotorEnableB = 6
-rightFrontEncoderChA = 13
-rightFrontEncoderChB = 19
+rightFrontMotorPWM = 23
+rightFrontMotorEnableA = 13
+rightFrontMotorEnableB = 19
+rightFrontEncoderChA = 20
+rightFrontEncoderChB = 21
 
 #Left Rear Motor Pins
 leftRearMotorPWM = 0
