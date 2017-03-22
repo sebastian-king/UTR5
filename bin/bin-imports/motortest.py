@@ -2,7 +2,8 @@
 
 
 #encoder.py has encoder class that takes 2 pins for quadrature encoders
-import encoder
+import sys
+from encoder import encoder
 import pins
 
 import RPi.GPIO as io
