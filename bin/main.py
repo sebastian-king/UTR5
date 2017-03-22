@@ -7,6 +7,8 @@ import movement_wrapper
 import displays
 import vipro
 
+import numpy
+
 #TUTORIAL FOR USING MOVEMENT FUNCTIONS TO MAKE ALGORITHMS
 
 #movement-wrapper.strafe_one_block(dir), strafe_to_block(x, y)
@@ -26,9 +28,8 @@ import vipro
 
 def main():
 	movement_wrapper.initMotors()
-	
 	find_live_tunnel_perimeter()
-	# do some fancy stuff
+	# wireEnds now contains possible candidates for caches
 	# assume we are now at the cache tile
 	arm.lower()
 	#arm.raise() #need to rename this method, raise is a reserved word in python -carson
@@ -47,36 +48,41 @@ def main():
 				f.write("T"),
 		f.write("\n")
 	f.close()
+	# check if we have time left, if we do, map out the rest of the map
+	# and we are done
+
+pastReadings = []
+wireEnds = []
 
 #TODO this algorithm should be going around the whole field
 def find_live_tunnel_perimeter():
-	if map_data.getDir() == 90 and map_data.getX() == 0 and map_data.getY() == 6:
-		while not is_infrastructure_below():
-			pos_x = map_data.getX()
-			pos_y = map_data.getY()
-			#this function is only for when bot facing north and in start position
-		
-                	if pos_x == 0 and pos_y == 6:
-                        	movement_wrapper.strafe_one_block(1) # MOVE NORTH
-                	elif pos_x == 0 and pos_y == 0:
-                        	movement_wrapper.strafe_one_block(0)
-                	elif pos_x == 6 and pos_y == 0:
-                        	print "E: Was not able to locate OT"
-                        	sys.exit(0)
-				# uh oh, since we were supposed to be facing the cache and have traversed half of the perimeter, something has gone wrong.
-                	elif pos_y == 0:
-                       		movement_wrapper.strafe_one_block(0)
-                	elif pos_x == 0:
-                        	movement_wrapper.strafe_one_block(1)
-	else:
-		#should not call if not facing north
-		pass
+	# we start at the bottom left, start exploring north
+	moveDirection = map_data.UP
+	exploring = True
+	while exploring:
+		movement_wrapper.strafe_one_block(moveDirection)
+		pos_x = map_data.getX()
+		pos_y = map_data.getY()
+		if is_infrastructure_below():
+			map_data.set_live_wire_here(true)
+			wireEnds.append([pos_x, pos_y])
+		# check for obstacles above
+		map_data.set_obstacle_at(pos_x-1, pos_y, IR_north.check())
+		# do that for all other directions
+		if pos_x == 0 and pos_y == 0: # top left
+			moveDirection = map_data.RIGHT
+		elif pos_x == 6 and pos_y == 0: # top right
+			moveDirection = map_data.DOWN
+		elif pos_x == 6 and pos_y == 6: # bottom right
+			moveDirection = map_data.LEFT
+		elif pos_x == 0 and pos_y == 6: # back at bottom left
+			exploring = False
 
 def is_infrastructure_below():
-	live_wire = false
-        if (live_wire):	#need to import sensor functions for em field, true if live wire
-                map_data.set_live_wire_here(true)
-		map_data.set_cache_here(true)
-		return true
-        else:
-                return false
+	# take a sample
+	currentReading = magnetometer.x # Maybe a different axis
+	pastReadings.append(currentReading)
+	if len(pastReadings) > 100:
+		pastReadings = pastReadings[-100:]
+	# is this different?
+	return currentReading > numpy.median(numpy.array(pastReadings))

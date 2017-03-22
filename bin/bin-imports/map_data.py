@@ -9,12 +9,12 @@
 gridsize = 7
 grid = [[Map_Block() for a in range(gridsize)] for b in range(gridsize)]
 
-
 current_direction = 90      #starting direction. 0 to 360 0=+x=east, 90=+y=north,, etc
 
 #location [x,y] 0-7. top left of feild is A0
 loc = [0, 6]         #starting x, y
 
+RIGHT, UP, LEFT, DOWN = 0, 1, 2, 3
 
 def is_valid_loc(x, y):
 	return (0 <= x < gridsize) and (0 <= y < gridsize )
@@ -34,13 +34,13 @@ def setDir(dir):
 
 #translate between A0 and [0, 0] notation
 def x(str):
-        return ord(str)-65
+    return ord(str)-65
 def y(int):
-        return int-1
+    return int-1
 def xr(int):
-        return unichr(int+65)
+    return unichr(int+65)
 def yr(int):
-        return int+1
+    return int+1
 
 
 def set_tunnel_here(object):
@@ -55,6 +55,8 @@ def has_live_wire_for_loc(x, y, object):
 
 def set_obstacle_here(object):
 	grid[loc[0]][loc[1]].set_obstacle(object)
+def set_obstacle_at(x, y, object):
+	grid[x][y].set_obstacle(object)
 def has_obstacle_for_loc(x, y, object):
 	return grid[x][y].has_obstacle
 
@@ -84,7 +86,7 @@ def print_map():
 			elif has_live_wire_for_loc(x, y):
 				print "O",
 			elif has_tunnel_for_loc(x, y):
-				print "E",                
+				print "E",
 		print
 
 class Map_Block():

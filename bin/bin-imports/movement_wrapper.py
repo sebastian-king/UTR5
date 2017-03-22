@@ -19,22 +19,22 @@ def move(distance, direction):
 		#angle = num_rotations_diagonal * 360
 		num_pulses = num_rotations_diagonal*600  #multiply by 600, the number of phase counts per revolution of the motor
 	
-		if direction == 0:    #right
+		if direction == map_data.RIGHT:    #right
 			FL = 0
 			FR = 0
 			BL = 1
 			BL = 1
-		if direction == 1:    #fwd
+		if direction == map_data.UP:    #fwd
 			FL = 0
 			FR = 1
 			BL = 0
 			BL = 1
-		if direction == 2:    #left
+		if direction == map_data.LEFT:    #left
 			FL = 1
 			FR = 1
 			BL = 0
 			BL = 0
-		if direction == 3:    #back
+		if direction == map_data.DOWN:    #back
 			FL = 1
 			FR = 0
 			BL = 1
@@ -47,12 +47,12 @@ def move(distance, direction):
 
 def turn(degrees):
 	if degrees != 0:
-		map_data.setDir(map_data.getDir() + degrees)	
+		map_data.setDir(map_data.getDir() + degrees)
 		if degrees > 0:
-			dir = 0
+			dir = map_data.RIGHT
 			angle = degrees
 		elif degrees < 0:
-			dir = 1
+			dir = map_data.UP
 			angle = degrees * -1
 		speed = 512     #not sure what speed to use
 		#need to figure out wheel numbers
@@ -65,15 +65,15 @@ blocklength = 305     #1 foot = 305mm
 
 #strafe one block no turning. direction: 0=right, 1=fwd, 2=left, 3=back
 def strafe_one_block(direction):
-	x = map_data.getX
-	y = map_data.getY
-	if direction == 0:
+	x = map_data.getX()
+	y = map_data.getY()
+	if direction == map_data.RIGHT:
 		x = x + 1
-	elif direction == 1:
+	elif direction == map_data.UP:
 		y = y + 1
-	elif direction == 2:
+	elif direction == map_data.LEFT:
 		x = x - 1
-	elif direction == 3:
+	elif direction == map_data.DOWN:
 		y = y - 1
 
 	if map_data.is_valid_loc(x, y):
@@ -126,31 +126,23 @@ def strafe_to_block(x, y):
 		
 		#x movement
 		distance = 0;
-		dir = 0
+		dir = map_data.RIGHT
 		if x_diff > 0:
 			distance = blocklength * x_diff
-			dir = 0
+			dir = map_data.RIGHT
 		elif x_diff < 0:
 			distance = blocklength * x_diff * -1
-			dir = 2
+			dir = map_data.LEFT
 		move(distance, dir)
 		map_data.setX(x)
 
 		#y movement
 		distance = 0;
 		if y_diff > 0:
-			dir = 1
+			dir = map_data.UP
 			distance = blocklength * y_diff
 		elif y_diff < 0:
-			dir = 3
+			dir = map_data.DOWN
 			distance = blocklength * y_diff * -1
 		move(distance, dir)
 		map_data.setY(y)
-		
-			
-
-
-
-
-
-
