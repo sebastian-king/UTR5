@@ -21,8 +21,8 @@ class encoder:
         if 'stateB_old' not in locals():
             stateB_old = 0
         
-        stateA = GPIO.input(encoderA)
-        stateB = GPIO.input(encoderB)
+        stateA = GPIO.input(pinA)
+        stateB = GPIO.input(pinB)
     
         # Print both states if something changes in either state and update the current state
         # Also casts the states as a string to remove ambiguity. Likely not needed
