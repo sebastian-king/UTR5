@@ -8,7 +8,6 @@ import pins
 
 import RPi.GPIO as io
 import wiringpi
-io.setmode(io.BCM)
 wiringpi.wiringPiSetupGpio()
 
 
@@ -27,6 +26,8 @@ def encoderHandlerRF():
 
 #sets up GPIO, encoders, interrupts
 def initMotors():
+    io.setmode(io.BCM)
+    
     #TODO make sure pwm is set up right
     wiringpi.pinMode(pins.rightFrontMotorPWM, 2)
     wiringpi.pwmWrite(pins.rightFrontMotorPWM, 0)     #set all speeds to 0
