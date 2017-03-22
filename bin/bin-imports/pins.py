@@ -41,30 +41,30 @@ motorEnableB = [0 for a in range(0, 3)]
 motorPwm = [0 for a in range(0, 3)]
 
 
-motorEnableA[0] = pins.leftFrontMotorEnableA
-motorEnableA[1] = pins.rightFrontMotorEnableA
-motorEnableA[2] = pins.leftRearMotorEnableA
-motorEnableA[3] = pins.rightRearMotorEnableA
+motorEnableA[0] = leftFrontMotorEnableA
+motorEnableA[1] = rightFrontMotorEnableA
+motorEnableA[2] = leftRearMotorEnableA
+motorEnableA[3] = rightRearMotorEnableA
 
-motorEnableB[0] = pins.leftFrontMotorEnableB
-motorEnableB[1] = pins.rightFrontMotorEnableB
-motorEnableB[2] = pins.leftRearMotorEnableB
-motorEnableB[3] = pins.rightRearMotorEnableB
+motorEnableB[0] = leftFrontMotorEnableB
+motorEnableB[1] = rightFrontMotorEnableB
+motorEnableB[2] = leftRearMotorEnableB
+motorEnableB[3] = rightRearMotorEnableB
 
-motorEncoderA[0] = pins.leftFrontEncoderChA
-motorEncoderA[1] = pins.rightFrontEncoderChA
-motorEncoderA[2] = pins.leftRearEncoderChA
-motorEncoderA[3] = pins.rightRearEncoderChA
+motorEncoderA[0] = leftFrontEncoderChA
+motorEncoderA[1] = rightFrontEncoderChA
+motorEncoderA[2] = leftRearEncoderChA
+motorEncoderA[3] = rightRearEncoderChA
 
-motorEncoderB[0] = pins.leftFrontEncoderChB
-motorEncoderB[1] = pins.rightFrontEncoderChA
-motorEncoderB[2] = pins.leftRearEncoderChB
-motorEncoderB[3] = pins.rightRearEncoderChB
+motorEncoderB[0] = leftFrontEncoderChB
+motorEncoderB[1] = rightFrontEncoderChA
+motorEncoderB[2] = leftRearEncoderChB
+motorEncoderB[3] = rightRearEncoderChB
 
-motorPwm[0] = pins.leftFrontMotorPWM
-motorPwm[1] = pins.rightFrontMotorPWM
-motorPwm[2] = pins.leftRearMotorPWM
-motorPwm[3] = pins.rightRearMotorPWM
+motorPwm[0] = leftFrontMotorPWM
+motorPwm[1] = rightFrontMotorPWM
+motorPwm[2] = leftRearMotorPWM
+motorPwm[3] = rightRearMotorPWM
 
 # displays
 matrix = range(1, 32)	#each led has 1 pin for on and 3 pins for rgb
