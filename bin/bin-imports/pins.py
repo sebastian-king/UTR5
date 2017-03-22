@@ -57,7 +57,7 @@ motorEncoderA[2] = leftRearEncoderChA
 motorEncoderA[3] = rightRearEncoderChA
 
 motorEncoderB[0] = leftFrontEncoderChB
-motorEncoderB[1] = rightFrontEncoderChA
+motorEncoderB[1] = rightFrontEncoderChB
 motorEncoderB[2] = leftRearEncoderChB
 motorEncoderB[3] = rightRearEncoderChB
 
