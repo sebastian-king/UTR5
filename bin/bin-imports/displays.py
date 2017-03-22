@@ -7,24 +7,19 @@ myfolder = os.path.dirname(os.path.realpath(__file__))
 
 sys.path.append(myfolder + "/bin-imports/")
 import Adafruit_MCP230XX
-
-pinmap = range(1, 32)	#each led has 1 pin for on and 3 pins for rgb
-rowpins = [17, 18, 19, 20, 29, 30, 31, 32]	#these are the pins to turn on rows
-
-for pin in pinmap:
-	GPIO.setup(pin, GPIO.OUT)
+import pins
 
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BOARD)
 
-#setup output pins
-GPIO.setup(11, GPIO.OUT)
-GPIO.setup(12, GPIO.OUT)
-GPIO.setup(13, GPIO.OUT)
-GPIO.setup(15, GPIO.OUT)
-GPIO.setup(16, GPIO.OUT)
-GPIO.setup(18, GPIO.OUT)
-GPIO.setup(22, GPIO.OUT)
+for pin in pins.matrix:
+	GPIO.setup(pin, GPIO.OUT)
+
+for pin in pins.matrixrow:
+	GPIO.setup(pin, GPIO.OUT)
+
+for pin in pins.segment:
+	GPIO.setup(pin, GPIO.OUT)
 
 #define 7 segment digits
 d = [ None for y in range( 11 ) ]
@@ -39,7 +34,13 @@ d[6]=[0,1,0,0,0,0,0]
 d[7]=[0,0,0,1,1,1,1]
 d[8]=[0,0,0,0,0,0,0]
 d[9]=[0,0,0,1,1,0,0]
-gpin=[11,12,13,15,16,18,22]
+
+rowpins = [17, 18, 19, 20, 29, 30, 31, 32]	# these are the pins to turn on rows
+
+# we should always have the bottom left lit yellow
+GPIO.output(pins.matrix[8], GPIO.HIGH)
+GPIO.output(pins.matrix[29], GPIO.HIGH)
+GPIO.output(pins.matrix[rowpins[6]], GPIO.HIGH)
 
 def show():
 	with open(+"/finaldata") as f:
@@ -55,22 +56,19 @@ def show():
 	#mcp.output(0, 1)  # High
 	#mcp.output(0, 0)  # Low
 
-	
 	digit = d[int(lines.pop(0))]
 	for x in range (0,7):
-		GPIO.output(gpin[x], d[10][x])
-			for x in range (0,7):
-				GPIO.output(gpin[x], digit[x])
+		GPIO.output(pins.segment[x], digit[x])
 	
 	while True: # need to quit this at some point, maybe on button press or after time
 		for y in range(0, len(lines)):
-			for pin in pinmap:
+			for pin in pins.matrix:
 				GPIO.output(pin, GPIO.LOW) # turn off everything
-			GPIO.output(pinmap[rowpins[y]], GPIO.HIGH)
+			GPIO.output(pins.matrix[rowpins[y]], GPIO.HIGH)
 			for x in range(0, md.gridsize):
-				r = pinmap[x+8]		#find the correct pin that corresponds to the color for the led in that column
-				g = pinmap[29-x] # we don't ever need green, for the yellow on A7 that should be always on, we should just ground that green pin, it doesn't need a GPIO
-				b = pinmap[x]
+				r = pins.matrix[x+8]		#find the correct pin that corresponds to the color for the led in that column
+				g = pins.matrix[29-x]
+				b = pins.matrix[x]
 				if (x == 0 and y == 6):
 					GPIO.output(r, GPIO.HIGH)
 					GPIO.output(g, GPIO.HIGH)

@@ -30,24 +30,6 @@ def main():
 	movement_wrapper.initMotors()
 	find_live_tunnel_perimeter()
 	# wireEnds now contains possible candidates for caches
-	# assume we are now at the cache tile
-	arm.lower()
-	#arm.raise() #need to rename this method, raise is a reserved word in python -carson
-	count = vipro.analyze(takePicture()) # takePicture() should return a path to an image
-	# save the count and map to be displayed later
-	f = open(myfolder+"/finaldata", "w")
-	f.write(str(count)+"\n")
-	for y in range(0, map_data.gridsize):
-		print y+1,
-		for x in range(0, map_data.gridsize):
-			if (x == 0 and y == 6):
-				f.write("S"),
-			elif map_data.has_live_wire_for_loc(x, y):
-				f.write("L"),
-			elif map_data.has_tunnel_for_loc(x, y):
-				f.write("T"),
-		f.write("\n")
-	f.close()
 	# check if we have time left, if we do, map out the rest of the map
 	# and we are done
 
@@ -66,9 +48,11 @@ def find_live_tunnel_perimeter():
 		if is_infrastructure_below():
 			map_data.set_live_wire_here(true)
 			wireEnds.append([pos_x, pos_y])
+			analyzeCache() # it's beneath us
 		# check for obstacles above
 		map_data.set_obstacle_at(pos_x-1, pos_y, IR_north.check())
 		# do that for all other directions
+		# [TODO]: don't move into an obstacle
 		if pos_x == 0 and pos_y == 0: # top left
 			moveDirection = map_data.RIGHT
 		elif pos_x == 6 and pos_y == 0: # top right
@@ -82,7 +66,26 @@ def is_infrastructure_below():
 	# take a sample
 	currentReading = magnetometer.x # Maybe a different axis
 	pastReadings.append(currentReading)
-	if len(pastReadings) > 100:
-		pastReadings = pastReadings[-100:]
-	# is this different?
+	if len(pastReadings) > 20:
+		pastReadings = pastReadings[-20:]
+	# is this different from the usual?
 	return currentReading > numpy.median(numpy.array(pastReadings))
+
+def analyzeCache():
+	arm.lower()
+	#arm.raise() #need to rename this method, raise is a reserved word in python -carson
+	count = vipro.analyze(takePicture()) # takePicture() should return a path to an image
+	# save the count and map to be displayed later
+	f = open(myfolder+"/finaldata", "w")
+	f.write(str(count)+"\n")
+	for y in range(0, map_data.gridsize):
+		print y+1,
+		for x in range(0, map_data.gridsize):
+			if (x == 0 and y == 6):
+				f.write("S"),
+			elif map_data.has_live_wire_for_loc(x, y):
+				f.write("L"),
+			elif map_data.has_tunnel_for_loc(x, y):
+				f.write("T"),
+		f.write("\n")
+	f.close()

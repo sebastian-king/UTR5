@@ -1,6 +1,9 @@
 import RPi.GPIO as GPIO
 import time
 
+sys.path.append(os.path.dirname(os.path.realpath(__file__)) + "/../bin/bin-imports")
+import displays
+
 def listen_for_stop():
 	GPIO.setwarnings(False)
 	GPIO.setmode(GPIO.BCM)
@@ -9,7 +12,7 @@ def listen_for_stop():
 	GPIO.output(26, GPIO.LOW)
 
 	#i=0;
-	while True:
+	while True: # wait for the stop button to be pressed
 		#i=i+1
 		time.sleep(0.1)
 		val = GPIO.input(5)
@@ -18,8 +21,6 @@ def listen_for_stop():
 			break
 
 	print "Stop pressed"
-	sys.path.append(dir + "/bin-imports/")
-	import displays
 	displays.show()
 
 	"""GPIO.cleanup()           # clean up GPIO on normal exit

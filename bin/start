@@ -14,20 +14,14 @@ if os.path.isfile(pidfile):
 	print "%s already exists, exiting" % pidfile
 	sys.exit()
 file(pidfile, 'w').write(pid)
+
 try:
-
 	from start_button import listen_for_start
-	
 	print "RUNIT SERVICE LISTENING"
-
 	listen_for_start()
-
 	print "START BUTTON HAS BEEN PRESSED"
-
 	time.sleep(60)
-
 	print "END"
-
 	GPIO.cleanup()
 
 finally:

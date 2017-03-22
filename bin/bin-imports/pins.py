@@ -65,3 +65,7 @@ motorPwm[0] = pins.leftFrontMotorPWM
 motorPwm[1] = pins.rightFrontMotorPWM
 motorPwm[2] = pins.leftRearMotorPWM
 motorPwm[3] = pins.rightRearMotorPWM
+
+# displays
+matrix = range(1, 32)	#each led has 1 pin for on and 3 pins for rgb
+segment = [11,12,13,15,16,18,22]
