@@ -1,5 +1,5 @@
 import RPi.GPIO as GPIO
-import time
+import sys, os, time
 
 myfolder = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(myfolder + "/../bin/")

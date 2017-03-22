@@ -1,5 +1,5 @@
 import RPi.GPIO as GPIO
-import time
+import sys, os, time
 
 sys.path.append(os.path.dirname(os.path.realpath(__file__)) + "/../bin/bin-imports")
 import displays

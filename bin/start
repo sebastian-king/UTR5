@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 
-import os
-import sys
-import time
+import sys, os, time
 import RPi.GPIO as GPIO
 
 sys.path.append(os.path.dirname(os.path.realpath(__file__)) + "/../buttons/")

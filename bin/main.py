@@ -1,3 +1,5 @@
+import sys, os
+
 myfolder = os.path.dirname(os.path.realpath(__file__))
 
 #make sure these imports are correct

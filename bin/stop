@@ -1,15 +1,13 @@
 #!/usr/bin/env python
 
-import os
-import sys
-import time
+import sys, os, time
 import RPi.GPIO as GPIO
 
 dir=os.path.dirname(os.path.realpath(__file__))
 sys.path.append(dir + "/../buttons/")
 
 from stop_button import listen_for_stop
-	
+
 print "RUNIT STOP SERVICE LISTENING"
 
 listen_for_stop()

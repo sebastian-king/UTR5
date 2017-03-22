@@ -6,6 +6,22 @@
 #Map_Block determines if that location has a tunnel, live wire, surface obstacle, cache
 #getters and setters for all map data
 
+class Map_Block():
+	#all data fields true/False
+	def __init__(self):
+		self.has_tunnel = False
+		self.has_live_wire = False
+		self.has_obstacle = False
+		self.has_cache = False
+	def set_tunnel(self, object):
+		self.has_tunnel = object
+	def set_live_wire(self, object):
+		self.has_live_wire = object
+	def set_obstacle(self, object):
+		self.has_obstacle = object
+	def set_cache(self):
+		self.has_cache = object
+
 gridsize = 7
 grid = [[Map_Block() for a in range(gridsize)] for b in range(gridsize)]
 
@@ -88,19 +104,3 @@ def print_map():
 			elif has_tunnel_for_loc(x, y):
 				print "E",
 		print
-
-class Map_Block():
-	#all data fields true/false
-	def __init__(self):
-		self.has_tunnel = false
-		self.has_live_wire = false
-		self.has_obstacle = false
-		self.has_cache = false
-	def set_tunnel(self, object):
-		self.has_tunnel = object
-	def set_live_wire(self, object):
-		self.has_live_wire = object
-	def set_obstacle(self, object):
-		self.has_obstacle = object
-	def set_cache(self):
-		self.has_cache = object
