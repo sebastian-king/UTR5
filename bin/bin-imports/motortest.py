@@ -18,7 +18,7 @@ motorEncoders = [0 for a in range(4)]
 
 
     
-def encoderHandlerRF():
+def encoderHandlerRF(void):
     motorEncoders[1].monitor();
 
 
