@@ -75,23 +75,23 @@ def rotate(motor_number, speed, dir):
         counter_clockwise(motor_number, speed)
 
 def clockwise(motor_number, speed):
-    speed(motor_number, speed)
+    setSpeed(motor_number, speed)
     io.output(pins.motorEnableA[motor_number], True)
     io.output(pins.motorEnableB[motor_number], False)
 
 def counter_clockwise(motor_number, speed):
-    speed(motor_number, speed)
+    setSpeed(motor_number, speed)
     io.output(pins.motorEnableA[motor_number], False)
     io.output(pins.motorEnableA[motor_number], True)
 
 def stop(motor_number):
     #TODO im not sure why the speed is set to 254 in motors_with_encoders
-    speed(motor_number, 254)
+    setSpeed(motor_number, 254)
     io.output(pins.motorEnableA[motor_number], True)
     io.output(pins.motorEnableB[motor_number], True)
 
 #TODO make sure this is right
-def speed(motor_number, speed):
+def setSpeed(motor_number, speed):
     if 0 <= speed <= 1024:
         wiringpi.pwmWrite(pins.motorPwm[motor_number], speed)
     else:
