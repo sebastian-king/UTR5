@@ -13,7 +13,7 @@ class encoder:
         self.pulses = 0
     
     #call this continuously in the main class to monitor the encoders and accumulate distance values
-    def monitor():
+    def monitor(self):
     # Infinite loop to print out 1 or 0 depending on encoder input
         # Read the encoder input
         if 'stateA_old' not in locals():
@@ -43,11 +43,11 @@ class encoder:
         stateA_old, stateB_old = stateA, stateB
                 
     #returns the accumulated distance in pulses            
-    def getPulses():
+    def getPulses(self):
         return self.pulses
     
     #returns the accumulated distance in units of our choosing, 5 is a placeholder for wheel circumference in that unit
-    def getDistance():
+    def getDistance(self):
         return self.pulses/600.0 * 5   
     
     def resetPulses(self):
