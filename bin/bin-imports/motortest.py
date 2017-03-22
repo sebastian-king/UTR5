@@ -13,13 +13,13 @@ wiringpi.wiringPiSetupGpio()
 
 #list of encoder objects
 #motor numbers: LF=0 RF=1 LB=2 RB=3
-motorEncoders = [0 for a in range(4)]
+encoder1 = encoder(pins.motorEncoderA[1], pins.motorEncoderB[1])
 
 
 
     
 def encoderHandlerRF(void):
-    motorEncoders[1].monitor();
+    encoder1.monitor();
 
 
 
@@ -38,8 +38,6 @@ def initMotors():
     io.setup(pins.rightFrontMotorEnableB, io.OUT)
     
     stop(1)
-    #create encoder list
-    motorEncoders[0] = encoder(pins.motorEncoderA[1], pins.motorEncoderB[1])
     
     #set up interrupts
     io.add_event_detect(pins.motorEncoderA[1], io.BOTH, callback = encoderHandlerRF)
@@ -53,7 +51,7 @@ def runMotor(pulses):
     speed = 512
     
     #set pulses to 0
-    motorEncoders[0].resetPulses()
+    encoder1.resetPulses()
     
     rotate(1, speed, 1)
 
@@ -61,7 +59,7 @@ def runMotor(pulses):
     numMotorsRotating = 1
             
     while numMotorsRotating != 0:
-        if abs(motorEncoders[0].getPulses()) >= pulses:
+        if abs(encoder1.getPulses()) >= pulses:
             stop(1)
             numMotorsRotating = numMotorsRotating - 1
             
