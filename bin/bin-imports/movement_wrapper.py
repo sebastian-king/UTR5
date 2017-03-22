@@ -13,7 +13,7 @@ def initMotors(void):
 def move(distance, direction):
 	if distance > 0:
 		#constant for ratio of the distance per rotation, in <unit of measurement>, that a wheel travels when wheel is straight
-		wheel_circumference = 5    #need to measure (what unit is this?)
+		wheel_circumference = 60    #60mm
 		#number of rotations needed to travel distance when wheels are at a 45 degree angle
 		num_rotations_diagonal = (distance * 1.414214) / wheel_circumference       # 1.414214=sqrt(2)
 		#angle = num_rotations_diagonal * 360
@@ -61,7 +61,7 @@ def turn(degrees):
 
 
 
-blocklength = 10     #constant that we need to measure
+blocklength = 305     #1 foot = 305mm
 
 #strafe one block no turning. direction: 0=right, 1=fwd, 2=left, 3=back
 def strafe_one_block(direction):

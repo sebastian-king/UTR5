@@ -79,7 +79,7 @@ def run_all_motors(speed, pulses, dir0, dir1, dir2, dir3):
             
     while numMotorsRotating != 0:
         for i in range(0, 3):
-            if motorEncoders[i].getPulses() >= pulses:
+            if abs(motorEncoders[i].getPulses()) >= pulses:
                 stop(i)
                 numMotorsRotating = numMotorsRotating - 1
             
