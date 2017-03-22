@@ -13,7 +13,7 @@ wiringpi.wiringPiSetupGpio()
 
 #list of encoder objects
 #motor numbers: LF=0 RF=1 LB=2 RB=3
-motorEncoders = [0 for a in range(0, 3)]
+motorEncoders = [0 for a in range(4)]
 
 
 

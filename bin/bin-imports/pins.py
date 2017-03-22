@@ -34,11 +34,11 @@ rightRearEncoderChB = 0
 
 
 #array versions
-motorEncoderA = [0 for a in range(0, 3)]
-motorEncoderB = [0 for a in range(0, 3)]
-motorEnableA = [0 for a in range(0, 3)]
-motorEnableB = [0 for a in range(0, 3)]
-motorPwm = [0 for a in range(0, 3)]
+motorEncoderA = [0 for a in range(4)]
+motorEncoderB = [0 for a in range(4)]
+motorEnableA = [0 for a in range(4)]
+motorEnableB = [0 for a in range(4)]
+motorPwm = [0 for a in range(4)]
 
 
 motorEnableA[0] = leftFrontMotorEnableA
