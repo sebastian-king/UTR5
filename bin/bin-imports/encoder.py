@@ -21,8 +21,8 @@ class encoder:
         if 'stateB_old' not in locals():
             stateB_old = 0
         
-        stateA = GPIO.input(pinA)
-        stateB = GPIO.input(pinB)
+        stateA = GPIO.input(self.pinA)
+        stateB = GPIO.input(self.pinB)
     
         # Print both states if something changes in either state and update the current state
         # Also casts the states as a string to remove ambiguity. Likely not needed
@@ -40,7 +40,7 @@ class encoder:
                 # print 'Encoder count is %s\nAB is %s %s' % (counts, stateA, stateB)
                 # print 'Going counter-clockwise'
                 
-        stateA_old, stateB_old = stateA, stateB
+        stateA_old, stateB_old = self.stateA, self.stateB
                 
     #returns the accumulated distance in pulses            
     def getPulses(self):
