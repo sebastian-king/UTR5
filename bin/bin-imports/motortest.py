@@ -65,7 +65,7 @@ def runMotor(pulses):
     speed = 1000
     
     #set pulses to 0
-    encoder1.resetPulses()
+    encoder1.reset()
     
     clockwise(1, speed)
 
