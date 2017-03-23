@@ -45,8 +45,8 @@ def initMotor():
     #wiringpi.pinMode(pins.rightFrontMotorPWM, 2)
     
     #TODO make sure gpio is set up right
-    io.setup(pins.rightFrontMotorEnableA, io.OUT, pull_up_down=io.PUD_DOWN)
-    io.setup(pins.rightFrontMotorEnableB, io.OUT, pull_up_down=io.PUD_DOWN)
+    io.setup(pins.rightFrontMotorEnableA, io.OUT)
+    io.setup(pins.rightFrontMotorEnableB, io.OUT)
     io.setup(pins.rightFrontMotorPWM, io.OUT)
 
     #set up interrupts
