@@ -29,14 +29,15 @@ def initMotor():
     io.setmode(io.BCM)
     
     #TODO make sure pwm is set up right
-    wiringpi.pinMode(pins.rightFrontMotorPWM, 2)
-    wiringpi.pwmWrite(pins.rightFrontMotorPWM, 0)     #set all speeds to 0
+    #wiringpi.pinMode(pins.rightFrontMotorPWM, 2)
     
     #TODO make sure gpio is set up right
     #set up GPIO
     io.setup(pins.rightFrontMotorEnableA, io.OUT)
     io.setup(pins.rightFrontMotorEnableB, io.OUT)
-    
+    io.setup(pins.rightFrontMotorPWM, io.OUT)
+
+
     stop(1)
     
     #set up interrupts
