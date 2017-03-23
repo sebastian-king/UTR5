@@ -102,7 +102,7 @@ def clockwise(motor_number, speed):
 def counter_clockwise(motor_number, speed):
     speed(motor_number, speed)
     io.output(pins.motorEnableA[motor_number], False)
-    io.output(pins.motorEnableA[motor_number], True)
+    io.output(pins.motorEnableB[motor_number], True)
 
 def stop(motor_number):
     #TODO im not sure why the speed is set to 254 in motors_with_encoders
