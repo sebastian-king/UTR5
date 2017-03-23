@@ -17,9 +17,9 @@ class encoder:
     # Infinite loop to print out 1 or 0 depending on encoder input
         # Read the encoder input
         if 'stateA_old' not in locals():
-            stateA_old = 0
+            self.stateA_old = 0
         if 'stateB_old' not in locals():
-            stateB_old = 0
+            self.stateB_old = 0
         
         stateA = GPIO.input(self.pinA)
         stateB = GPIO.input(self.pinB)
@@ -27,20 +27,20 @@ class encoder:
         # Print both states if something changes in either state and update the current state
         # Also casts the states as a string to remove ambiguity. Likely not needed
         if str(stateA) != str(stateA_old):
-            if ((stateA, stateB_old) == (0,0)) or ((stateA, stateB_old) == (1,1)):
+            if ((stateA, self.stateB_old) == (0,0)) or ((stateA, self.stateB_old) == (1,1)):
                  # IF clockwise rotation
                 self.pulses += 1
                 # print 'Encoder count is %s\nAB is %s %s' % (counts, stateA, stateB)
                 # print 'Going clockwise'
     
-        if str(stateB) != str(stateB_old):
-            if ((stateA, stateB_old) == (0,1)) or ((stateA, stateB_old) == (1,0)):
+        if str(stateB) != str(self.stateB_old):
+            if ((stateA, self.stateB_old) == (0,1)) or ((stateA, self.stateB_old) == (1,0)):
                 # IF counter-clockwise rotation
                 self.pulses -= 1
                 # print 'Encoder count is %s\nAB is %s %s' % (counts, stateA, stateB)
                 # print 'Going counter-clockwise'
                 
-        stateA_old, stateB_old = self.stateA, self.stateB
+        self.stateA_old, self.stateB_old = stateA, stateB
                 
     #returns the accumulated distance in pulses            
     def getPulses(self):
