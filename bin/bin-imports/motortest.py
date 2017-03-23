@@ -48,7 +48,7 @@ def initMotor():
 #TODO test this make sure it works
 #motor numbers: LF=0 RF=1 LB=2 RB=3
 def runMotor(pulses):    
-    speed = 512
+    speed = 1000
     
     #set pulses to 0
     encoder1.resetPulses()
@@ -90,7 +90,9 @@ def stop(motor_number):
 
 #TODO make sure this is right
 def setSpeed(motor_number, speed):
-    if 0 <= speed <= 1024:
-        wiringpi.pwmWrite(pins.motorPwm[motor_number], speed)
+    if 0 < speed <= 1024:
+        io.output(pins.motorPwm[motor_number], True)
+        #wiringpi.pwmWrite(pins.motorPwm[motor_number], speed)
     else:
-        wiringpi.pwmWrite(pins.motorPwm[motor_number], 0)
+        io.output(pins.motorPwm[motor_number], False)
+        #wiringpi.pwmWrite(pins.motorPwm[motor_number], 0)
