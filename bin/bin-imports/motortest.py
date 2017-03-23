@@ -46,8 +46,13 @@ def initMotor():
     
     #TODO make sure gpio is set up right
     #set up GPIO
+<<<<<<< HEAD
     io.setup(pins.rightFrontMotorEnableA, io.OUT, io.PUD_DOWN)
     io.setup(pins.rightFrontMotorEnableB, io.OUT, io.PUD_DOWN)
+=======
+    io.setup(pins.rightFrontMotorEnableA, io.OUT, pull_up_down=io.PUD_DOWN)
+    io.setup(pins.rightFrontMotorEnableB, io.OUT, pull_up_down=io.PUD_DOWN)
+>>>>>>> origin/master
     io.setup(pins.rightFrontMotorPWM, io.OUT)
 
     #set up interrupts
