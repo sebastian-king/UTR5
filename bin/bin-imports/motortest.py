@@ -1,5 +1,18 @@
 #!/usr/bin/env python
 
+#WHAT WE NEED TO DO: MOVEMENT TESTING
+#this is a simple test for the encoder and motor, the right front
+#import motortest in python on the pi
+#call initMotor()
+#call clockwise(1, 1), counter_clockwise(1, 1), and stop(1)
+#if all of the above works:
+#call runMotor(num_pulses), make sure it rotates and stops 
+#once that works, we need to figurue out pwm stuff for speed
+#once this whole test works, we can update/test motors.py in the same way, which is this but with all 4 motors
+#when motors.py works, we can test movement_wrapper.strafe_one_block(direction), this is what handles 600 pulses/rot, wheel size constants, etc
+
+
+
 
 #encoder.py has encoder class that takes 2 pins for quadrature encoders
 import sys
@@ -57,13 +70,13 @@ def runMotor(pulses):
     clockwise(1, speed)
 
     
-    numMotorsRotating = 1
+    moving = True
             
-    while numMotorsRotating != 0:
+    while moving == True:
         if abs(encoder1.getPulses()) >= pulses:
-            stop(1)
-            numMotorsRotating = numMotorsRotating - 1
-            
+            moving = False
+                    
+    stop(1)
 
     
 #motor numbers: LF=0 RF=1 LB=2 RB=3
