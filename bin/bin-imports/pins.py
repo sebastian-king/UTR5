@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 #a module for storing all wiring information and pin numbers
+#NEVER USE PIN 13 for OUTPUT
 
 #Left Front Motor Pins
 leftFrontMotorPWM = 0
@@ -11,7 +12,7 @@ leftFrontEncoderChB =0
 
 #Right Front Motor Pins
 rightFrontMotorPWM = 23
-rightFrontMotorEnableA = 13
+rightFrontMotorEnableA = 5 
 rightFrontMotorEnableB = 6
 rightFrontEncoderChA = 20
 rightFrontEncoderChB = 21
