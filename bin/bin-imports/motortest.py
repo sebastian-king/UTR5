@@ -89,7 +89,7 @@ def rotate(motor_number, speed, dir):
 def clockwise(motor_number, speed):
     setSpeed(motor_number, speed)
     io.output(pins.motorEnableA[motor_number], True)
-    io.output(pins.motorEnableB[motor_number], True)
+    io.output(pins.motorEnableB[motor_number], False)
 
 def counter_clockwise(motor_number, speed):
     setSpeed(motor_number, speed)
