@@ -33,7 +33,7 @@ encoder1 = encoder(pins.motorEncoderA[1], pins.motorEncoderB[1])
     
 def encoderHandlerRF(void):
     encoder1.monitor();
-
+    print 'encoder pulses: %s' % (encoder1.getPulses())
 
 
 #CALL THIS BEFORE RUNMOTOR
@@ -54,7 +54,7 @@ def initMotor():
     io.add_event_detect(pins.motorEncoderB[1], io.BOTH, callback = encoderHandlerRF)    
     
     stop(1)
-
+    print 'initMotor() completed'
 
 
 #TODO test this make sure it works
@@ -67,7 +67,7 @@ def runMotor(pulses):
     encoder1.reset()
     
     clockwise(1, speed)
-
+    print 'runMotor() motor started'
     
     moving = True
             
@@ -76,6 +76,7 @@ def runMotor(pulses):
             moving = False
                     
     stop(1)
+    print 'runMotor() completed'
 
     
 #motor numbers: LF=0 RF=1 LB=2 RB=3
