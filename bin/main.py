@@ -50,7 +50,7 @@ def find_live_tunnel_perimeter():
 		if is_infrastructure_below():
 			map_data.set_live_wire_here(true)
 			wireEnds.append([pos_x, pos_y])
-			analyzeCache() # it's beneath us
+			analyzeCache() # it's beneath us!
 		# check for obstacles above
 		map_data.set_obstacle_at(pos_x-1, pos_y, IR_north.check())
 		# do that for all other directions
@@ -74,6 +74,7 @@ def is_infrastructure_below():
 	return currentReading > numpy.median(numpy.array(pastReadings))
 
 def analyzeCache():
+	# here we need to assure that the arm is above the cache
 	arm.lower()
 	#arm.raise() #need to rename this method, raise is a reserved word in python -carson
 	count = vipro.analyze(takePicture()) # takePicture() should return a path to an image
@@ -89,5 +90,7 @@ def analyzeCache():
 				f.write("L"),
 			elif map_data.has_tunnel_for_loc(x, y):
 				f.write("T"),
+			else:
+				f.write("."),
 		f.write("\n")
 	f.close()
