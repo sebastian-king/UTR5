@@ -1,68 +1,82 @@
 #!/usr/bin/env python
 
+#WHAT WE NEED TO DO: MOVEMENT TESTING
+#this is a simple test for the encoder and motor, the right front
+#import motortest in python on the pi
+#call initMotor()
+#call clockwise(1, 1), counter_clockwise(1, 1), and stop(1)
+#if all of the above works:
+#call runMotor(num_pulses), make sure it rotates and stops 
+#once that works, we need to figurue out pwm stuff for speed
+#once this whole test works, we can update/test motors.py in the same way, which is this but with all 4 motors
+#when motors.py works, we can test movement_wrapper.strafe_one_block(direction), this is what handles 600 pulses/rot, wheel size constants, etc
+
+
+
 
 #encoder.py has encoder class that takes 2 pins for quadrature encoders
-import encoder
+import sys
+from encoder import encoder
 import pins
 
 import RPi.GPIO as io
-import wiringpi
-io.setmode(io.BCM)
-wiringpi.wiringPiSetupGpio()
+#import wiringpi
+#wiringpi.wiringPiSetupGpio()
 
 
 #list of encoder objects
 #motor numbers: LF=0 RF=1 LB=2 RB=3
-motorEncoders = [0 for a in range(4)]
+encoder1 = encoder(pins.motorEncoderA[1], pins.motorEncoderB[1])
 
 
 
     
 def encoderHandlerRF(void):
-    motorEncoders[1].monitor();
+    encoder1.monitor();
+    print 'encoder pulses: %s' % (encoder1.getPulses())
 
 
-
-
+#CALL THIS BEFORE RUNMOTOR
 #sets up GPIO, encoders, interrupts
-def initMotors(void):
+def initMotor():
+    io.setmode(io.BCM)
+    
     #TODO make sure pwm is set up right
-    wiringpi.pinMode(pins.rightFrontMotorPWM, 2)
-    wiringpi.pwmWrite(pins.rightFrontMotorPWM, 0)     #set all speeds to 0
+    #wiringpi.pinMode(pins.rightFrontMotorPWM, 2)
     
     #TODO make sure gpio is set up right
-    #set up GPIO
     io.setup(pins.rightFrontMotorEnableA, io.OUT)
     io.setup(pins.rightFrontMotorEnableB, io.OUT)
+    io.setup(pins.rightFrontMotorPWM, io.OUT)
+
+    #set up interrupts
+    io.add_event_detect(pins.motorEncoderA[1], io.BOTH, callback = encoderHandlerRF)
+    io.add_event_detect(pins.motorEncoderB[1], io.BOTH, callback = encoderHandlerRF)    
     
     stop(1)
-    #create encoder list
-    motorEncoders[0] = encoder(pins.motorEncoderA[1], pins.motorEncoderB[1])
-    
-    #set up interrupts
-    GPIO.add_event_detect(pins.motorEncoderA[1], GPIO.BOTH, callback = encoderHandlerRF)
-    GPIO.add_event_detect(pins.motorEncoderB[1], GPIO.BOTH, callback = encoderHandlerRF)    
-
+    print 'initMotor() completed'
 
 
 #TODO test this make sure it works
+#running clockwise function on motor 1 (right front) to test
 #motor numbers: LF=0 RF=1 LB=2 RB=3
 def runMotor(pulses):    
-    speed = 512
+    speed = 1000
     
     #set pulses to 0
-    motorEncoders[0].resetPulses()
+    encoder1.reset()
     
-    rotate(1, speed, 1)
-
+    clockwise(1, speed)
+    print 'runMotor() motor started'
     
-    numMotorsRotating = 1
+    moving = True
             
-    while numMotorsRotating != 0:
-        if abs(motorEncoders[0].getPulses()) >= pulses:
-            stop(1)
-            numMotorsRotating = numMotorsRotating - 1
-            
+    while moving == True:
+        if abs(encoder1.getPulses()) >= pulses:
+            moving = False
+                    
+    stop(1)
+    print 'runMotor() completed'
 
     
 #motor numbers: LF=0 RF=1 LB=2 RB=3
@@ -73,24 +87,25 @@ def rotate(motor_number, speed, dir):
         counter_clockwise(motor_number, speed)
 
 def clockwise(motor_number, speed):
-    speed(speed)
+    setSpeed(motor_number, speed)
     io.output(pins.motorEnableA[motor_number], True)
     io.output(pins.motorEnableB[motor_number], False)
 
 def counter_clockwise(motor_number, speed):
-    speed(speed)
+    setSpeed(motor_number, speed)
     io.output(pins.motorEnableA[motor_number], False)
-    io.output(pins.motorEnableA[motor_number], True)
-
-def stop(motor_number):
-    #TODO im not sure why the speed is set to 254 in motors_with_encoders
-    speed(254)
-    io.output(pins.motorEnableA[motor_number], True)
     io.output(pins.motorEnableB[motor_number], True)
 
+def stop(motor_number):
+    setSpeed(motor_number, 0)
+    io.output(pins.motorEnableA[motor_number], False)
+    io.output(pins.motorEnableB[motor_number], False)
+
 #TODO make sure this is right
-def speed(motor_number, speed):
-    if 0 <= speed <= 1024:
-        wiringpi.pwmWrite(pins.motorPwm[motor_number], speed)
+def setSpeed(motor_number, speed):
+    if 0 < speed <= 1024:
+        io.output(pins.motorPwm[motor_number], True)
+        #wiringpi.pwmWrite(pins.motorPwm[motor_number], speed)
     else:
-        wiringpi.pwmWrite(pins.motorPwm[motor_number], 0)
+        io.output(pins.motorPwm[motor_number], False)
+        #wiringpi.pwmWrite(pins.motorPwm[motor_number], 0)
