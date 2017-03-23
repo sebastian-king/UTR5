@@ -30,12 +30,12 @@ class encoder:
         stateB = GPIO.input(self.pinB)
         
         #find time passed
-        timePass = millis() - oldTime
+        timePass = millis() - self.oldTime
         if timePass > 1000:
-            speed = self.pulses - self.oldPulses
+            self.speed = self.pulses - self.oldPulses
             self.oldPulses = self.pulses
             timePass = 0
-            oldTime = millis()
+            self.oldTime = millis()
     
         # Print both states if something changes in either state and update the current state
         # Also casts the states as a string to remove ambiguity. Likely not needed
