@@ -26,7 +26,7 @@ class encoder:
     
         # Print both states if something changes in either state and update the current state
         # Also casts the states as a string to remove ambiguity. Likely not needed
-        if str(stateA) != str(stateA_old):
+        if str(stateA) != str(self.stateA_old):
             if ((stateA, self.stateB_old) == (0,0)) or ((stateA, self.stateB_old) == (1,1)):
                  # IF clockwise rotation
                 self.pulses += 1
