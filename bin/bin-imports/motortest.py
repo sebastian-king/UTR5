@@ -25,7 +25,7 @@ def encoderHandlerRF(void):
 
 
 #sets up GPIO, encoders, interrupts
-def initMotors():
+def initMotor():
     io.setmode(io.BCM)
     
     #TODO make sure pwm is set up right

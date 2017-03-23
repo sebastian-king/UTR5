@@ -1,38 +1,39 @@
 #!/usr/bin/env python
 
 #encoder.py has encoder class that takes 2 pins for quadrature encoders
-import encoder
+import sys
+from encoder import encoder
 import pins
 
 import RPi.GPIO as io
 import wiringpi
-io.setmode(io.BCM)
 wiringpi.wiringPiSetupGpio()
 
 
 #list of encoder objects
 #motor numbers: LF=0 RF=1 LB=2 RB=3
-motorEncoders = [0 for a in range(0, 3)]
+#motorEncoders = [0 for a in range(0, 3)]
 
 
 
 #interrupt that updates encoders
-def encoderHandlerLF():
+def encoderHandlerLF(void):
     motorEncoders[0].monitor();
     
-def encoderHandlerRF():
+def encoderHandlerRF(void):
     motorEncoders[1].monitor();
     
-def encoderHandlerLB():
+def encoderHandlerLB(void):
     motorEncoders[2].monitor();
     
-def encoderHandlerRB():
+def encoderHandlerRB(void):
     motorEncoders[3].monitor();
 
 
 
 #sets up GPIO, encoders, interrupts
 def initMotors():
+    io.setmode(io.BCM)
     #TODO make sure pwm is set up right
     for m in pins.motorPwm:
         wiringpi.pinMode(m,2)
