@@ -70,7 +70,7 @@ def initMotors():
 def run_all_motors(speed, pulses, dir0, dir1, dir2, dir3):    
     #set pulses to 0
     for e in motorEncoders:
-        e.resetPulses()
+        e.reset()
     
     rotate(0, speed, dir0)
     rotate(1, speed, dir1)
