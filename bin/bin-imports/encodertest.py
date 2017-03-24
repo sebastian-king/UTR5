@@ -1,3 +1,13 @@
+# Encodertest.py
+# We're working on the assumption that we only need to read one encoder per motor
+# 	in order to accurately count rotations. The datasheet provides the states
+# 	each encoder should be in when rotating a certain direction.
+
+# We will interrupt when A goes from 0->1 (False->True) and then check the state
+# 	of B. If B is high, we are going clockwise, otherwise, we are going
+# 	counterclockwise.
+
+
 import RPi.GPIO as GPIO # Allows use of pins on the Pi
 import time
 import pins
@@ -18,7 +28,7 @@ def initEncoderCallbacks():
     GPIO.setup(pins.motorEncoderB[1], GPIO.IN, GPIO.PUD_UP)
     #set up interrupts
     GPIO.add_event_detect(pins.motorEncoderA[1], GPIO.RISING, callback = encoderHandlerA)
-    GPIO.add_event_detect(pins.motorEncoderB[1], GPIO.RISING, callback = encoderHandlerB)   
+    #GPIO.add_event_detect(pins.motorEncoderB[1], GPIO.RISING, callback = encoderHandlerB)   
    
 
 def reset():
@@ -33,13 +43,13 @@ def encoderHandlerA(void):
     else:
         pulses -= 1
      
-def encoderHandlerB(void):
-    global pulses  
-    a = GPIO.input(pins.motorEncoderA[1])
-    if a == 1:
-        pulses -= 1
-    else:
-        pulses += 1
+#def encoderHandlerB(void):
+#    global pulses  
+#    a = GPIO.input(pins.motorEncoderA[1])
+#    if a == 1:
+#        pulses -= 1
+#    else:
+#        pulses += 1
 
 def getPulses():
     global p
