@@ -3,14 +3,14 @@
 import RPi.GPIO as GPIO # Allows use of pins on the Pi
 import time
 import pins
-p = 0
-p_elapsed = 0
-sa = 0
-sb = 0
-sa_old = 0
-sb_old = 0
-    
+
 def initCallbacks():
+    global p
+    global p_elapsed
+    global sa
+    global sb
+    global sa_old
+    global sb_old
     p = 0
     p_elapsed = 0
     sa = 0
