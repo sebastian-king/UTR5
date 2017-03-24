@@ -7,16 +7,19 @@
 #call clockwise(1, 1), counter_clockwise(1, 1), and stop(1)
 #if all of the above works:
 #call runMotor(num_pulses), make sure it rotates and stops 
+#make sure encoders are working
 #once that works, we need to figurue out pwm stuff for speed
 #once this whole test works, we can update/test motors.py in the same way, which is this but with all 4 motors
 #when motors.py works, we can test movement_wrapper.strafe_one_block(direction), this is what handles 600 pulses/rot, wheel size constants, etc
 
 
 
+#need to test/debug encodertest on the pi
+
 
 #encoder.py has encoder class that takes 2 pins for quadrature encoders
 import sys
-import encoder
+import encodertest
 #from encoder import encoder
 import pins
 
@@ -25,7 +28,6 @@ import RPi.GPIO as io
 #wiringpi.wiringPiSetupGpio()
 
 
-#list of encoder objects
 #motor numbers: LF=0 RF=1 LB=2 RB=3
 #encoder1 = encoder(pins.motorEncoderA[1], pins.motorEncoderB[1])
 
@@ -44,7 +46,7 @@ def initMotor():
     io.setup(pins.rightFrontMotorEnableB, io.OUT)
     io.setup(pins.rightFrontMotorPWM, io.OUT)
 
-    encoder.initCallbacks()
+    encodertest.initEncoderCallbacks()
     
     stop(1)
     print 'initMotor() completed'
@@ -57,7 +59,7 @@ def runMotor(pulses, dir):
     speed = 1000
     
     #set pulses to 0
-    encoder.reset()
+    encodertest.reset()
     
     rotate(1, speed, dir)
 
@@ -66,9 +68,8 @@ def runMotor(pulses, dir):
     moving = True
             
     while moving == True:
-        encoder.updateP()
-        print 'encoder pulses: %s' % (encoder.getP())
-        if abs(encoder.getP()) >= pulses:
+        print 'encoder pulses: %s' % (encodertest.getPulses())
+        if abs(encodertest.getPulses()) >= pulses:
             moving = False
 
     stop(1)
