@@ -19,7 +19,7 @@
 
 #encoder.py has encoder class that takes 2 pins for quadrature encoders
 import sys
-import encodertest
+from encodertest import import encoder
 #from encoder import encoder
 import pins
 
@@ -29,7 +29,7 @@ import RPi.GPIO as io
 
 
 #motor numbers: LF=0 RF=1 LB=2 RB=3
-#encoder1 = encoder(pins.motorEncoderA[1], pins.motorEncoderB[1])
+encoder1 = encoder(pins.motorEncoderA[1], pins.motorEncoderB[1])
 
 
 
@@ -46,7 +46,7 @@ def initMotor():
     io.setup(pins.rightFrontMotorEnableB, io.OUT)
     io.setup(pins.rightFrontMotorPWM, io.OUT)
 
-    encodertest.initEncoderCallbacks()
+    #encodertest.initEncoderCallbacks()
     
     stop(1)
     print 'initMotor() completed'
@@ -59,7 +59,7 @@ def runMotor(pulses, dir):
     speed = 1000
     
     #set pulses to 0
-    encodertest.reset()
+    encoder1.reset()
     
     rotate(1, speed, dir)
 
@@ -68,8 +68,8 @@ def runMotor(pulses, dir):
     moving = True
             
     while moving == True:
-        print 'encoder pulses: %s' % (encodertest.getPulses())
-        if abs(encodertest.getPulses()) >= pulses:
+        print 'encoder pulses: %s' % (encoder1.getPulses())
+        if abs(encoder1.getPulses()) >= pulses:
             moving = False
 
     stop(1)
