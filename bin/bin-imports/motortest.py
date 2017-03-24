@@ -55,7 +55,7 @@ def initMotor():
 
     #set up interrupts
     io.add_event_detect(pins.motorEncoderA[1], io.BOTH, callback = encoderHandlerA)
-    io.add_event_detect(pins.motorEncoderB[1], io.BOTH, callback = encoderHandlerB)    
+    #io.add_event_detect(pins.motorEncoderB[1], io.BOTH, callback = encoderHandlerB)    
     
     stop(1)
     print 'initMotor() completed'
