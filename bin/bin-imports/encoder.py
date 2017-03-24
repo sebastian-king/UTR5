@@ -51,7 +51,7 @@ class encoder:
         currentState = [stateA, stateB]
         oldState = [self.stateA_old, self.stateB_old]
         
-        if (getDirection(currentState, oldState)):
+        if (self.getDirection(currentState, oldState)):
             self.pulses += 1
         else:
             self.pulses -= 1
@@ -87,13 +87,13 @@ class encoder:
     #True = clockwise
     def getDirection(self, newData = [], oldData = []):
         if oldData == [0, 0]:
-            return (oldData == [0, 1])
+            return (newData == [0, 1])
         elif oldData == [0, 1]:
-            return (oldData == [1, 1])
+            return (newData == [1, 1])
         elif oldData == [1, 1]:
-            return (oldData == [1, 0])
+            return (newData == [1, 0])
         elif oldData == [1, 0]:
-            return (oldData == [0, 0])
+            return (newData == [0, 0])
         
     #returns the accumulated distance in pulses            
     def getPulses(self):
