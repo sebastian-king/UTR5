@@ -32,6 +32,16 @@ loc = [0, 6]         #starting x, y
 
 RIGHT, UP, LEFT, DOWN = 0, 1, 2, 3
 
+def coordsFor(x, y, direction):
+	if direction == RIGHT:
+		return x + 1, y
+	elif direction == UP:
+		return x, y + 1
+	elif direction == LEFT:
+		return x - 1, y
+	elif direction == DOWN:
+		return x, y - 1
+
 def is_valid_loc(x, y):
 	return (0 <= x < gridsize) and (0 <= y < gridsize )
 
@@ -80,6 +90,13 @@ def set_cache_here(object):
 	grid[loc[0]][loc[1]].set_cache(object)
 def has_cache_for_loc(x, y, object):
 	return grid[x][y].has_cache
+
+def has_not_been_explored(x, y, object):
+	return not (
+		grid[x][y].has_tunnel or
+		grid[x][y].has_live_wire or
+		grid[x][y].has_obstacle or
+		grid[x][y].has_cache)
 
 
 

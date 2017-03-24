@@ -26,19 +26,49 @@ import numpy
 
 #END OF TUTORIAL
 
-
+count = -1 # this will store the 7-segment count
 
 def main():
 	movement_wrapper.initMotors()
 	find_live_tunnel_perimeter()
-	# wireEnds now contains possible candidates for caches
-	# check if we have time left, if we do, map out the rest of the map
-	# and we are done
+	mapOut()
+	# and we are done, save and go back to starting location
+	saveResults()
+	movement_wrapper.strafe_to_block(0, 6)
+
+def mapOut():
+	lastDirection = map_data.UP # let's just start moving upwards
+	if map_data.getY() is 0: # uh, if we're at the top, let's not
+		lastDirection = map_data.DOWN
+	exploring = True
+	while exploring:
+		if not wireBelowBlockIn(lastDirection): # try the preferred direction first
+			for direction in range(0,3): # will loop through all directions
+				if direction is not lastDirection: # we don't want to waste time
+					if wireBelowBlockIn(direction):
+						lastDirection = direction # the wire probably moves towards this direction
+						pass # skip trying other directions
+					else: # no wire :(
+						# flip the direction
+						if direction > 1:
+							direction -= 2
+						else:
+							direction += 2
+						# move back to the previous block
+						movement_wrapper.strafe_one_block(direction)
+		if map_data.getX() is 0 or map_data.getY() is 0:
+			# we're at an edge, so we're back on the other side
+			exploring = False
+
+def wireBelowBlockIn(direction):
+	x, y = map_data.coordsFor(map_data.getX(), map_data.getY(), direction)
+	if map_data.has_not_been_explored(x, y):
+		movement_wrapper.strafe_one_block(direction)
+		return is_infrastructure_below()
 
 pastReadings = []
 wireEnds = []
 
-#TODO this algorithm should be going around the whole field
 def find_live_tunnel_perimeter():
 	# we start at the bottom left, start exploring north
 	moveDirection = map_data.UP
@@ -48,9 +78,9 @@ def find_live_tunnel_perimeter():
 		pos_x = map_data.getX()
 		pos_y = map_data.getY()
 		if is_infrastructure_below():
-			map_data.set_live_wire_here(true)
 			wireEnds.append([pos_x, pos_y])
 			analyzeCache() # it's beneath us!
+			exploring = False # we are done
 		# check for obstacles above
 		map_data.set_obstacle_at(pos_x-1, pos_y, IR_north.check())
 		# do that for all other directions
@@ -67,17 +97,24 @@ def find_live_tunnel_perimeter():
 def is_infrastructure_below():
 	# take a sample
 	currentReading = magnetometer.x # Maybe a different axis
-	pastReadings.append(currentReading)
-	if len(pastReadings) > 20:
-		pastReadings = pastReadings[-20:]
 	# is this different from the usual?
-	return currentReading > numpy.median(numpy.array(pastReadings))
+	if currentReading > numpy.median(numpy.array(pastReadings)):
+		map_data.set_live_wire_here(True)
+		return True
+	else:
+		pastReadings.append(currentReading)
+		if len(pastReadings) > 20:
+			pastReadings = pastReadings[-20:]
+		return False
 
 def analyzeCache():
-	# here we need to assure that the arm is above the cache
-	arm.lower()
-	#arm.raise() #need to rename this method, raise is a reserved word in python -carson
+	movement_wrapper.move(map_data.UP, movement_wrapper.blocklength/2) # position the arm
+	movement_wrapper.removeCacheLid()
 	count = vipro.analyze(takePicture()) # takePicture() should return a path to an image
+	saveResults()
+	movement_wrapper.move(map_data.DOWN, movement_wrapper.blocklength/2) # move back to where we were
+
+def saveResults():
 	# save the count and map to be displayed later
 	f = open(myfolder+"/finaldata", "w")
 	f.write(str(count)+"\n")
