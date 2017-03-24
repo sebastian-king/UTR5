@@ -4,11 +4,11 @@
 #NEVER USE PIN 13 for OUTPUT
 
 #Left Front Motor Pins
-leftFrontMotorPWM = 0
+leftFrontMotorPWM = 24
 leftFrontMotorEnableA = 0
 leftFrontMotorEnableB = 0
-leftFrontEncoderChA = 0
-leftFrontEncoderChB =0
+leftFrontEncoderChA = 7
+leftFrontEncoderChB = 8
 
 #Right Front Motor Pins
 rightFrontMotorPWM = 23
@@ -18,18 +18,18 @@ rightFrontEncoderChA = 20
 rightFrontEncoderChB = 21
 
 #Left Rear Motor Pins
-leftRearMotorPWM = 0
+leftRearMotorPWM = 18
 leftRearMotorEnableA = 0
 leftRearMotorEnableB = 0
-leftRearEncoderChA = 0
-leftRearEncoderChB = 0
+leftRearEncoderChA = 14
+leftRearEncoderChB = 15
 
 #Right Rear Motor Pins
-rightRearMotorPWM = 0
+rightRearMotorPWM = 12
 rightRearMotorEnableA = 0
 rightRearMotorEnableB = 0
-rightRearEncoderChA = 0
-rightRearEncoderChB = 0
+rightRearEncoderChA = 4
+rightRearEncoderChB = 17
 
 
 
