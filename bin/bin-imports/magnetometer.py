@@ -30,10 +30,11 @@ imu.setAccelEnable(False)
 imu.setCompassEnable(True)
 
 poll_interval = imu.IMUGetPollInterval()
-print("Recommended poll interval: %dmS, attempting to connect...\n" % poll_interval)
+print("Recommended poll interval: %dmS, attempting to connect\n" % poll_interval)
 
 while not imu.IMURead():
 	# waiting...
+	print "."
 
 monitor = Thread(target = readData)
 monitor.start()

@@ -1,4 +1,4 @@
-import sys, os
+import sys, os, picamera
 
 myfolder = os.path.dirname(os.path.realpath(__file__))
 
@@ -6,10 +6,7 @@ myfolder = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(myfolder + "/bin-imports/")
 import map_data
 import movement_wrapper
-import displays
 import vipro
-
-import numpy
 
 #TUTORIAL FOR USING MOVEMENT FUNCTIONS TO MAKE ALGORITHMS
 
@@ -43,11 +40,11 @@ def mapOut():
 	exploring = True
 	while exploring:
 		if not wireBelowBlockIn(lastDirection): # try the preferred direction first
-			for direction in range(0,3): # will loop through all directions
+			for direction in range(0, 3): # will loop through all directions
 				if direction is not lastDirection: # we don't want to waste time
 					if wireBelowBlockIn(direction):
 						lastDirection = direction # the wire probably moves towards this direction
-						pass # skip trying other directions
+						break # skip trying other directions
 					else: # no wire :(
 						# flip the direction
 						if direction > 1:
@@ -104,7 +101,9 @@ def is_infrastructure_below():
 def analyzeCache():
 	movement_wrapper.move(map_data.UP, movement_wrapper.blocklength/2) # position the arm
 	movement_wrapper.removeCacheLid()
-	count = vipro.analyze(takePicture()) # takePicture() should return a path to an image
+	camera = picamera.PiCamera()
+	camera.capture("image.jpg")
+	count = vipro.analyze("image.jpg")
 	saveResults()
 	movement_wrapper.move(map_data.DOWN, movement_wrapper.blocklength/2) # move back to where we were
 
@@ -116,12 +115,12 @@ def saveResults():
 		print y+1,
 		for x in range(0, map_data.gridsize):
 			if (x == 0 and y == 6):
-				f.write("S"),
+				f.write("S")
 			elif map_data.has_live_wire_for_loc(x, y):
-				f.write("L"),
+				f.write("L")
 			elif map_data.has_tunnel_for_loc(x, y):
-				f.write("T"),
+				f.write("T")
 			else:
-				f.write("."),
+				f.write(".")
 		f.write("\n")
 	f.close()

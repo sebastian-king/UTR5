@@ -6,8 +6,8 @@ import os, sys, time
 myfolder = os.path.dirname(os.path.realpath(__file__))
 
 sys.path.append(myfolder + "/bin-imports/")
-import Adafruit_MCP230XX
 import pins
+import map_data as md
 
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BOARD)
@@ -23,17 +23,17 @@ for pin in pins.segment:
 
 #define 7 segment digits
 d = [ None for y in range( 11 ) ]
-d[10]=[1,1,1,1,1,1,1]
-d[0]=[0,0,0,0,0,0,1]
-d[1]=[1,0,0,1,1,1,1]
-d[2]=[0,0,1,0,0,1,0]
-d[3]=[0,0,0,0,1,1,0]
-d[4]=[1,0,0,1,1,0,0]
-d[5]=[0,1,0,0,1,0,0]
-d[6]=[0,1,0,0,0,0,0]
-d[7]=[0,0,0,1,1,1,1]
-d[8]=[0,0,0,0,0,0,0]
-d[9]=[0,0,0,1,1,0,0]
+d[10] = [1,1,1,1,1,1,1]
+d[0] = [0,0,0,0,0,0,1]
+d[1] = [1,0,0,1,1,1,1]
+d[2] = [0,0,1,0,0,1,0]
+d[3] = [0,0,0,0,1,1,0]
+d[4] = [1,0,0,1,1,0,0]
+d[5] = [0,1,0,0,1,0,0]
+d[6] = [0,1,0,0,0,0,0]
+d[7] = [0,0,0,1,1,1,1]
+d[8] = [0,0,0,0,0,0,0]
+d[9] = [0,0,0,1,1,0,0]
 
 rowpins = [17, 18, 19, 20, 29, 30, 31, 32]	# these are the pins to turn on rows
 
@@ -57,7 +57,7 @@ def show():
 	#mcp.output(0, 0)  # Low
 
 	digit = d[int(lines.pop(0))]
-	for x in range (0,7):
+	for x in range(0, 7):
 		GPIO.output(pins.segment[x], digit[x])
 	
 	while True: # need to quit this at some point, maybe on button press or after time

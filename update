@@ -6,7 +6,7 @@ cd ~/UTR5 # just to make sure
 git pull
 
 # install packages
-sudo apt-get install python-smbus i2c-tools
+sudo apt-get install python-smbus i2c-tools python-picamera
 sudo pip install opencv-python
 
 # update button listeners
