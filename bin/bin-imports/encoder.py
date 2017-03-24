@@ -30,26 +30,26 @@ class encoder:
         stateB = GPIO.input(self.pinB)
         
         #find time passed
-        timePass = millis() - self.oldTime
-        if timePass > 1000:
-            self.speed = self.pulses - self.oldPulses
-            self.oldPulses = self.pulses
-            timePass = 0
-            self.oldTime = millis()
+        #timePass = millis() - self.oldTime
+        #if timePass > 1000:
+         #   self.speed = self.pulses - self.oldPulses
+          #  self.oldPulses = self.pulses
+           # timePass = 0
+            #self.oldTime = millis()
     
         # Print both states if something changes in either state and update the current state
         # Also casts the states as a string to remove ambiguity. Likely not needed
-        if str(stateA) != str(self.stateA_old):
-            if ((stateA, self.stateB_old) == (0,0)) or ((stateA, self.stateB_old) == (1,1)):
+        #if str(stateA) != str(self.stateA_old):
+        if ((stateA, self.stateB_old) == (0,0)) or ((stateA, self.stateB_old) == (1,1)):
                  # IF clockwise rotation
-                self.pulses += 1
+            self.pulses += 1
                 # print 'Encoder count is %s\nAB is %s %s' % (counts, stateA, stateB)
                 # print 'Going clockwise'
     
-        if str(stateB) != str(self.stateB_old):
-            if ((stateA, self.stateB_old) == (0,1)) or ((stateA, self.stateB_old) == (1,0)):
+        #if str(stateB) != str(self.stateB_old):
+        if ((stateA, self.stateB_old) == (0,1)) or ((stateA, self.stateB_old) == (1,0)):
                 # IF counter-clockwise rotation
-                self.pulses -= 1
+            self.pulses -= 1
                 # print 'Encoder count is %s\nAB is %s %s' % (counts, stateA, stateB)
                 # print 'Going counter-clockwise'
                 
@@ -61,11 +61,11 @@ class encoder:
     
     #returns the accumulated distance in units of mm
     def getDistance(self):
-        return self.pulses/600.0 * 60 #60mm wheel circumference referenced from movement_wrapper   
+        return self.pulses/90.0 * 60 #60mm wheel circumference referenced from movement_wrapper   
     
     #returns the speed in mm/sec
     def getSpeed(self):
-        return self.speed / 600.0 * 60 #60mm wheel circumference
+        return self.speed / 90.0 * 60 #60mm wheel circumference
         
     def reset(self):
         self.pulses = 0

@@ -17,7 +17,7 @@ def move(distance, direction):
 		#number of rotations needed to travel distance when wheels are at a 45 degree angle
 		num_rotations_diagonal = (distance * 1.414214) / wheel_circumference       # 1.414214=sqrt(2)
 		#angle = num_rotations_diagonal * 360
-		num_pulses = num_rotations_diagonal*600  #multiply by 600, the number of phase counts per revolution of the motor
+		num_pulses = num_rotations_diagonal*90  #multiply by 600, the number of phase counts per revolution of the motor
 	
 		if direction == map_data.RIGHT:    #right
 			FL = 0
