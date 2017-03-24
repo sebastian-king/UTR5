@@ -6,9 +6,9 @@
 
 import RPi.GPIO as GPIO # Allows use of pins on the Pi
 
-GPIO.setmode(GPIO.BOARD) # Refer to pins on the board by their number (reference pin schematic)
-encoderA = 5 # Set the input on pin 5
-encoderB = 7 # Set the input on pin 7
+GPIO.setmode(GPIO.BCM) # Refer to pins on the board by their number (reference pin schematic)
+encoderA = 20 # Set the input on pin 5
+encoderB = 21 # Set the input on pin 7
 
 # Setup pins as input and activate pullup resistor
 GPIO.setup(encoderA, GPIO.IN, GPIO.PUD_UP)
