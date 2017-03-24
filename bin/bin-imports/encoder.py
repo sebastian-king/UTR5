@@ -2,6 +2,7 @@
 
 import RPi.GPIO as GPIO # Allows use of pins on the Pi
 import time
+import pins
 
 p = 0
 p_elapsed = 0
@@ -32,11 +33,18 @@ def encoderHandlerB(void):
 
 
 def initCallbacks():
+    p = 0
+    p_elapsed = 0
+    sa = 0
+    sb = 0
+    sa_old = 0
+    sb_old = 0
+
     GPIO.setup(pins.motorEncoderA[1], GPIO.IN, GPIO.PUD_UP)
     GPIO.setup(pins.motorEncoderB[1], GPIO.IN, GPIO.PUD_UP)
     #set up interrupts
-    io.add_event_detect(pins.motorEncoderA[1], io.BOTH, callback = encoderHandlerA)
-    io.add_event_detect(pins.motorEncoderB[1], io.BOTH, callback = encoderHandlerB)   
+    GPIO.add_event_detect(pins.motorEncoderA[1], GPIO.BOTH, callback = encoderHandlerA)
+    GPIO.add_event_detect(pins.motorEncoderB[1], GPIO.BOTH, callback = encoderHandlerB)   
 
 def getP():
     return p
