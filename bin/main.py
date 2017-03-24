@@ -95,17 +95,11 @@ def find_live_tunnel_perimeter():
 			exploring = False
 
 def is_infrastructure_below():
-	# take a sample
-	currentReading = magnetometer.x # Maybe a different axis
 	# is this different from the usual?
-	if currentReading > numpy.median(numpy.array(pastReadings)):
+	if magnetometer.unsual():
 		map_data.set_live_wire_here(True)
 		return True
-	else:
-		pastReadings.append(currentReading)
-		if len(pastReadings) > 20:
-			pastReadings = pastReadings[-20:]
-		return False
+	return False
 
 def analyzeCache():
 	movement_wrapper.move(map_data.UP, movement_wrapper.blocklength/2) # position the arm

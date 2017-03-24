@@ -1,14 +1,37 @@
 #!/bin/sh
 
-cd ~/UTR5
+# update from git
+echo "Updating ~/UTR5..."
+cd ~/UTR5 # just to make sure
 git pull
 
-rm /etc/init.d/UTR5*
+# install packages
+sudo apt-get install python-smbus i2c-tools
+sudo pip install opencv-python
 
-cp startup ./bin/start /etc/init.d/UTR5start
-cp startup ./bin/stop /etc/init.d/UTR5stop
+# update button listeners
+echo "Updating button listeners"
+sudo rm /etc/init.d/UTR5*
+sudo cp startup ./bin/start /etc/init.d/UTR5start
+sudo cp startup ./bin/stop /etc/init.d/UTR5stop
+# fix permissions
+sudo chmod 755 /etc/init.d/UTR5*
+sudo update-rc.d UTR5start defaults
+sudo update-rc.d UTR5stop defaults
 
-chmod 755 /etc/init.d/UTR5*
+# update needed libraries: RTIMULib2
+$installed=python -c 'import pkgutil; print(1 if pkgutil.find_loader("math") else 0)'
+if [ "$installed" -eq 0 ];then
+	echo "Missing RTIMULib2, installing...";
+	sudo apt-get install python-dev
+	mkdir ~/UTR5/bin/temp
+	cd ~/UTR5/bin/temp
+	git clone https://github.com/RTIMULib/RTIMULib2.git
+	cd RTIMULib2/Linux/python
+	python setup.py build
+	sudo python setup.py install
+	cd ~/UTR5
+	rm -rf bin/temp
+fi
 
-update-rc.d UTR5start defaults
-update-rc.d UTR5stop defaults
+echo "Update complete!"
