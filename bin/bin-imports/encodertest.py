@@ -28,7 +28,7 @@ class encoder:
         GPIO.setup(pinB, GPIO.IN, GPIO.PUD_UP)
         #set up interrupts
         GPIO.add_event_detect(pins.motorEncoderA[1], GPIO.RISING, callback = self.encoderHandlerA)
-        #GPIO.add_event_detect(pins.motorEncoderB[1], GPIO.RISING, callback = encoderHandlerB)   
+        GPIO.add_event_detect(pins.motorEncoderB[1], GPIO.RISING, callback = self.encoderHandlerB)   
        
     
     def reset(self):
@@ -37,17 +37,17 @@ class encoder:
     def encoderHandlerA(self, void):
         b = GPIO.input(pins.motorEncoderB[1])
         if b == 1:
-            self.pulses += 1
+            self.pulses += .5
         else:
-            self.pulses -= 1
+            self.pulses -= .5
          
-    #def encoderHandlerB(self, void):
-    #    global pulses  
-    #    a = GPIO.input(pins.motorEncoderA[1])
-    #    if a == 1:
-    #        pulses -= 1
-    #    else:
-    #        pulses += 1
+    def encoderHandlerB(self, void):
+        global pulses  
+        a = GPIO.input(pins.motorEncoderA[1])
+        if a == 1:
+            pulses -= .5
+        else:
+            pulses += .5
     
     def getPulses(self):
         return self.pulses

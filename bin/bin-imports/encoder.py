@@ -28,31 +28,6 @@ class encoder:
         self.oldPulses = 0
          
     
-    
-    def monitorA(self):
-        stateA = GPIO.input(self.pinA)
-        currentState = [stateA, self.stateB_old]
-        oldState = [self.stateA_old, self.stateB_old]
-        direction = self.getDirection(currentState, oldState)
-        print 'currentState: %s' % currentState
-        print 'oldState: %s' % oldState 
-        print 'current current direction: %s' % direction
-        if (direction):
-            self.pulses += 1
-        else:
-            self.pulses -= 1
-        self.stateA_old = stateA
-        
-    def monitorB(self):
-        stateB = GPIO.input(self.pinB)
-        currentState = [self.stateA_old, stateB]
-        oldState = [self.stateA_old, self.stateB_old]
-        if (self.getDirection(currentState, oldState)):
-            self.pulses += 1
-        else:
-            self.pulses -= 1
-        self.stateB_old = stateB
-    
     #call this continuously in the main class to monitor the encoders and accumulate distance values
     def monitor(self):
     # Infinite loop to print out 1 or 0 depending on encoder input
