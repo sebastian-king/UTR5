@@ -1,0 +1,14 @@
+#!/bin/sh
+
+cd ~/UTR5
+git pull
+
+rm /etc/init.d/UTR5*
+
+cp startup ./bin/start /etc/init.d/UTR5start
+cp startup ./bin/stop /etc/init.d/UTR5stop
+
+chmod 755 /etc/init.d/UTR5*
+
+update-rc.d UTR5start defaults
+update-rc.d UTR5stop defaults

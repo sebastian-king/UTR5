@@ -3,8 +3,7 @@
 import sys, os, time
 import RPi.GPIO as GPIO
 
-dir=os.path.dirname(os.path.realpath(__file__))
-sys.path.append(dir + "/../buttons/")
+sys.path.append(os.path.expanduser("~/UTR5/buttons/"))
 
 from stop_button import listen_for_stop
 
@@ -17,7 +16,7 @@ print "STOP BUTTON HAS BEEN PRESSED"
 time.sleep(60)
 
 #import subprocess
-#subprocess.call(dir + '/emergency-stop') #set and unset all GPIO pins and force kill the start thread with the kernel
+#subprocess.call(os.path.expanduser("~/UTR5/bin/emergency-stop") #set and unset all GPIO pins and force kill the start thread with the kernel
 
 print "END"
 
