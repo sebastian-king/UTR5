@@ -60,13 +60,14 @@ def initMotor():
 #TODO test this make sure it works
 #running clockwise function on motor 1 (right front) to test
 #motor numbers: LF=0 RF=1 LB=2 RB=3
-def runMotor(pulses):    
+def runMotor(pulses, dir):    
     speed = 1000
     
     #set pulses to 0
     encoder1.reset()
     
-    clockwise(1, speed)
+    rotate(1, speed, dir)
+
     print 'runMotor() motor started'
     
     moving = True
@@ -74,7 +75,7 @@ def runMotor(pulses):
     while moving == True:
         if abs(encoder1.getPulses()) >= pulses:
             moving = False
-                    
+
     stop(1)
     print 'runMotor() completed'
 
