@@ -26,7 +26,11 @@ class encoder:
         stateA = GPIO.input(self.pinA)
         currentState = [stateA, self.stateB_old]
         oldState = [self.stateA_old, self.stateB_old]
-        if (self.getDirection(currentState, oldState)):
+	direction = self.getDirection(currentState, oldState)
+	print 'currentState: %s' % currentState
+	print 'oldState: %s' % oldState 
+	print 'current current direction: %s' % direction
+        if (direction):
             self.pulses += 1
         else:
             self.pulses -= 1
