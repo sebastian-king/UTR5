@@ -31,8 +31,12 @@ encoder1 = encoder(pins.motorEncoderA[1], pins.motorEncoderB[1])
 
 
     
-def encoderHandlerRF(void):
-    encoder1.monitor();
+def encoderHandlerA(void):
+    encoder1.monitorA();
+    print 'encoder pulses: %s' % (encoder1.getPulses())
+
+def encoderHandlerB(void):
+    encoder1.monitorB();
     print 'encoder pulses: %s' % (encoder1.getPulses())
 
 
@@ -50,8 +54,8 @@ def initMotor():
     io.setup(pins.rightFrontMotorPWM, io.OUT)
 
     #set up interrupts
-    io.add_event_detect(pins.motorEncoderA[1], io.BOTH, callback = encoderHandlerRF)
-    #io.add_event_detect(pins.motorEncoderB[1], io.BOTH, callback = encoderHandlerRF)    
+    io.add_event_detect(pins.motorEncoderA[1], io.BOTH, callback = encoderHandlerA)
+    io.add_event_detect(pins.motorEncoderB[1], io.BOTH, callback = encoderHandlerB)    
     
     stop(1)
     print 'initMotor() completed'

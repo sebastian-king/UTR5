@@ -22,13 +22,41 @@ class encoder:
         self.speed = 0 #this value is in pulses/second
         self.oldPulses = 0
     
+    def monitorA(self):
+        stateA = GPIO.input(self.pinA)
+        currentState = [stateA, self.stateB_old]
+        oldState = [self.stateA_old, self.stateB_old]
+        if (getDirection(currentState, oldState)):
+            self.pulses += 1
+        else:
+            self.pulses -= 1
+        self.stateA_old = stateA
+        
+    def monitorB(self):
+        stateB = GPIO.input(self.pinB)
+        currentState = [self.stateA_old, stateB]
+        oldState = [self.stateA_old, self.stateB_old]
+        if (getDirection(currentState, oldState)):
+            self.pulses += 1
+        else:
+            self.pulses -= 1
+        self.stateB_old = stateB
+    
     #call this continuously in the main class to monitor the encoders and accumulate distance values
     def monitor(self):
     # Infinite loop to print out 1 or 0 depending on encoder input
         # Read the encoder input        
         stateA = GPIO.input(self.pinA)
         stateB = GPIO.input(self.pinB)
+        currentState = [stateA, stateB]
+        oldState = [self.stateA_old, self.stateB_old]
         
+        if (getDirection(currentState, oldState)):
+            self.pulses += 1
+        else:
+            self.pulses -= 1
+            
+            
         #find time passed
         #timePass = millis() - self.oldTime
         #if timePass > 1000:
@@ -40,21 +68,33 @@ class encoder:
         # Print both states if something changes in either state and update the current state
         # Also casts the states as a string to remove ambiguity. Likely not needed
         #if str(stateA) != str(self.stateA_old):
-        if ((stateA, self.stateB_old) == (0,0)) or ((stateA, self.stateB_old) == (1,1)):
+        #if ((stateA, self.stateB_old) == (0,0)) or ((stateA, self.stateB_old) == (1,1)):
                  # IF clockwise rotation
-            self.pulses += 1
+            #self.pulses += 1
                 # print 'Encoder count is %s\nAB is %s %s' % (counts, stateA, stateB)
                 # print 'Going clockwise'
     
         #if str(stateB) != str(self.stateB_old):
-        if ((stateA, self.stateB_old) == (0,1)) or ((stateA, self.stateB_old) == (1,0)):
+        #if ((stateA, self.stateB_old) == (0,1)) or ((stateA, self.stateB_old) == (1,0)):
                 # IF counter-clockwise rotation
-            self.pulses -= 1
+            #self.pulses -= 1
                 # print 'Encoder count is %s\nAB is %s %s' % (counts, stateA, stateB)
                 # print 'Going counter-clockwise'
                 
         self.stateA_old, self.stateB_old = stateA, stateB
                 
+                
+    #True = clockwise
+    def getDirection(self, newData = [], oldData = []):
+        if oldData == [0, 0]:
+            return (oldData == [0, 1])
+        elif oldData == [0, 1]:
+            return (oldData == [1, 1])
+        elif oldData == [1, 1]:
+            return (oldData == [1, 0])
+        elif oldData == [1, 0]:
+            return (oldData == [0, 0])
+        
     #returns the accumulated distance in pulses            
     def getPulses(self):
         return self.pulses
