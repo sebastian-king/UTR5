@@ -16,7 +16,8 @@
 
 #encoder.py has encoder class that takes 2 pins for quadrature encoders
 import sys
-from encoder import encoder
+import encoder
+#from encoder import encoder
 import pins
 
 import RPi.GPIO as io
@@ -26,18 +27,8 @@ import RPi.GPIO as io
 
 #list of encoder objects
 #motor numbers: LF=0 RF=1 LB=2 RB=3
-encoder1 = encoder(pins.motorEncoderA[1], pins.motorEncoderB[1])
+#encoder1 = encoder(pins.motorEncoderA[1], pins.motorEncoderB[1])
 
-
-
-    
-def encoderHandlerA(void):
-    encoder1.monitorA();
-    print 'encoder pulses: %s' % (encoder1.getPulses())
-
-def encoderHandlerB(void):
-    encoder1.monitorB();
-    print 'encoder pulses: %s' % (encoder1.getPulses())
 
 
 #CALL THIS BEFORE RUNMOTOR
@@ -53,9 +44,7 @@ def initMotor():
     io.setup(pins.rightFrontMotorEnableB, io.OUT)
     io.setup(pins.rightFrontMotorPWM, io.OUT)
 
-    #set up interrupts
-    io.add_event_detect(pins.motorEncoderA[1], io.BOTH, callback = encoderHandlerA)
-    #io.add_event_detect(pins.motorEncoderB[1], io.BOTH, callback = encoderHandlerB)    
+    encoder.initCallbacks()
     
     stop(1)
     print 'initMotor() completed'
@@ -68,7 +57,7 @@ def runMotor(pulses, dir):
     speed = 1000
     
     #set pulses to 0
-    encoder1.reset()
+    encoder.reset()
     
     rotate(1, speed, dir)
 
@@ -77,7 +66,9 @@ def runMotor(pulses, dir):
     moving = True
             
     while moving == True:
-        if abs(encoder1.getPulses()) >= pulses:
+        encoder.updateP()
+        print 'encoder pulses: %s' % (encoder.getP())
+        if abs(encoder.getP()) >= pulses:
             moving = False
 
     stop(1)

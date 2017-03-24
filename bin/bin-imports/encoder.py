@@ -3,9 +3,64 @@
 import RPi.GPIO as GPIO # Allows use of pins on the Pi
 import time
 
+p = 0
+p_elapsed = 0
+sa = 0
+sb = 0
+sa_old = 0
+sb_old = 0
+
 #get time since epoch in milliseconds
 def millis():
     return time.time() * 1000
+   
+def encoderHandlerA(void):
+    sa_old = sa
+    sa = GPIO.input(pins.motorEncoderA[1])
+    p_elapsed += 1
+
+def reset():
+        p = 0
+        p_elapsed = 0
+        sa_old = 0
+        sb_old = 0
+     
+def encoderHandlerB(void):
+    sb_old = sb
+    sb = GPIO.input(pins.motorEncoderB[1])
+    p_elapsed += 1
+
+
+def initCallbacks():
+    GPIO.setup(pins.motorEncoderA[1], GPIO.IN, GPIO.PUD_UP)
+    GPIO.setup(pins.motorEncoderB[1], GPIO.IN, GPIO.PUD_UP)
+    #set up interrupts
+    io.add_event_detect(pins.motorEncoderA[1], io.BOTH, callback = encoderHandlerA)
+    io.add_event_detect(pins.motorEncoderB[1], io.BOTH, callback = encoderHandlerB)   
+
+def getP():
+    return p
+
+def updateP():
+    currentState = [sa, sb]
+    oldState = [sa_old, sb_old]
+    direction = getDirection(currentState, oldState)
+    if (direction):
+        p += p_elapsed
+    else:
+        p -= p_elapsed
+    p_elapsed = 0
+
+def getDirection(newData = [], oldData = []):
+        if oldData == [0, 0]:
+            return (newData == [0, 1])
+        elif oldData == [0, 1]:
+            return (newData == [1, 1])
+        elif oldData == [1, 1]:
+            return (newData == [1, 0])
+        elif oldData == [1, 0]:
+            return (newData == [0, 0])
+    
 
 class encoder:
     
@@ -21,15 +76,17 @@ class encoder:
         self.oldTime = millis()
         self.speed = 0 #this value is in pulses/second
         self.oldPulses = 0
+         
+    
     
     def monitorA(self):
         stateA = GPIO.input(self.pinA)
         currentState = [stateA, self.stateB_old]
         oldState = [self.stateA_old, self.stateB_old]
-	direction = self.getDirection(currentState, oldState)
-	print 'currentState: %s' % currentState
-	print 'oldState: %s' % oldState 
-	print 'current current direction: %s' % direction
+        direction = self.getDirection(currentState, oldState)
+        print 'currentState: %s' % currentState
+        print 'oldState: %s' % oldState 
+        print 'current current direction: %s' % direction
         if (direction):
             self.pulses += 1
         else:
