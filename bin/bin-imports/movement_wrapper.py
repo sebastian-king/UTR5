@@ -86,8 +86,8 @@ def strafe_one_block(direction):
 #move to a block with turning, no diagonals
 def move_to_block(x, y):
 	if map_data.is_valid_loc(x, y):
-		x_diff = x - map_data.getLoc[0]
-		y_diff = y - map_data.getLoc[1]
+		x_diff = x - map_data.getX()
+		y_diff = y - map_data.getY()
 		
 		#x movement
 		turn_angle = 0
@@ -121,8 +121,8 @@ def move_to_block(x, y):
 
 def strafe_to_block(x, y):
 	if map_data.is_valid_loc(x, y):
-		x_diff = x - map_data.getLoc[0]
-		y_diff = y - map_data.getLoc[1]
+		x_diff = x - map_data.getX()
+		y_diff = y - map_data.getY()
 		
 		#x movement
 		distance = 0;
@@ -146,3 +146,6 @@ def strafe_to_block(x, y):
 			distance = blocklength * y_diff * -1
 		move(distance, dir)
 		map_data.setY(y)
+
+def removeCacheLid():
+	# lower and raise arm
