@@ -4,12 +4,21 @@ import RPi.GPIO as GPIO # Allows use of pins on the Pi
 import time
 import pins
 
-p = 0
-p_elapsed = 0
-sa = 0
-sb = 0
-sa_old = 0
-sb_old = 0
+def initCallbacks():
+    p = 0
+    p_elapsed = 0
+    sa = 0
+    sb = 0
+    sa_old = 0
+    sb_old = 0
+
+    GPIO.setup(pins.motorEncoderA[1], GPIO.IN, GPIO.PUD_UP)
+    GPIO.setup(pins.motorEncoderB[1], GPIO.IN, GPIO.PUD_UP)
+    #set up interrupts
+    GPIO.add_event_detect(pins.motorEncoderA[1], GPIO.BOTH, callback = encoderHandlerA)
+    GPIO.add_event_detect(pins.motorEncoderB[1], GPIO.BOTH, callback = encoderHandlerB)   
+
+
 
 #get time since epoch in milliseconds
 def millis():
@@ -31,20 +40,6 @@ def encoderHandlerB(void):
     sb = GPIO.input(pins.motorEncoderB[1])
     p_elapsed += 1
 
-
-def initCallbacks():
-    p = 0
-    p_elapsed = 0
-    sa = 0
-    sb = 0
-    sa_old = 0
-    sb_old = 0
-
-    GPIO.setup(pins.motorEncoderA[1], GPIO.IN, GPIO.PUD_UP)
-    GPIO.setup(pins.motorEncoderB[1], GPIO.IN, GPIO.PUD_UP)
-    #set up interrupts
-    GPIO.add_event_detect(pins.motorEncoderA[1], GPIO.BOTH, callback = encoderHandlerA)
-    GPIO.add_event_detect(pins.motorEncoderB[1], GPIO.BOTH, callback = encoderHandlerB)   
 
 def getP():
     return p
