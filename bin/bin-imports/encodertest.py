@@ -42,12 +42,11 @@ class encoder:
             self.pulses -= .5
          
     def encoderHandlerB(self, void):
-        global pulses  
         a = GPIO.input(pins.motorEncoderA[1])
         if a == 1:
-            pulses -= .5
+            self.pulses -= .5
         else:
-            pulses += .5
+            self.pulses += .5
     
     def getPulses(self):
         return self.pulses
