@@ -19,7 +19,7 @@
 
 #encoder.py has encoder class that takes 2 pins for quadrature encoders
 import sys
-from encodertest import encoder
+from encoder import encoder
 #from encoder import encoder
 import pins
 
