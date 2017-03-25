@@ -8,13 +8,11 @@
 #if all of the above works:
 #call runMotor(num_pulses), make sure it rotates and stops 
 #make sure encoders are working
+#>>>WE ARE HERE<<<
 #once that works, we need to figurue out pwm stuff for speed
 #once this whole test works, we can update/test motors.py in the same way, which is this but with all 4 motors
 #when motors.py works, we can test movement_wrapper.strafe_one_block(direction), this is what handles 600 pulses/rot, wheel size constants, etc
 
-
-
-#need to test/debug encodertest on the pi
 
 
 #encoder.py has encoder class that takes 2 pins for quadrature encoders

@@ -15,22 +15,6 @@ wiringpi.wiringPiSetupGpio()
 #motorEncoders = [0 for a in range(0, 3)]
 
 
-
-#interrupt that updates encoders
-def encoderHandlerLF(void):
-    motorEncoders[0].monitor();
-    
-def encoderHandlerRF(void):
-    motorEncoders[1].monitor();
-    
-def encoderHandlerLB(void):
-    motorEncoders[2].monitor();
-    
-def encoderHandlerRB(void):
-    motorEncoders[3].monitor();
-
-
-
 #sets up GPIO, encoders, interrupts
 def initMotors():
     io.setmode(io.BCM)
@@ -54,16 +38,6 @@ def initMotors():
     for i in range(0, 3):
         motorEncoders[i] = encoder(pins.motorEncoderA[i], pins.motorEncoderB[i])
     
-    #set up interrupts
-    io.add_event_detect(pins.motorEncoderA[0], io.BOTH, callback = encoderHandlerLF)
-    io.add_event_detect(pins.motorEncoderB[0], io.BOTH, callback = encoderHandlerLF)
-    io.add_event_detect(pins.motorEncoderA[1], io.BOTH, callback = encoderHandlerRF)
-    io.add_event_detect(pins.motorEncoderB[1], io.BOTH, callback = encoderHandlerRF)    
-    io.add_event_detect(pins.motorEncoderA[2], io.BOTH, callback = encoderHandlerLB)
-    io.add_event_detect(pins.motorEncoderB[2], io.BOTH, callback = encoderHandlerLB)
-    io.add_event_detect(pins.motorEncoderA[3], io.BOTH, callback = encoderHandlerRB)
-    io.add_event_detect(pins.motorEncoderB[3], io.BOTH, callback = encoderHandlerRB)
-
 
 #TODO test this make sure it works
 #motor numbers: LF=0 RF=1 LB=2 RB=3
