@@ -22,6 +22,8 @@ import sys
 from encoder import encoder
 #from encoder import encoder
 import pins
+import time
+import Adafruit_MCP230xx
 
 import RPi.GPIO as io
 #import wiringpi
@@ -104,3 +106,11 @@ def setSpeed(motor_number, speed):
     else:
         io.output(pins.motorPwm[motor_number], False)
         #wiringpi.pwmWrite(pins.motorPwm[motor_number], 0)
+        
+def turnOnLED():
+    mcp = Adafruit_MCP230xx(busnum=0, address = 0x20, num_gpios = 16)
+    mcp.config(14, OUTPUT)
+    mcp.output(14, 1)
+    time.sleep(2)
+    mcp.output(14, 0)
+    
