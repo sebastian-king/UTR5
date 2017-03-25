@@ -6,6 +6,7 @@ cd ~/UTR5 # just to make sure
 git pull
 
 # install packages
+echo "Updating packages"
 sudo apt-get install python-smbus i2c-tools python-picamera
 sudo pip install opencv-python
 
@@ -20,7 +21,7 @@ sudo update-rc.d UTR5start defaults
 sudo update-rc.d UTR5stop defaults
 
 # update needed libraries: RTIMULib2
-$installed=python -c 'import pkgutil; print(1 if pkgutil.find_loader("math") else 0)'
+$installed=python -c 'import pkgutil; print(1 if pkgutil.find_loader("RTIMU") else 0)'
 if [ "$installed" -eq 0 ];then
 	echo "Missing RTIMULib2, installing...";
 	sudo apt-get install python-dev
