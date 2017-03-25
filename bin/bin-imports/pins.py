@@ -2,6 +2,7 @@
 
 #a module for storing all wiring information and pin numbers
 #NEVER USE PIN 13 for OUTPUT
+#GPIO23 and GPIO6 arent working!
 
 #Left Front Motor Pins
 leftFrontMotorPWM = 24
@@ -11,9 +12,9 @@ leftFrontEncoderChA = 7
 leftFrontEncoderChB = 8
 
 #Right Front Motor Pins
-rightFrontMotorPWM = 23
+rightFrontMotorPWM = 26
 rightFrontMotorEnableA = 5 
-rightFrontMotorEnableB = 6
+rightFrontMotorEnableB = 4
 rightFrontEncoderChA = 20
 rightFrontEncoderChB = 21
 
