@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-import Adafruit_I2C
+from Adafruit_I2C import *
 import smbus
 import time
 
