@@ -45,8 +45,6 @@ def initMotor():
     io.setup(pins.rightFrontMotorEnableA, io.OUT)
     io.setup(pins.rightFrontMotorEnableB, io.OUT)
     io.setup(pins.rightFrontMotorPWM, io.OUT)
-
-    #encodertest.initEncoderCallbacks()
     
     stop(1)
     print 'initMotor() completed'

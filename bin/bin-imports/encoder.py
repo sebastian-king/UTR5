@@ -24,18 +24,18 @@ class encoder:
         GPIO.setup(pinA, GPIO.IN, GPIO.PUD_UP)
         GPIO.setup(pinB, GPIO.IN, GPIO.PUD_UP)
         #set up interrupts
-        GPIO.add_event_detect(pins.motorEncoderA[1], GPIO.RISING, callback = self.encoderHandlerA)
-        GPIO.add_event_detect(pins.motorEncoderB[1], GPIO.RISING, callback = self.encoderHandlerB)   
+        GPIO.add_event_detect(pinA, GPIO.RISING, callback = self.encoderHandlerA)
+        GPIO.add_event_detect(pinB, GPIO.RISING, callback = self.encoderHandlerB)   
 
     def encoderHandlerA(self, void):
-        b = GPIO.input(pins.motorEncoderB[1])
+        b = GPIO.input(pinB)
         if b == 1:
             self.pulses += .5
         else:
             self.pulses -= .5
          
     def encoderHandlerB(self, void):
-        a = GPIO.input(pins.motorEncoderA[1])
+        a = GPIO.input(pinA)
         if a == 1:
             self.pulses -= .5
         else:
