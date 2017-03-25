@@ -33,7 +33,8 @@ import RPi.GPIO as io
 #motor numbers: LF=0 RF=1 LB=2 RB=3
 encoder1 = encoder(pins.motorEncoderA[1], pins.motorEncoderB[1])
 
-
+OUTPUT = 0
+INPUT = 1
 
 #CALL THIS BEFORE RUNMOTOR
 #sets up GPIO, encoders, interrupts
