@@ -50,7 +50,7 @@ motorEncoderA = [0 for a in range(4)]
 motorEncoderB = [0 for a in range(4)]
 motorEnableA = [0 for a in range(4)]
 motorEnableB = [0 for a in range(4)]
-motorPwm = [0 for a in range(4)]
+motorPWM = [0 for a in range(4)]
 
 
 motorEnableA[0] = leftFrontMotorEnableA
@@ -73,10 +73,10 @@ motorEncoderB[1] = rightFrontEncoderChB
 motorEncoderB[2] = leftRearEncoderChB
 motorEncoderB[3] = rightRearEncoderChB
 
-motorPwm[0] = leftFrontMotorPWM
-motorPwm[1] = rightFrontMotorPWM
-motorPwm[2] = leftRearMotorPWM
-motorPwm[3] = rightRearMotorPWM
+motorPWM[0] = leftFrontMotorPWM
+motorPWM[1] = rightFrontMotorPWM
+motorPWM[2] = leftRearMotorPWM
+motorPWM[3] = rightRearMotorPWM
 
 # displays
 matrix = range(1, 32)	#each led has 1 pin for on and 3 pins for rgb
