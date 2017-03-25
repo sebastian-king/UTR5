@@ -108,7 +108,7 @@ def setSpeed(motor_number, speed):
         #wiringpi.pwmWrite(pins.motorPwm[motor_number], 0)
         
 def turnOnLED():
-    mcp = Adafruit_MCP230xx(0, 0x20, 16)
+    mcp = Adafruit_MCP230xx(0x20, 16)
     mcp.config(14, OUTPUT)
     mcp.output(14, 1)
     time.sleep(2)
