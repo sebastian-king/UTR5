@@ -110,10 +110,10 @@ def stop(motor_number):
 #TODO make sure this is right
 def setSpeed(motor_number, speed):
     if 0 < speed <= 1024:
-        io.output(pins.motorPwm[motor_number], True)
+        io.output(pins.motorPWM[motor_number], True)
         #wiringpi.pwmWrite(pins.motorPwm[motor_number], speed)
     else:
-        io.output(pins.motorPwm[motor_number], False)
+        io.output(pins.motorPWM[motor_number], False)
         #wiringpi.pwmWrite(pins.motorPwm[motor_number], 0)
         
 def resetEncoders():
