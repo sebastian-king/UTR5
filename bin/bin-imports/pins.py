@@ -5,33 +5,43 @@
 #GPIO23 and GPIO6 arent working!
 
 #Left Front Motor Pins
-leftFrontMotorPWM = 24
-leftFrontMotorEnableA = 19
-leftFrontMotorEnableB = 13
-leftFrontEncoderChA = 7
-leftFrontEncoderChB = 8
+leftFrontListNum = 0
+
+leftFrontMotorPWM = 19
+leftFrontMotorEnableA = 9
+leftFrontMotorEnableB = 8
+leftFrontEncoderChA = 16
+leftFrontEncoderChB = 12
 
 #Right Front Motor Pins
+rightFrontListNum = 1
+
 rightFrontMotorPWM = 26
-rightFrontMotorEnableA = 5 
-rightFrontMotorEnableB = 4
-rightFrontEncoderChA = 20
-rightFrontEncoderChB = 21
+rightFrontMotorEnableA = 1 
+rightFrontMotorEnableB = 0
+rightFrontEncoderChA = 21
+rightFrontEncoderChB = 20
 
 #Left Rear Motor Pins
-leftRearMotorPWM = 18
-leftRearMotorEnableA = 0
-leftRearMotorEnableB = 0
+leftRearListNum = 2
+
+leftRearMotorPWM = 25
+leftRearMotorEnableA = 11
+leftRearMotorEnableB = 10
 leftRearEncoderChA = 14
 leftRearEncoderChB = 15
 
 #Right Rear Motor Pins
-rightRearMotorPWM = 12
-rightRearMotorEnableA = 0
-rightRearMotorEnableB = 0
+rightRearListNum = 3
+
+rightRearMotorPWM = 5
+rightRearMotorEnableA = 3
+rightRearMotorEnableB = 2
 rightRearEncoderChA = 4
 rightRearEncoderChB = 17
 
+INPUT = HIGH = 1
+OUTPUT = LOW = 0
 
 
 
