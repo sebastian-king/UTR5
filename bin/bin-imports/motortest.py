@@ -28,50 +28,80 @@ import RPi.GPIO as io
 
 
 #motor numbers: LF=0 RF=1 LB=2 RB=3
-rightFrontEncoder = encoder(pins.rightFrontEncoderChA, pins.rightFrontEncoderChB)
 leftFrontEncoder = encoder(pins.leftFrontEncoderChA, pins.leftFrontEncoderChB)
-rightRearEncoder = encoder(pins.rightRearEncoderChA, pins.rightRearEncoderChB)
+rightFrontEncoder = encoder(pins.rightFrontEncoderChA, pins.rightFrontEncoderChB)
 leftRearEncoder = encoder(pins.leftRearEncoderChA, pins.leftRearEncoderChB)
+rightRearEncoder = encoder(pins.rightRearEncoderChA, pins.rightRearEncoderChB)
 
-encoders = [rightFrontEncoder,leftFrontEncoder, rightRearEncoder, leftRearEncoder]
+encoders = [leftFrontEncoder, rightFrontEncoder, leftRearEncoder, rightRearEncoder]
 
 mcp = Adafruit_MCP230XX(busnum = 0, address = 0x20, num_gpios = 16)
 
 #CALL THIS BEFORE RUNMOTOR
 #sets up GPIO, encoders, interrupts
-def initMotor():
+def initMotors():
     io.setmode(io.BCM)
-    
     #TODO make sure pwm is set up right
     #wiringpi.pinMode(pins.rightFrontMotorPWM, 2)
-    
-    #TODO make sure gpio is set up right
-    #io.setup(pins.rightFrontMotorEnableA, io.OUT)
-    #io.setup(pins.rightFrontMotorEnableB, io.OUT)
-    #io.setup(pins.rightFrontMotorPWM, io.OUT)
     
     for i in range(4):
         mcp.config(pins.motorEnableA[i], pins.OUTPUT)
         mcp.config(pins.motorEnableB[i], pins.OUTPUT)
         io.setup(pins.motorPWM[i], io.OUT)
         stop(i)
-        
+    
+    #SETUP FOR NO EXPANDER
+    #io.setup(pins.rightFrontMotorEnableA, io.OUT)
+    #io.setup(pins.rightFrontMotorEnableB, io.OUT)
+    #io.setup(pins.rightFrontMotorPWM, io.OUT)
+    
     print 'initMotor() completed'
 
 
-#TODO test this make sure it works
-#running clockwise function on motor 1 (right front) to test
+
+#running pulses on motor_number
+#positive pulses = clockwise, negative = counterclockwise
 #motor numbers: LF=0 RF=1 LB=2 RB=3
-def runMotor(pulses, dir):    
+def runMotor(motor_number, pulses):    
+    #find dir based on sign of pulses
+    dir = 0
+    if pulses >= 0:
+        dir = 1
+
     speed = 1000
     
     #set pulses to 0
-    resetEncoders()
+    rightFrontEncoder.resetPulses()
+    
+    rotate(motor_number, speed, dir)
+
+    print 'runMotor() motor started for %s pulses' % pulses
+    
+    moving = True
+            
+    while moving == True:
+        print 'encoder pulses: %s' % (rightFrontEncoder.getPulses())
+        if abs(encoders[motor_number].getPulses()) >= abs(pulses):
+            moving = False
+
+    stopAllMotors()
+    
+    print 'runMotor() completed'
+
+#running same number of pulses on all motors to compare
+#positive pulses = clockwise, negative = counterclockwise
+def runMotors(pulses):
+     #find dir based on sign of pulses
+    dir = 0
+    if pulses >= 0:
+        dir = 1
+    speed = 1000 
+    resetAllEncoders()
     
     for i in range(4):
         rotate(i, speed, dir)
 
-    print 'runMotor() motor started'
+    print 'runMotors() motors started for %s pulses' % pulses
     
     moving = True
             
@@ -83,7 +113,10 @@ def runMotor(pulses, dir):
     stopAllMotors()
     
     print 'runMotor() completed'
-
+    
+    
+    
+    
     
 #motor numbers: LF=0 RF=1 LB=2 RB=3
 def rotate(motor_number, speed, dir):
@@ -116,7 +149,10 @@ def setSpeed(motor_number, speed):
         io.output(pins.motorPWM[motor_number], False)
         #wiringpi.pwmWrite(pins.motorPwm[motor_number], 0)
         
-def resetEncoders():
+        
+        
+        
+def resetAllEncoders():
     for i in range(4):
         encoders[i].reset()
         
