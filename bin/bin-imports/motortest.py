@@ -23,7 +23,7 @@ from encoder import encoder
 #from encoder import encoder
 import pins
 import time
-from Adafruit_MCP230xx import Adafruit_MCP230XX
+from Adafruit_MCP230xx import *
 
 import RPi.GPIO as io
 #import wiringpi
