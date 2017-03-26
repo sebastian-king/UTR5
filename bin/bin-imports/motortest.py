@@ -71,7 +71,7 @@ def runMotor(motor_number, pulses):
     speed = 1000
     
     #set pulses to 0
-    rightFrontEncoder.reset()
+    encoders[motor_number].reset()
     
     rotate(motor_number, speed, dir)
 
