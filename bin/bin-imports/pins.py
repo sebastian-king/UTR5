@@ -7,7 +7,7 @@
 #Left Front Motor Pins
 leftFrontListNum = 0
 
-leftFrontMotorPWM = 35 #GPIO19 ALL PWM IS BOARD MODE (bc of wiringpi)
+leftFrontMotorPWM = 19 #board 35
 leftFrontMotorEnableA = 9
 leftFrontMotorEnableB = 8
 leftFrontEncoderChA = 16
@@ -16,7 +16,7 @@ leftFrontEncoderChB = 12
 #Right Front Motor Pins
 rightFrontListNum = 1
 
-rightFrontMotorPWM = 37 #GPIO26 ALL PWM IS BOARD MODE
+rightFrontMotorPWM = 26 #board 37
 rightFrontMotorEnableA = 1 
 rightFrontMotorEnableB = 0
 rightFrontEncoderChA = 21
@@ -25,7 +25,7 @@ rightFrontEncoderChB = 20
 #Left Rear Motor Pins
 leftRearListNum = 2
 
-leftRearMotorPWM = 22 #GPIO 25 ALL PWM IS BOARD MODE
+leftRearMotorPWM = 25 #board 22
 leftRearMotorEnableA = 11
 leftRearMotorEnableB = 10
 leftRearEncoderChA = 14
@@ -34,7 +34,7 @@ leftRearEncoderChB = 15
 #Right Rear Motor Pins
 rightRearListNum = 3
 
-rightRearMotorPWM = 29 #GPIO5 ALL PWM IS BOARD MODE
+rightRearMotorPWM = 5 #board 29
 rightRearMotorEnableA = 3
 rightRearMotorEnableB = 2
 rightRearEncoderChA = 4

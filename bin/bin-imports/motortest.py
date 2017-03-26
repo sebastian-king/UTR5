@@ -39,7 +39,7 @@ mcp = Adafruit_MCP230XX(busnum = 0, address = 0x20, num_gpios = 16)
 #CALL THIS BEFORE RUNMOTOR
 #sets up GPIO, encoders, interrupts
 def initMotors():
-    wiringpi.wiringPiSetup()
+    wiringpi.wiringPiSetupGpio()
     io.setmode(io.BCM)
     #TODO make sure pwm is set up right
     #wiringpi.pinMode(pins.rightFrontMotorPWM, 2)
