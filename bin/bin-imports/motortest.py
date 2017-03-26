@@ -32,6 +32,8 @@ import wiringpi
 #leftRearEncoder = encoder(pins.leftRearEncoderChA, pins.leftRearEncoderChB)
 #rightRearEncoder = encoder(pins.rightRearEncoderChA, pins.rightRearEncoderChB)
 
+encoders = [0 for a in range(4)]
+
 for i in range(4):
     encoders[i] = encoder(pins.motorEncoderA[i], pins.motorEncoderB[i])
 
@@ -111,7 +113,7 @@ def runMotors(pulses, speed):
             
     while moving == True:
         print 'encoder pulses: %s' % (encoders[1].getPulses())
-        if abs(rightFrontEncoder.getPulses()) >= abs(pulses):
+        if abs(encoders[1].getPulses()) >= abs(pulses):
             moving = False
 
     stopAllMotors()
