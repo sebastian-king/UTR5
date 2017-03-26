@@ -27,12 +27,14 @@ import wiringpi
 
 
 #motor numbers: LF=0 RF=1 LB=2 RB=3
-leftFrontEncoder = encoder(pins.leftFrontEncoderChA, pins.leftFrontEncoderChB)
-rightFrontEncoder = encoder(pins.rightFrontEncoderChA, pins.rightFrontEncoderChB)
-leftRearEncoder = encoder(pins.leftRearEncoderChA, pins.leftRearEncoderChB)
-rightRearEncoder = encoder(pins.rightRearEncoderChA, pins.rightRearEncoderChB)
+#leftFrontEncoder = encoder(pins.leftFrontEncoderChA, pins.leftFrontEncoderChB)
+#rightFrontEncoder = encoder(pins.rightFrontEncoderChA, pins.rightFrontEncoderChB)
+#leftRearEncoder = encoder(pins.leftRearEncoderChA, pins.leftRearEncoderChB)
+#rightRearEncoder = encoder(pins.rightRearEncoderChA, pins.rightRearEncoderChB)
 
-encoders = [leftFrontEncoder, rightFrontEncoder, leftRearEncoder, rightRearEncoder]
+for i in range(4):
+    encoders[i] = encoder(pins.motorEncoderA[i], pins.motorEncoderB[i])
+
 
 mcp = Adafruit_MCP230XX(busnum = 0, address = 0x20, num_gpios = 16)
 
@@ -82,7 +84,7 @@ def runMotor(motor_number, pulses, speed):
     moving = True
             
     while moving == True:
-        print 'encoder pulses: %s' % (rightFrontEncoder.getPulses())
+        print 'encoder pulses: %s' % (encoders[motor_number].getPulses())
         if abs(encoders[motor_number].getPulses()) >= abs(pulses):
             moving = False
 
@@ -108,7 +110,7 @@ def runMotors(pulses, speed):
     moving = True
             
     while moving == True:
-        print 'encoder pulses: %s' % (rightFrontEncoder.getPulses())
+        print 'encoder pulses: %s' % (encoders[1].getPulses())
         if abs(rightFrontEncoder.getPulses()) >= abs(pulses):
             moving = False
 
