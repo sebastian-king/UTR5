@@ -55,7 +55,7 @@ def initMotors():
     #io.setup(pins.rightFrontMotorEnableB, io.OUT)
     #io.setup(pins.rightFrontMotorPWM, io.OUT)
     
-    print 'initMotor() completed'
+    print 'initMotors() completed'
 
 
 
@@ -71,7 +71,7 @@ def runMotor(motor_number, pulses):
     speed = 1000
     
     #set pulses to 0
-    rightFrontEncoder.resetPulses()
+    rightFrontEncoder.reset()
     
     rotate(motor_number, speed, dir)
 
@@ -107,7 +107,7 @@ def runMotors(pulses):
             
     while moving == True:
         print 'encoder pulses: %s' % (rightFrontEncoder.getPulses())
-        if abs(rightFrontEncoder.getPulses()) >= pulses:
+        if abs(rightFrontEncoder.getPulses()) >= abs(pulses):
             moving = False
 
     stopAllMotors()
