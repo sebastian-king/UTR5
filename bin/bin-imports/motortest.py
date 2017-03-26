@@ -23,8 +23,7 @@ import pins
 import time
 from Adafruit_MCP230xx import *
 import RPi.GPIO as io
-#import wiringpi
-#wiringpi.wiringPiSetupGpio()
+import wiringpi
 
 
 #motor numbers: LF=0 RF=1 LB=2 RB=3
@@ -40,6 +39,7 @@ mcp = Adafruit_MCP230XX(busnum = 0, address = 0x20, num_gpios = 16)
 #CALL THIS BEFORE RUNMOTOR
 #sets up GPIO, encoders, interrupts
 def initMotors():
+    wiringpi.wiringPiSetup()
     io.setmode(io.BCM)
     #TODO make sure pwm is set up right
     #wiringpi.pinMode(pins.rightFrontMotorPWM, 2)
@@ -47,7 +47,11 @@ def initMotors():
     for i in range(4):
         mcp.config(pins.motorEnableA[i], pins.OUTPUT)
         mcp.config(pins.motorEnableB[i], pins.OUTPUT)
-        io.setup(pins.motorPWM[i], io.OUT)
+        #io.setup(pins.motorPWM[i], io.OUT)
+        wiringpi.pinMode(pins.motorPWM[i], pins.OUTPUT)
+        error = wiringpi.softPwmCreate(pins.motorPWM[i],0,1000)
+        if error != 0:
+            print "error with wiringpi PWM setup in motortest for motor %s" % i
         stop(i)
     
     #SETUP FOR NO EXPANDER
@@ -142,13 +146,13 @@ def stop(motor_number):
 
 #TODO make sure this is right
 def setSpeed(motor_number, speed):
-    if 0 < speed <= 1024:
-        io.output(pins.motorPWM[motor_number], True)
-        #wiringpi.pwmWrite(pins.motorPwm[motor_number], speed)
+    if 0 < speed <= 1000:
+        #io.output(pins.motorPWM[motor_number], True)
+        wiringpi.softPwmWrite(pins.motorPWM[motor_number], speed)
     else:
-        io.output(pins.motorPWM[motor_number], False)
-        #wiringpi.pwmWrite(pins.motorPwm[motor_number], 0)
-        
+        #io.output(pins.motorPWM[motor_number], False)
+        wiringpi.softPwmWrite(pins.motorPWM[motor_number], 0)
+
         
         
         
