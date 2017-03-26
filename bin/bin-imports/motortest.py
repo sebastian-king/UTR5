@@ -66,13 +66,11 @@ def initMotors():
 #running pulses on motor_number
 #positive pulses = clockwise, negative = counterclockwise
 #motor numbers: LF=0 RF=1 LB=2 RB=3
-def runMotor(motor_number, pulses):    
+def runMotor(motor_number, pulses, speed):    
     #find dir based on sign of pulses
     dir = 0
     if pulses >= 0:
         dir = 1
-
-    speed = 1000
     
     #set pulses to 0
     encoders[motor_number].reset()
@@ -94,12 +92,12 @@ def runMotor(motor_number, pulses):
 
 #running same number of pulses on all motors to compare
 #positive pulses = clockwise, negative = counterclockwise
-def runMotors(pulses):
+def runMotors(pulses, speed):
      #find dir based on sign of pulses
     dir = 0
     if pulses >= 0:
         dir = 1
-    speed = 1000 
+
     resetAllEncoders()
     
     for i in range(4):
