@@ -12,7 +12,7 @@ import motors
 import map_data
 
 #this is just so we don't have to include motors.py in main
-def initMotors(void):
+def initMotors():
 	motors.initMotors()
 
 #move the entire bot a certain distance in mm in a direction relative to the bot
@@ -31,22 +31,22 @@ def move(distance, direction):
 			FL = 0
 			FR = 0
 			BL = 1
-			BL = 1
-		if direction == map_data.UP:    #fwd
+			BR = 1
+		elif direction == map_data.UP:    #fwd
 			FL = 0
 			FR = 1
 			BL = 0
-			BL = 1
-		if direction == map_data.LEFT:    #left
+			BR = 1
+		elif direction == map_data.LEFT:    #left
 			FL = 1
 			FR = 1
 			BL = 0
-			BL = 0
-		if direction == map_data.DOWN:    #back
+			BR = 0
+		elif direction == map_data.DOWN:    #back
 			FL = 1
 			FR = 0
 			BL = 1
-			BL = 0
+			BR = 0
 	
 		speed = 800     #not sure what speed to use for initial speed of each motor
 		motors.runMotors(num_pulses, speed, FL, FR, BL, BR)
@@ -87,8 +87,9 @@ def strafe_one_block(direction):
 		map_data.setX(x)
 		map_data.setX(y)
 		move(blocklength, direction)
-	#else: error in movement algorithm
-
+	else: 
+		#error in movement algorithm
+		print "invalid location (%s, %s)" % (x, y)
 
 def strafe_to_block(x, y):
 	if map_data.is_valid_loc(x, y):

@@ -98,7 +98,7 @@ def stop(motor_number):
     mcp.output(pins.motorEnableB[motor_number], pins.LOW)
 
 #TODO make sure this is right
-def speed(motor_number, speed):
+def setSpeed(motor_number, speed):
     if 0 < speed <= 1000:
         wiringpi.softPwmWrite(pins.motorPWM[motor_number], speed)
     else:
