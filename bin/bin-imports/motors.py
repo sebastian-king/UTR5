@@ -59,7 +59,8 @@ def runMotors(pulses, speed, dirLF, dirRF, dirLB, dirRB):
     
     for i in range(4):
         stop(i)
-        
+    
+    print "final pulses: FL/0=%s, FR/1=%s, BL/2=%s, BR/3=%s" % (encoders[0].getPulses(), encoders[1].getPulses(), encoders[2].getPulses(), encoders[3].getPulses())    
     #stop when all motors hit pulse number (option 2)
     #==============================================================
     # numMotorsRotating = 4        

@@ -40,13 +40,13 @@ loc = [0, 6]         #starting x, y
 #finds the adjacent coordinate to loc (x, y) in a direction
 def coordsFor(x, y, direction):
 	if direction == RIGHT:
-		return x + 1, y
+		return [x + 1, y]
 	elif direction == UP:
-		return x, y + 1
+		return [x, y - 1]
 	elif direction == LEFT:
-		return x - 1, y
+		return [x - 1, y]
 	elif direction == DOWN:
-		return x, y - 1
+		return [x, y + 1]
 
 
 #tests if a loc is within the grid

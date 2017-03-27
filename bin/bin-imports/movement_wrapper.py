@@ -77,17 +77,17 @@ def strafe_one_block(direction):
 	if direction == map_data.RIGHT:
 		x = x + 1
 	elif direction == map_data.UP:
-		y = y + 1
+		y = y - 1
 	elif direction == map_data.LEFT:
 		x = x - 1
 	elif direction == map_data.DOWN:
-		y = y - 1
+		y = y + 1
 
 	if map_data.is_valid_loc(x, y):
 		map_data.setX(x)
 		map_data.setY(y)
 		move(blocklength, direction)
-		print "moved to (%s, %s)" % (x, y)
+		print "moved to (%s, %s)" % (map_data.loc[0], map_data.loc[1])
 	else: 
 		#error in movement algorithm
 		print "invalid location (%s, %s)" % (x, y)
