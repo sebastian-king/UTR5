@@ -2,13 +2,20 @@
 
 #holonomic drive wrapper
 
+#TESTING PLAN
+#call initMotors() first
+#test move()
+#test strafe_one_block()
+#test strafe_to_block()
+
 import motors
 import map_data
 
-#we don't want to have to include motors.py in main
+#this is just so we don't have to include motors.py in main
 def initMotors(void):
 	motors.initMotors()
 
+#move the entire bot a certain distance in mm in a direction relative to the bot
 #direction: 0=right, 1=fwd, 2=left, 3=back	relative to current direction
 def move(distance, direction):
 	if distance > 0:
@@ -17,8 +24,9 @@ def move(distance, direction):
 		#number of rotations needed to travel distance when wheels are at a 45 degree angle
 		num_rotations_diagonal = (distance * 1.414214) / wheel_circumference       # 1.414214=sqrt(2)
 		#angle = num_rotations_diagonal * 360
-		num_pulses = num_rotations_diagonal*90  #multiply by 600, the number of phase counts per revolution of the motor
+		num_pulses = num_rotations_diagonal*90  #multiply by 90, the number of phase counts per revolution of the motor
 	
+		#figure out which wheels are clockwise(1) vs counter_clockwise(0)
 		if direction == map_data.RIGHT:    #right
 			FL = 0
 			FR = 0
@@ -40,9 +48,8 @@ def move(distance, direction):
 			BL = 1
 			BL = 0
 	
-		speed = 512     #not sure what speed to use (maybe max)
-		#need to figure out wheel numbers
-		motors.run_all_motors(speed, num_pulses, FL, FR, BL, BR)
+		speed = 800     #not sure what speed to use for initial speed of each motor
+		motors.runMotors(num_pulses, speed, FL, FR, BL, BR)
 
 
 def turn(degrees):
@@ -83,6 +90,36 @@ def strafe_one_block(direction):
 	#else: error in movement algorithm
 
 
+def strafe_to_block(x, y):
+	if map_data.is_valid_loc(x, y):
+		x_diff = x - map_data.getX()
+		y_diff = y - map_data.getY()
+		
+		#x movement
+		distance = 0;
+		dir = map_data.RIGHT
+		if x_diff > 0:
+			distance = blocklength * x_diff
+			dir = map_data.RIGHT
+		elif x_diff < 0:
+			distance = blocklength * x_diff * -1
+			dir = map_data.LEFT
+		move(distance, dir)
+		map_data.setX(x)
+
+		#y movement
+		distance = 0;
+		if y_diff > 0:
+			dir = map_data.UP
+			distance = blocklength * y_diff
+		elif y_diff < 0:
+			dir = map_data.DOWN
+			distance = blocklength * y_diff * -1
+		move(distance, dir)
+		map_data.setY(y)
+
+
+#we probably don't need this
 #move to a block with turning, no diagonals
 def move_to_block(x, y):
 	if map_data.is_valid_loc(x, y):
@@ -119,33 +156,8 @@ def move_to_block(x, y):
 		move(distance, 1)
 		map_data.setY(y)
 
-def strafe_to_block(x, y):
-	if map_data.is_valid_loc(x, y):
-		x_diff = x - map_data.getX()
-		y_diff = y - map_data.getY()
-		
-		#x movement
-		distance = 0;
-		dir = map_data.RIGHT
-		if x_diff > 0:
-			distance = blocklength * x_diff
-			dir = map_data.RIGHT
-		elif x_diff < 0:
-			distance = blocklength * x_diff * -1
-			dir = map_data.LEFT
-		move(distance, dir)
-		map_data.setX(x)
 
-		#y movement
-		distance = 0;
-		if y_diff > 0:
-			dir = map_data.UP
-			distance = blocklength * y_diff
-		elif y_diff < 0:
-			dir = map_data.DOWN
-			distance = blocklength * y_diff * -1
-		move(distance, dir)
-		map_data.setY(y)
-
+#im not sure if this should go in movement_wrapper, the arm should maybe have its own file
 def removeCacheLid():
+	abc = 0
 	# lower and raise arm

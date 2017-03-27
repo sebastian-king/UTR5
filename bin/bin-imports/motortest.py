@@ -8,17 +8,16 @@
 #if all of the above works:
 #call runMotor(num_pulses), make sure it rotates and stops 
 #make sure encoders are working
-#>>>WE ARE HERE<<<
 #once that works, we need to figurue out pwm stuff for speed
 #once this whole test works, we can update/test motors.py in the same way, which is this but with all 4 motors
-#when motors.py works, we can test movement_wrapper.strafe_one_block(direction), this is what handles 600 pulses/rot, wheel size constants, etc
+#>>>WE ARE HERE<<<
+#when motors.py works, we can test movement_wrapper.strafe_one_block(direction), this is what handles 90 pulses/rot, wheel size constants, etc
 
 
 
 #encoder.py has encoder class that takes 2 pins for quadrature encoders
 import sys
 from encoder import encoder
-#from encoder import encoder
 import pins
 import time
 from Adafruit_MCP230xx import *
@@ -27,11 +26,6 @@ import wiringpi
 
 
 #motor numbers: LF=0 RF=1 LB=2 RB=3
-#leftFrontEncoder = encoder(pins.leftFrontEncoderChA, pins.leftFrontEncoderChB)
-#rightFrontEncoder = encoder(pins.rightFrontEncoderChA, pins.rightFrontEncoderChB)
-#leftRearEncoder = encoder(pins.leftRearEncoderChA, pins.leftRearEncoderChB)
-#rightRearEncoder = encoder(pins.rightRearEncoderChA, pins.rightRearEncoderChB)
-
 encoders = [0 for a in range(4)]
 
 for i in range(4):
@@ -45,18 +39,16 @@ mcp = Adafruit_MCP230XX(busnum = 0, address = 0x20, num_gpios = 16)
 def initMotors():
     wiringpi.wiringPiSetupGpio()
     io.setmode(io.BCM)
-    #TODO make sure pwm is set up right
-    #wiringpi.pinMode(pins.rightFrontMotorPWM, 2)
     
     for i in range(4):
-        mcp.config(pins.motorEnableA[i], pins.OUTPUT)
+        mcp.config(pins.motorEnableA[i], pins.OUTPUT)       #set up the h-bridge a and b pins
         mcp.config(pins.motorEnableB[i], pins.OUTPUT)
         #io.setup(pins.motorPWM[i], io.OUT)
-        wiringpi.pinMode(pins.motorPWM[i], pins.OUTPUT)
+        wiringpi.pinMode(pins.motorPWM[i], pins.OUTPUT)     #set up wiringpi software pwms
         error = wiringpi.softPwmCreate(pins.motorPWM[i],0,1000)
         if error != 0:
             print "error with wiringpi PWM setup in motortest for motor %s" % i
-        stop(i)
+        stop(i)                             #make sure the motor is stopped
     
     #SETUP FOR NO EXPANDER
     #io.setup(pins.rightFrontMotorEnableA, io.OUT)
@@ -109,8 +101,7 @@ def runMotors(pulses, speed):
 
     print 'runMotors() motors started for %s pulses' % pulses
     
-    moving = True
-            
+    moving = True         
     while moving == True:
         print 'encoder pulses: %s' % (encoders[1].getPulses())
         if abs(encoders[1].getPulses()) >= abs(pulses):
