@@ -51,12 +51,13 @@ def runMotors(pulses, speed, dirLF, dirRF, dirLB, dirRB):
     rotate(3, speed, dirRB)
     
     #stop when right front motor hits pulse number
-    moving = True         
+    moving = True
     while moving == True:
-        print 'encoder pulses: %s' % (encoders[1].getPulses())
+        time.sleep(.001)
+	#print "%s " % (encoders[1].getPulses()),
         if abs(encoders[1].getPulses()) >= abs(pulses):
-            moving = False
-    
+	    moving = False  
+
     for i in range(4):
         stop(i)
     
