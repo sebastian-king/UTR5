@@ -62,7 +62,7 @@ def getY():
 def setX(newX):
 	loc[0] = newX
 def setY(newY):
-	loc[0] = newY
+	loc[1] = newY
 def getDir():
 	return current_direction
 def setDir(dir):
