@@ -21,7 +21,7 @@ sudo update-rc.d UTR5start defaults
 sudo update-rc.d UTR5stop defaults
 
 # update needed libraries: RTIMULib2
-$installed=python -c 'import pkgutil; print(1 if pkgutil.find_loader("RTIMU") else 0)'
+installed=`python -c 'import pkgutil; print(1 if pkgutil.find_loader("RTIMU") else 0)'`
 if [ "$installed" -eq 0 ];then
 	echo "Missing RTIMULib2, installing...";
 	sudo apt-get install python-dev
