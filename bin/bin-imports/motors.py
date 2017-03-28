@@ -99,9 +99,28 @@ def stop(motor_number):
     mcp.output(pins.motorEnableA[motor_number], pins.LOW)
     mcp.output(pins.motorEnableB[motor_number], pins.LOW)
 
-#TODO make sure this is right
 def setSpeed(motor_number, speed):
     if 0 < speed <= 1000:
         wiringpi.softPwmWrite(pins.motorPWM[motor_number], speed)
     else:
         wiringpi.softPwmWrite(pins.motorPWM[motor_number], 0)
+
+def calibrateMotors():
+    speeds = []
+    speeds = findSpeeds()
+    #TODO math for correct speeds based on relative speeds
+    for i in range(4):
+        setSpeed(500)
+
+#get the speed of each motor in pulses/second
+def findSpeeds():
+    for i in range(4):
+        encoders[i].reset()    
+    rotate(0, 500, 1)
+    rotate(1, 500, 1)
+    rotate(2, 500, 1)
+    rotate(3, 500, 1)
+    delay(60)
+    return [encoders[0].getPulses() / 60, encoders[1].getPulses() / 60, encoders[2].getPulses() / 60, encoders[3].getPulses() / 60]
+    
+    
