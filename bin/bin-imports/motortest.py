@@ -103,7 +103,8 @@ def runMotors(pulses, speed):
     
     moving = True         
     while moving == True:
-        print 'encoder pulses: %s' % (encoders[1].getPulses())
+        #print 'encoder pulses: %s' % (encoders[1].getPulses())
+        print 'encoder speed: %s' % (encoders[1].getSpeed())
         if abs(encoders[1].getPulses()) >= abs(pulses):
             moving = False
 

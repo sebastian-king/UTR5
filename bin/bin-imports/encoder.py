@@ -11,7 +11,10 @@ import RPi.GPIO as GPIO # Allows use of pins on the Pi
 import time
 import pins
 
+speedUpdateMs = 50
 
+def millis():
+    return time.time() * 1000
 
 class encoder:
     
@@ -20,6 +23,10 @@ class encoder:
         self.pinA = pinA
         self.pinB = pinB        
         self.pulses = 0
+        
+        self.speed = 0
+        self.oldTime = millis()
+        self.oldPulses = 0
     
         GPIO.setup(pinA, GPIO.IN, GPIO.PUD_UP)
         GPIO.setup(pinB, GPIO.IN, GPIO.PUD_UP)
@@ -33,6 +40,10 @@ class encoder:
             self.pulses += .5
         else:
             self.pulses -= .5
+        if(millis() - self.oldTime >= speedUpdateMs):
+            self.speed = self.pulses-self.oldPulses
+            self.oldPulses = self.pulses
+            self.oldTime = millis()
          
     def encoderHandlerB(self, void):
         a = GPIO.input(self.pinA)
@@ -40,6 +51,10 @@ class encoder:
             self.pulses -= .5
         else:
             self.pulses += .5
+        if(millis() - self.oldTime >= speedUpdateMs):
+            self.speed = self.pulses-self.oldPulses
+            self.oldPulses = self.pulses
+            self.oldTime = millis()
  
     #returns the accumulated distance in pulses            
     def getPulses(self):
@@ -47,17 +62,16 @@ class encoder:
    
     def reset(self):
         self.pulses = 0
-         
- 
  
     #returns the accumulated distance in units of mm
     def getDistance(self):
         return self.pulses/90.0 * 60 #60mm wheel circumference referenced from movement_wrapper   
     
     #TODO
-    #returns the speed in mm/sec
+    #returns the speed in RPM
     def getSpeed(self):
-        return self.speed / 90.0 * 60 #60mm wheel circumference
+        return self.speed * (1000/speedUpdateMs) * 60 / 90  #pulses traveled during speedUpdateMs * number of updates per second
+                                                            # * 60 seconds in a minute / 90 pulses per rotation = RPM
         
 
 
