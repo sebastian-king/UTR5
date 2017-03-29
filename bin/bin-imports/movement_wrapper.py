@@ -20,9 +20,9 @@ def initMotors():
 def move(distance, direction):
 	if distance > 0:
 		#constant for ratio of the distance per rotation, in <unit of measurement>, that a wheel travels when wheel is straight
-		wheel_circumference = 60    #60mm
+		wheel_diameter = 60    #60mm
 		#number of rotations needed to travel distance when wheels are at a 45 degree angle
-		num_rotations_diagonal = (distance * 1.414214) / wheel_circumference       # 1.414214=sqrt(2)
+		num_rotations_diagonal = (distance * 1.414214) / (wheel_diameter * 3.1415)     # 1.414214=sqrt(2)
 		#angle = num_rotations_diagonal * 360
 		num_pulses = num_rotations_diagonal*90  #multiply by 90, the number of phase counts per revolution of the motor
 	
