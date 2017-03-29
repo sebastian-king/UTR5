@@ -125,13 +125,20 @@ display8x8p23 = 1
 display8x8p22 = 2
 display8x8p21 = 3
 
-display8x8GPIOred = 0x22
-display8x8GPIOgreen = 0x21
-display8x8GPIOblue = 0x22
+#ROW ENABLES on gpio expander 0x21
+display8x8p17 = 7
+display8x8p18 = 6
+display8x8p19 = 5
+display8x8p20 = 4
+display8x8p29 = 12
+display8x8p30 = 13
+display8x8p31 = 14
+display8x8p32 = 15
 
 display8x8red = [0 for a in range(8)]
 display8x8green = [0 for a in range(8)]
 display8x8blue = [0 for a in range(8)]
+display8x8row = [0 for a in range(8)]
 
 display8x8red[0] = display8x8p9
 display8x8red[1] = display8x8p10
@@ -160,7 +167,14 @@ display8x8blue[5] = display8x8p6
 display8x8blue[6] = display8x8p7
 display8x8blue[7] = display8x8p8
 
-
+display8x8row[0] = display8x8p17
+display8x8row[1] = display8x8p18
+display8x8row[2] = display8x8p19
+display8x8row[3] = display8x8p20
+display8x8row[4] = display8x8p29
+display8x8row[5] = display8x8p30
+display8x8row[6] = display8x8p31
+display8x8row[7] = display8x8p32
 
 
 

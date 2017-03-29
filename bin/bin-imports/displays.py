@@ -13,14 +13,11 @@ import map_data as md
 mcpBLUE = Adafruit_MCP230XX(busnum = 0, address = 0x20, num_gpios = 16)
 
 for i in range(8):
-	(pins.mcp22).config(display8x8red[i], pins.OUTPUT)
-	(pins.mcp21).config(display8x8green[i], pins.OUTPUT)
-	(pins.mcp22).config(display8x8blue[i], pins.OUTPUT)
+	(pins.mcp22).config(pins.display8x8red[i], pins.OUTPUT)
+	(pins.mcp21).config(pins.display8x8green[i], pins.OUTPUT)
+	(pins.mcp22).config(pins.display8x8blue[i], pins.OUTPUT)
+	(pins.mcp21).config(pins.display8x8row[i], pins.OUTPUT)
 
-#TODO fix row enable pins/ setup
-rowpins = [17, 18, 19, 20, 29, 30, 31, 32]	# these are the pins to turn on rows
-for pin in pins.matrixrow:
-	GPIO.setup(pin, GPIO.OUT)
 
 #TODO fix setup
 for pin in pins.segment:
@@ -44,7 +41,7 @@ d[9] = [0,0,0,1,1,0,0]
 # we should always have the bottom left lit yellow
 (pins.mcp22).output(pins.display8x8red[0], pins.HIGH) #GPIO.output(pins.matrix[8], GPIO.HIGH)
 (pins.mcp21).output(pins.display8x8green[0], pins.HIGH) #GPIO.output(pins.matrix[29], GPIO.HIGH)
-mcp.output(rowpins[7], pins.HIGH) #GPIO.output(pins.matrix[rowpins[6]], GPIO.HIGH)
+(pins.mcp21).output(pins.display8x8row[7], pins.HIGH) #GPIO.output(pins.matrix[rowpins[6]], GPIO.HIGH)
 
 def show():
 	with open(+"/finaldata") as f:
@@ -58,15 +55,16 @@ def show():
 	for x in range(0, 7):
 		GPIO.output(pins.segment[x], digit[x])
 	
+	#TODO make sure high and low is correct
 	while True: # need to quit this at some point, maybe on button press or after time TODO
 		for y in range(0, len(lines)):
 			for i in range(8):
 				(pins.mcp22).output(display8x8red[i], pins.LOW)
 				(pins.mcp21).output(display8x8green[i], pins.LOW)
 				(pins.mcp22).output(display8x8blue[i], pins.LOW)
-			GPIO.output(pins.matrix[rowpins[y]], GPIO.HIGH)		#TODO rowpins
+			(pins.mcp21).output(pins.display8x8row[y], pins.HIGH)
 			for x in range(0, md.gridsize):
-				r = pins.display8x8red[x+8]		#find the correct pin that corresponds to the color for the led in that column
+				r = pins.display8x8red[x]		#find the correct pin that corresponds to the color for the led in that column
 				g = pins.display8x8green[x]
 				b = pins.display8x8blue[x]
 				if (x == 0 and y == 6):
