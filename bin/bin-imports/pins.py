@@ -17,7 +17,7 @@ leftFrontEncoderChB = 12
 rightFrontListNum = 1
 
 rightFrontMotorPWM = 26 #board 37
-rightFrontMotorEnableA = 9 
+rightFrontMotorEnableA = 9
 rightFrontMotorEnableB = 8
 rightFrontEncoderChA = 21
 rightFrontEncoderChB = 20
@@ -80,4 +80,4 @@ motorPWM[3] = rightRearMotorPWM
 
 # displays
 matrix = range(1, 32)	#each led has 1 pin for on and 3 pins for rgb
-segment = [11,12,13,15,16,18,22]
+segment = range(0,7) # 8 elements, a..g, last one for decimal point, on expander 0x23
