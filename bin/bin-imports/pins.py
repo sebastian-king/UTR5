@@ -8,8 +8,8 @@
 leftFrontListNum = 0
 
 leftFrontMotorPWM = 19 #board 35
-leftFrontMotorEnableA = 9
-leftFrontMotorEnableB = 8
+leftFrontMotorEnableA = 6 #old 9
+leftFrontMotorEnableB = 7 #old 8
 leftFrontEncoderChA = 16
 leftFrontEncoderChB = 12
 
@@ -26,8 +26,8 @@ rightFrontEncoderChB = 20
 leftRearListNum = 2
 
 leftRearMotorPWM = 25 #board 22
-leftRearMotorEnableA = 11
-leftRearMotorEnableB = 10
+leftRearMotorEnableA = 5 #old 11
+leftRearMotorEnableB = 4 #old 10
 leftRearEncoderChA = 14
 leftRearEncoderChB = 15
 
