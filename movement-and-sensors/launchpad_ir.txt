@@ -1,0 +1,43 @@
+#include <Wire.h>
+
+int ir_sensors[] = {A0, A1, A2, A3}; //PE3,PE2,PE1,PE0
+int values[4];
+int heart = BLUE_LED;
+int beat;
+
+void setup() {
+  // put your setup code here, to run once:
+  pinMode(heart, OUTPUT);
+  beat = 0;
+  // SDA is pb3 and SCL is pb2
+  Wire.begin(0x42);
+  Wire.onRequest(transmit_values);
+
+}
+
+void transmit_values() {
+  for (int i = 0; i < 4; i++)
+  {
+    Wire.write(values[i]);
+  }
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  for (int i = 0; i < 4; i++)
+  {
+    values[i] = analogRead(ir_sensors[i]);
+  }
+  //heartbeat logic
+  if (beat)
+  {
+    digitalWrite(heart, HIGH);
+    beat = 0;
+  }
+  else
+  {
+    digitalWrite(heart, LOW);
+    beat = 1;
+  }
+  delay(100);
+}

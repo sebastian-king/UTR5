@@ -124,3 +124,26 @@ def saveResults():
 				f.write(".")
 		f.write("\n")
 	f.close()
+
+
+def avoidObstacle(dir):
+	obstacleBlock = []
+	obstacleBlock = coordsFor(map_data.getX(), map_data.getY(), dir);
+	rightOfMoveDir = []
+	rightOfMoveDir = coordsFor(map_data.getX(), map_data.getY(), dir - 1);
+	#default go right (relative to dir) since we are usually going clockwise
+	
+	#check the block to the right
+	is_valid = False 	#this is true when the desired block is safe to move to
+	if map_data.has_been_explored(rightOfMoveDir[0], rightOfMoveDir[1]):
+		is_valid = not map_data.has_obstacle_for_loc(rightOfMoveDir[0], rightOfMoveDir[1])
+			
+	else:
+		map_data.set_obstacle_at(rightOfMoveDir[0], rightOfMoveDir[1], IRSTUFF)
+		
+	if is_valid_loc:
+		movement_wrapper.strafe_one_block(dir - 1)
+	#movement_wrapper.strafe_one_block(dir)
+	#
+	
+	
