@@ -2,26 +2,24 @@
 
 import RPi.GPIO as GPIO
 import os, sys, time
-from Adafruit_MCP230xx import *
 
-myfolder = os.path.dirname(os.path.realpath(__file__))
+#myfolder = os.path.dirname(os.path.realpath(__file__))
 
-sys.path.append(myfolder + "/bin-imports/")
+#sys.path.append(myfolder + "/bin-imports/")
 import pins
 import map_data as md
+from Adafruit_MCP230xx import *
 
-mcpBLUE = Adafruit_MCP230XX(busnum = 0, address = 0x20, num_gpios = 16)
+GPIO.setmode(GPIO.BCM)
+
+#mcpBLUE = Adafruit_MCP230XX(busnum = 0, address = 0x20, num_gpios = 16)
+#Expander 0x20 is the motor controller?
 
 for i in range(8):
 	(pins.mcp22).config(pins.display8x8red[i], pins.OUTPUT)
 	(pins.mcp21).config(pins.display8x8green[i], pins.OUTPUT)
 	(pins.mcp22).config(pins.display8x8blue[i], pins.OUTPUT)
 	(pins.mcp21).config(pins.display8x8row[i], pins.OUTPUT)
-
-
-#TODO fix setup
-for pin in pins.segment:
-	GPIO.setup(pin, GPIO.OUT)
 
 #define 7 segment digits
 d = [ None for y in range( 11 ) ]
