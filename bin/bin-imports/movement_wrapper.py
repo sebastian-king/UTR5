@@ -10,6 +10,7 @@
 
 import motors
 import map_data
+import time
 
 #this is just so we don't have to include motors.py in main
 def initMotors():
@@ -108,6 +109,8 @@ def strafe_to_block(x, y):
 			dir = map_data.LEFT
 		move(distance, dir)
 		map_data.setX(x)
+
+		time.sleep(.4)
 
 		#y movement
 		distance = 0;
