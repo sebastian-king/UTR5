@@ -15,8 +15,8 @@ echo "Updating button listeners"
 sudo rm /etc/init.d/UTR5*
 sudo cp ./bin/start /etc/init.d
 sudo cp ./bin/stop /etc/init.d
-sudo mv /etc/init.d/start UTR5start
-sudo mv /etc/init.d/stop UTR5stop
+sudo mv /etc/init.d/start /etc/init.d/UTR5start
+sudo mv /etc/init.d/stop /etc/init.d/UTR5stop
 # fix permissions
 sudo chmod 755 /etc/init.d/UTR5*
 sudo update-rc.d UTR5start defaults
