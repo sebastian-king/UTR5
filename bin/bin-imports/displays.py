@@ -49,12 +49,7 @@ def show():
 	# you may also want to remove whitespace characters like `\n` at the end of each line
 	lines = [x.strip() for x in content]
 	os.remove(myfolder + "/finaldata")
-
-
-	digit = d[int(lines.pop(0))]
-	for x in range(0, 7):
-		GPIO.output(pins.segment[x], digit[x])
-	
+	showNumber(lines.pop(0))
 	#TODO make sure high and low is correct
 	while True: # need to quit this at some point, maybe on button press or after time TODO
 		for y in range(0, len(lines)):
@@ -75,3 +70,8 @@ def show():
 				elif lines[y][x] == "T":
 					(pins.mcp22).output(r, pins.HIGH)
 			time.sleep(0.001) # need to mess around to find good time TODO
+
+def showNumber(n):
+	digit = d[int(n)]
+	for x in range(0, 7):
+		GPIO.output(pins.segment[x], digit[x])
