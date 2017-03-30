@@ -70,7 +70,26 @@ def find_live_tunnel_perimeter():
 	# we start at the bottom left, start exploring north
 	moveDirection = map_data.UP
 	exploring = True
+	checkAndMapObstacles()
 	while exploring:
+		if checkAndMapObstacles(moveDirection):
+			# try going around the obstacle
+			avoiding = True
+			destX, destY = map_data.coordsFor(map_data.getX(), map_data.getY(), moveDirection)
+			lastDirection = moveDirection
+			circleAround = 1
+			while avoiding:
+				for naiveDest in range(lastDirection+1, lastDirection+3): # will loop through all directions
+					naiveDest = naiveDest + 4 + (circleAround*4)
+					direction = naiveDest % 4
+					if not map_data.has_obstacle_for_loc(direction):
+						lastDirection = direction
+						circleAround *= -1
+						break # out of the different directions
+				movement_wrapper.strafe_one_block(lastDirection % 4)
+				if map_data.getX() is destX and map_data.getY() is Y:
+					avoiding = False
+			break # out of this exploration round
 		movement_wrapper.strafe_one_block(moveDirection)
 		pos_x = map_data.getX()
 		pos_y = map_data.getY()
@@ -78,9 +97,7 @@ def find_live_tunnel_perimeter():
 			wireEnds.append([pos_x, pos_y])
 			analyzeCache() # it's beneath us!
 			exploring = False # we are done
-		# check for obstacles above
-		map_data.set_obstacle_at(pos_x-1, pos_y, IR_north.check())
-		# do that for all other directions
+		checkAndMapObstacles()
 		# [TODO]: don't move into an obstacle
 		if pos_x == 0 and pos_y == 0: # top left
 			moveDirection = map_data.RIGHT
@@ -90,6 +107,15 @@ def find_live_tunnel_perimeter():
 			moveDirection = map_data.LEFT
 		elif pos_x == 0 and pos_y == 6: # back at bottom left
 			exploring = False
+
+def checkAndMapObstacles(direction):
+	# check for obstacles above
+	map_data.set_obstacle_at(pos_x-1, pos_y, IR_north.check())
+	# do that for all other directions
+	if not direction:
+		return
+	x, y = map_data.coordsFor(map_data.getX(), map_data.getY(), direction)
+	return map_data.has_obstacle_for_loc(x, y)
 
 def is_infrastructure_below():
 	# is this different from the usual?
@@ -132,18 +158,16 @@ def avoidObstacle(dir):
 	rightOfMoveDir = []
 	rightOfMoveDir = coordsFor(map_data.getX(), map_data.getY(), dir - 1);
 	#default go right (relative to dir) since we are usually going clockwise
-	
+
 	#check the block to the right
 	is_valid = False 	#this is true when the desired block is safe to move to
 	if map_data.has_been_explored(rightOfMoveDir[0], rightOfMoveDir[1]):
 		is_valid = not map_data.has_obstacle_for_loc(rightOfMoveDir[0], rightOfMoveDir[1])
-			
+
 	else:
 		map_data.set_obstacle_at(rightOfMoveDir[0], rightOfMoveDir[1], IRSTUFF)
-		
+
 	if is_valid_loc:
 		movement_wrapper.strafe_one_block(dir - 1)
 	#movement_wrapper.strafe_one_block(dir)
 	#
-	
-	
