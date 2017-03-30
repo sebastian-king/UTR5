@@ -1,3 +1,13 @@
+### BEGIN INIT INFO
+# Provides:          Start button listener
+# Required-Start:    $remote_fs $syslog
+# Required-Stop:     $remote_fs $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Start button listener
+# Description:       Enable service provided by daemon.
+### END INIT INFO
+
 #!/usr/bin/env python
 
 import sys, os, time
