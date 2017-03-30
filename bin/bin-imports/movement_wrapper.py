@@ -53,7 +53,7 @@ def move(distance, direction):
 		motors.runMotors(num_pulses, speed, FL, FR, BL, BR)
 
 
-#330 mm circumference of bot
+#330.2 mm circumference of bot
 def turn(degrees):
 	if degrees != 0:
 		map_data.setDir(map_data.getDir() + degrees)
@@ -66,7 +66,7 @@ def turn(degrees):
 			d = 1
 			angle = degrees * -1
 		
-		dist = 330.0 * 3.1415 * (angle / 360.0)
+		dist = 330.2 * 3.1415 * (angle / 360.0)
 		num_pulses_turn = (dist * 90.0)/(60.0 * 3.1415)
 		print "pulses: %s, dist: %s, direction: %s, angle: %s" % (num_pulses_turn, dist, d, angle)
 		speed = 800     #not sure what speed to use	
@@ -75,7 +75,7 @@ def turn(degrees):
 
 
 
-blocklength = 305     #1 foot = 305mm
+blocklength = 304.8     #1 foot = 305mm
 
 #strafe one block no turning. direction: 0=right, 1=fwd, 2=left, 3=back
 def strafe_one_block(direction):
