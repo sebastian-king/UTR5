@@ -20,6 +20,9 @@ for i in range(8):
 	(pins.mcp22).config(pins.display8x8blue[i], pins.OUTPUT)
 	(pins.mcp21).config(pins.display8x8row[i], pins.OUTPUT)
 
+for x in range(0, 7):
+	(pins.mcp23).config(pins.segments[x], pins.OUTPUT)
+
 #define 7 segment digits
 d = [ None for y in range( 11 ) ]
 d[10] = [1,1,1,1,1,1,1]
