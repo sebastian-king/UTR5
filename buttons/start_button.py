@@ -25,7 +25,7 @@ def listen_for_start():
 		time.sleep(0.1)
 		val = GPIO.input(18)
 		#print str(i) + " " + str(val)
-		if val == 0:
+		if val == 1:
 			break
 
 	import displays

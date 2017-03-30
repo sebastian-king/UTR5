@@ -15,7 +15,7 @@ def listen_for_stop():
 		time.sleep(0.1)
 		val = GPIO.input(23)
 		#print str(i) + " " + str(val)
-		if val == 0:
+		if val == 1:
 			break
 
 	print "Stop pressed"
