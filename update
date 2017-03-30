@@ -13,8 +13,8 @@ sudo pip install opencv-python
 # update button listeners
 echo "Updating button listeners"
 sudo rm /etc/init.d/UTR5*
-sudo cp startup ./bin/start /etc/init.d
-sudo cp startup ./bin/stop /etc/init.d
+sudo cp ./bin/start /etc/init.d
+sudo cp ./bin/stop /etc/init.d
 sudo mv /etc/init.d/start UTR5start
 sudo mv /etc/init.d/stop UTR5stop
 # fix permissions
