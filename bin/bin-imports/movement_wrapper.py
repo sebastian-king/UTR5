@@ -10,6 +10,7 @@
 
 import motors
 import map_data
+import time
 
 #this is just so we don't have to include motors.py in main
 def initMotors():
@@ -20,11 +21,11 @@ def initMotors():
 def move(distance, direction):
 	if distance > 0:
 		#constant for ratio of the distance per rotation, in <unit of measurement>, that a wheel travels when wheel is straight
-		wheel_diameter = 60    #60mm
+		wheel_diameter = 60.0    #60mm
 		#number of rotations needed to travel distance when wheels are at a 45 degree angle
 		num_rotations_diagonal = distance / (1.414214 * wheel_diameter * 3.1415)     # 1.414214=sqrt(2)
 		#angle = num_rotations_diagonal * 360
-		num_pulses = num_rotations_diagonal*90  #multiply by 90, the number of phase counts per revolution of the motor
+		num_pulses = num_rotations_diagonal*90.0  #multiply by 90, the number of phase counts per revolution of the motor
 	
 		#figure out which wheels are clockwise(1) vs counter_clockwise(0)
 		if direction == map_data.RIGHT:    #right
@@ -52,18 +53,24 @@ def move(distance, direction):
 		motors.runMotors(num_pulses, speed, FL, FR, BL, BR)
 
 
+#356 mm circumference of bot
 def turn(degrees):
 	if degrees != 0:
 		map_data.setDir(map_data.getDir() + degrees)
+		angle = 0
+		d = 0
 		if degrees > 0:
-			dir = map_data.RIGHT
+			d = 0
 			angle = degrees
 		elif degrees < 0:
-			dir = map_data.UP
+			d = 1
 			angle = degrees * -1
-		speed = 512     #not sure what speed to use
-		#need to figure out wheel numbers
-		motors.run_all_motors(speed, angle, dir, dir, dir, dir)
+		
+		dist = 356.0 * 3.1415 * (angle / 360.0)
+		num_pulses_turn = (dist * 90.0)/(60.0 * 3.1415)
+		print "pulses: %s, dist: %s, direction: %s, angle: %s" % (num_pulses_turn, dist, d, angle)
+		speed = 800     #not sure what speed to use	
+		motors.runMotors(num_pulses_turn, speed, d, d, d, d)
 	
 
 
@@ -109,14 +116,16 @@ def strafe_to_block(x, y):
 		move(distance, dir)
 		map_data.setX(x)
 
+		time.sleep(.4)
+
 		#y movement
 		distance = 0;
-		if y_diff > 0:
+		if y_diff < 0:
 			dir = map_data.UP
-			distance = blocklength * y_diff
-		elif y_diff < 0:
-			dir = map_data.DOWN
 			distance = blocklength * y_diff * -1
+		elif y_diff > 0:
+			dir = map_data.DOWN
+			distance = blocklength * y_diff
 		move(distance, dir)
 		map_data.setY(y)
 

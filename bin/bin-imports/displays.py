@@ -2,6 +2,7 @@
 
 import RPi.GPIO as GPIO
 import os, sys, time
+from Adafruit_MCP230xx import *
 
 myfolder = os.path.dirname(os.path.realpath(__file__))
 
@@ -9,15 +10,16 @@ sys.path.append(myfolder + "/bin-imports/")
 import pins
 import map_data as md
 
-GPIO.setwarnings(False)
-GPIO.setmode(GPIO.BOARD)
+mcpBLUE = Adafruit_MCP230XX(busnum = 0, address = 0x20, num_gpios = 16)
 
-for pin in pins.matrix:
-	GPIO.setup(pin, GPIO.OUT)
+for i in range(8):
+	(pins.mcp22).config(pins.display8x8red[i], pins.OUTPUT)
+	(pins.mcp21).config(pins.display8x8green[i], pins.OUTPUT)
+	(pins.mcp22).config(pins.display8x8blue[i], pins.OUTPUT)
+	(pins.mcp21).config(pins.display8x8row[i], pins.OUTPUT)
 
-for pin in pins.matrixrow:
-	GPIO.setup(pin, GPIO.OUT)
 
+#TODO fix setup
 for pin in pins.segment:
 	GPIO.setup(pin, GPIO.OUT)
 
@@ -35,12 +37,11 @@ d[7] = [0,0,0,1,1,1,1]
 d[8] = [0,0,0,0,0,0,0]
 d[9] = [0,0,0,1,1,0,0]
 
-rowpins = [17, 18, 19, 20, 29, 30, 31, 32]	# these are the pins to turn on rows
-
+#TODO check pin setup
 # we should always have the bottom left lit yellow
-GPIO.output(pins.matrix[8], GPIO.HIGH)
-GPIO.output(pins.matrix[29], GPIO.HIGH)
-GPIO.output(pins.matrix[rowpins[6]], GPIO.HIGH)
+(pins.mcp22).output(pins.display8x8red[0], pins.HIGH) #GPIO.output(pins.matrix[8], GPIO.HIGH)
+(pins.mcp21).output(pins.display8x8green[0], pins.HIGH) #GPIO.output(pins.matrix[29], GPIO.HIGH)
+(pins.mcp21).output(pins.display8x8row[7], pins.HIGH) #GPIO.output(pins.matrix[rowpins[6]], GPIO.HIGH)
 
 def show():
 	with open(+"/finaldata") as f:
@@ -49,31 +50,28 @@ def show():
 	lines = [x.strip() for x in content]
 	os.remove(myfolder + "/finaldata")
 
-	#mcp = Adafruit_MCP230XX(busnum = 1, address = 0x20, num_gpios = 16)
-	#mcp.config(0, OUTPUT)
-	#mcp.config(1, OUTPUT)
-	#mcp.config(2, OUTPUT)
-	#mcp.output(0, 1)  # High
-	#mcp.output(0, 0)  # Low
 
 	digit = d[int(lines.pop(0))]
 	for x in range(0, 7):
 		GPIO.output(pins.segment[x], digit[x])
 	
-	while True: # need to quit this at some point, maybe on button press or after time
+	#TODO make sure high and low is correct
+	while True: # need to quit this at some point, maybe on button press or after time TODO
 		for y in range(0, len(lines)):
-			for pin in pins.matrix:
-				GPIO.output(pin, GPIO.LOW) # turn off everything
-			GPIO.output(pins.matrix[rowpins[y]], GPIO.HIGH)
+			for i in range(8):
+				(pins.mcp22).output(display8x8red[i], pins.LOW)
+				(pins.mcp21).output(display8x8green[i], pins.LOW)
+				(pins.mcp22).output(display8x8blue[i], pins.LOW)
+			(pins.mcp21).output(pins.display8x8row[y], pins.HIGH)
 			for x in range(0, md.gridsize):
-				r = pins.matrix[x+8]		#find the correct pin that corresponds to the color for the led in that column
-				g = pins.matrix[29-x]
-				b = pins.matrix[x]
+				r = pins.display8x8red[x]		#find the correct pin that corresponds to the color for the led in that column
+				g = pins.display8x8green[x]
+				b = pins.display8x8blue[x]
 				if (x == 0 and y == 6):
-					GPIO.output(r, GPIO.HIGH)
-					GPIO.output(g, GPIO.HIGH)
+					(pins.mcp22).output(r, pins.HIGH)
+					(pins.mcp21).output(g, pins.HIGH)
 				elif lines[y][x] == "L":
-					GPIO.output(b, GPIO.HIGH)
+					(pins.mcp22).output(b, pins.HIGH)
 				elif lines[y][x] == "T":
-					GPIO.output(r, GPIO.HIGH)
-			time.sleep(0.001) # need to mess around to find good time
+					(pins.mcp22).output(r, pins.HIGH)
+			time.sleep(0.001) # need to mess around to find good time TODO

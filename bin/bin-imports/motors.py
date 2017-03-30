@@ -12,8 +12,7 @@ import wiringpi
 #array of motor encoders
 encoders = [0 for a in range(4)]
 
-#gpio expander setup
-mcp = Adafruit_MCP230XX(busnum = 0, address = 0x20, num_gpios = 16)
+
 
 
 
@@ -26,8 +25,8 @@ def initMotors():
     
     for i in range(4):
         encoders[i] = encoder(pins.motorEncoderA[i], pins.motorEncoderB[i])     #set up encoder object
-        mcp.config(pins.motorEnableA[i], pins.OUTPUT)       #set up the h-bridge a and b pins
-        mcp.config(pins.motorEnableB[i], pins.OUTPUT)
+        (pins.mcp20).config(pins.motorEnableA[i], pins.OUTPUT)       #set up the h-bridge a and b pins
+        (pins.mcp20).config(pins.motorEnableB[i], pins.OUTPUT)
         #io.setup(pins.motorPWM[i], io.OUT)
         wiringpi.pinMode(pins.motorPWM[i], pins.OUTPUT)     #set up wiringpi software pwms
         error = wiringpi.softPwmCreate(pins.motorPWM[i],0,1000)
@@ -54,10 +53,9 @@ def runMotors(pulses, speed, dirLF, dirRF, dirLB, dirRB):
     moving = True
     while moving == True:
         time.sleep(.001)
-	#print "%s " % (encoders[1].getPulses()),
+	print "encoder speeds: 0=%s, 1=%s, 2=%s, 3=%s" % (encoders[0].getSpeed(), encoders[1].getSpeed(), encoders[2].getSpeed(), encoders[3].getSpeed())
         if abs(encoders[1].getPulses()) >= abs(pulses):
 	    moving = False  
-
     for i in range(4):
         stop(i)
     
@@ -86,18 +84,18 @@ def rotate(motor_number, speed, dir):
 
 def clockwise(motor_number, speed):
     setSpeed(motor_number, speed)
-    mcp.output(pins.motorEnableA[motor_number], pins.HIGH)
-    mcp.output(pins.motorEnableB[motor_number], pins.LOW)
+    (pins.mcp20).output(pins.motorEnableA[motor_number], pins.HIGH)
+    (pins.mcp20).output(pins.motorEnableB[motor_number], pins.LOW)
 
 def counter_clockwise(motor_number, speed):
     setSpeed(motor_number, speed)
-    mcp.output(pins.motorEnableA[motor_number], pins.LOW)
-    mcp.output(pins.motorEnableB[motor_number], pins.HIGH)
+    (pins.mcp20).output(pins.motorEnableA[motor_number], pins.LOW)
+    (pins.mcp20).output(pins.motorEnableB[motor_number], pins.HIGH)
 
 def stop(motor_number):
     setSpeed(motor_number, 0)
-    mcp.output(pins.motorEnableA[motor_number], pins.LOW)
-    mcp.output(pins.motorEnableB[motor_number], pins.LOW)
+    (pins.mcp20).output(pins.motorEnableA[motor_number], pins.LOW)
+    (pins.mcp20).output(pins.motorEnableB[motor_number], pins.LOW)
 
 def setSpeed(motor_number, speed):
     if 0 < speed <= 1000:
