@@ -170,13 +170,3 @@ def avoidObstacle(dir):
 		movement_wrapper.strafe_one_block(dir - 1)
 	else:
 		tryleft
-
-
-
-	#movement_wrapper.strafe_one_block(dir)
-<<<<<<< HEAD
-	#
-=======
-
-
->>>>>>> 0f22e6702c14b6568ac3ef96d6db636496ce4afa
