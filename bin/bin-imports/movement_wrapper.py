@@ -56,14 +56,14 @@ def turn(degrees):
 	if degrees != 0:
 		map_data.setDir(map_data.getDir() + degrees)
 		if degrees > 0:
-			dir = map_data.RIGHT
+			dir = 0
 			angle = degrees
 		elif degrees < 0:
-			dir = map_data.UP
+			dir = 1
 			angle = degrees * -1
-		speed = 512     #not sure what speed to use
+		speed = 800     #not sure what speed to use
 		#need to figure out wheel numbers
-		motors.run_all_motors(speed, angle, dir, dir, dir, dir)
+		motors.runMotors(speed, angle, dir, dir, dir, dir)
 	
 
 
