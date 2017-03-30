@@ -11,7 +11,7 @@ import RPi.GPIO as GPIO # Allows use of pins on the Pi
 import time
 import pins
 
-speedUpdateMs = 50
+speedUpdateMs = 20
 
 def millis():
     return time.time() * 1000
