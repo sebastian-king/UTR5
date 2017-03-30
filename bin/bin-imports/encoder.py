@@ -11,8 +11,6 @@ import RPi.GPIO as GPIO # Allows use of pins on the Pi
 import time
 import pins
 
-speedUpdateMs = 20
-
 def millis():
     return time.time() * 1000
 
@@ -24,10 +22,9 @@ class encoder:
         self.pinB = pinB        
         self.pulses = 0
         
-        self.speed = 0
+        self.frequency = 0
         self.currentTime = millis()
         self.oldTime = self.currentTime
-        self.oldPulses = 0
     
         GPIO.setup(pinA, GPIO.IN, GPIO.PUD_UP)
         GPIO.setup(pinB, GPIO.IN, GPIO.PUD_UP)
@@ -42,10 +39,8 @@ class encoder:
         else:
             self.pulses -= .5
         self.currentTime = millis()
-        if(self.currentTime - self.oldTime >= speedUpdateMs):
-            self.speed = self.pulses-self.oldPulses
-            self.oldPulses = self.pulses
-            self.oldTime = self.currentTime
+        self.frequency = self.currentTime - self.oldTime
+        self.oldTime = self.currentTime
          
     def encoderHandlerB(self, void):
         a = GPIO.input(self.pinA)
@@ -53,11 +48,9 @@ class encoder:
             self.pulses -= .5
         else:
             self.pulses += .5
-        #self.currentTime = millis()
-        #if(self.currentTime - self.oldTime >= speedUpdateMs):
-        #    self.speed = self.pulses-self.oldPulses
-        #    self.oldPulses = self.pulses
-        #    self.oldTime = self.currentTime
+        self.currentTime = millis()
+        self.frequency = self.currentTime - self.oldTime
+        self.oldTime = self.currentTime
  
     #returns the accumulated distance in pulses            
     def getPulses(self):
@@ -73,8 +66,7 @@ class encoder:
     #TODO
     #returns the speed in RPM
     def getSpeed(self):
-        return self.speed * (1000.0/speedUpdateMs) * 60.0 / 90.0  #pulses traveled during speedUpdateMs * number of updates per second
-                                                            # * 60 seconds in a minute / 90 pulses per rotation = RPM
+        return 60.0 / (self.frequency * 90.0)  #60 seconds / (time taken to go one pulse * pulses per one rotation) = RPM
         
 
 
