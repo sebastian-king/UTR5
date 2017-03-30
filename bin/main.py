@@ -164,28 +164,19 @@ def avoidObstacle(dir):
 	is_valid = False 	#this is true when the desired block is safe to move to
 	if map_data.has_been_explored(rightOfMoveDir[0], rightOfMoveDir[1]):
 		is_valid = not map_data.has_obstacle_for_loc(rightOfMoveDir[0], rightOfMoveDir[1])
-<<<<<<< HEAD
-
 	else:
 		map_data.set_obstacle_at(rightOfMoveDir[0], rightOfMoveDir[1], IRSTUFF)
-
-=======
-	else:
-		map_data.set_obstacle_at(rightOfMoveDir[0], rightOfMoveDir[1], IRSTUFF)
-	
-	#move right if it is okay
->>>>>>> 0f22e6702c14b6568ac3ef96d6db636496ce4afa
 	if is_valid_loc:
 		movement_wrapper.strafe_one_block(dir - 1)
 	else:
 		tryleft
-	
-		
-		
+
+
+
 	#movement_wrapper.strafe_one_block(dir)
 <<<<<<< HEAD
 	#
 =======
-	
-	
+
+
 >>>>>>> 0f22e6702c14b6568ac3ef96d6db636496ce4afa
