@@ -135,46 +135,46 @@ display8x8p30 = 13
 display8x8p31 = 14
 display8x8p32 = 15
 
-display8x8red = [0 for a in range(8)]
-display8x8green = [0 for a in range(8)]
-display8x8blue = [0 for a in range(8)]
-display8x8row = [0 for a in range(8)]
+display8x8RedCol = [0 for a in range(8)]
+display8x8GreenCol = [0 for a in range(8)]
+display8x8BlueCol = [0 for a in range(8)]
+display8x8Row = [0 for a in range(8)]
 
-display8x8red[0] = display8x8p9
-display8x8red[1] = display8x8p10
-display8x8red[2] = display8x8p11
-display8x8red[3] = display8x8p12
-display8x8red[4] = display8x8p13
-display8x8red[5] = display8x8p14
-display8x8red[6] = display8x8p15
-display8x8red[7] = display8x8p16
+display8x8RedCol[0] = display8x8p9
+display8x8RedCol[1] = display8x8p10
+display8x8RedCol[2] = display8x8p11
+display8x8RedCol[3] = display8x8p12
+display8x8RedCol[4] = display8x8p13
+display8x8RedCol[5] = display8x8p14
+display8x8RedCol[6] = display8x8p15
+display8x8RedCol[7] = display8x8p16
 
-display8x8green[0] = display8x8p28
-display8x8green[1] = display8x8p27
-display8x8green[2] = display8x8p26
-display8x8green[3] = display8x8p25
-display8x8green[4] = display8x8p24
-display8x8green[5] = display8x8p23
-display8x8green[6] = display8x8p22
-display8x8green[7] = display8x8p21
+display8x8GreenCol[0] = display8x8p28
+display8x8GreenCol[1] = display8x8p27
+display8x8GreenCol[2] = display8x8p26
+display8x8GreenCol[3] = display8x8p25
+display8x8GreenCol[4] = display8x8p24
+display8x8GreenCol[5] = display8x8p23
+display8x8GreenCol[6] = display8x8p22
+display8x8GreenCol[7] = display8x8p21
 
-display8x8blue[0] = display8x8p1
-display8x8blue[1] = display8x8p2
-display8x8blue[2] = display8x8p3
-display8x8blue[3] = display8x8p4
-display8x8blue[4] = display8x8p5
-display8x8blue[5] = display8x8p6
-display8x8blue[6] = display8x8p7
-display8x8blue[7] = display8x8p8
+display8x8BlueCol[0] = display8x8p1
+display8x8BlueCol[1] = display8x8p2
+display8x8BlueCol[2] = display8x8p3
+display8x8BlueCol[3] = display8x8p4
+display8x8BlueCol[4] = display8x8p5
+display8x8BlueCol[5] = display8x8p6
+display8x8BlueCol[6] = display8x8p7
+display8x8BlueCol[7] = display8x8p8
 
-display8x8row[0] = display8x8p17
-display8x8row[1] = display8x8p18
-display8x8row[2] = display8x8p19
-display8x8row[3] = display8x8p20
-display8x8row[4] = display8x8p29
-display8x8row[5] = display8x8p30
-display8x8row[6] = display8x8p31
-display8x8row[7] = display8x8p32
+display8x8Row[0] = display8x8p17
+display8x8Row[1] = display8x8p18
+display8x8Row[2] = display8x8p19
+display8x8Row[3] = display8x8p20
+display8x8Row[4] = display8x8p29
+display8x8Row[5] = display8x8p30
+display8x8Row[6] = display8x8p31
+display8x8Row[7] = display8x8p32
 
 
 # 7 segment
