@@ -70,7 +70,7 @@ class encoder:
     #TODO
     #returns the speed in RPM
     def getSpeed(self):
-        return self.speed * (1000/speedUpdateMs) * 60 / 90  #pulses traveled during speedUpdateMs * number of updates per second
+        return self.speed * (1000.0/speedUpdateMs) * 60.0 / 90.0  #pulses traveled during speedUpdateMs * number of updates per second
                                                             # * 60 seconds in a minute / 90 pulses per rotation = RPM
         
 

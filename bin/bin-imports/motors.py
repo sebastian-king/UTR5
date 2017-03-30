@@ -53,10 +53,9 @@ def runMotors(pulses, speed, dirLF, dirRF, dirLB, dirRB):
     moving = True
     while moving == True:
         time.sleep(.001)
-	#print "%s " % (encoders[1].getPulses()),
+	print "encoder speeds: 0=%s, 1=%s, 2=%s, 3=%s" % (encoders[0].getSpeed(), encoders[1].getSpeed(), encoders[2].getSpeed(), encoders[3].getSpeed())
         if abs(encoders[1].getPulses()) >= abs(pulses):
 	    moving = False  
-
     for i in range(4):
         stop(i)
     
