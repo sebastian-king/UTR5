@@ -11,7 +11,7 @@ import RPi.GPIO as GPIO # Allows use of pins on the Pi
 import time
 import pins
 
-speedUpdateMs = 1000
+speedUpdateMs = 20
 
 def millis():
     return time.time() * 1000
@@ -25,7 +25,8 @@ class encoder:
         self.pulses = 0
         
         self.speed = 0
-        self.oldTime = millis()
+        self.currentTime = millis()
+        self.oldTime = self.currentTime
         self.oldPulses = 0
     
         GPIO.setup(pinA, GPIO.IN, GPIO.PUD_UP)
@@ -40,10 +41,11 @@ class encoder:
             self.pulses += .5
         else:
             self.pulses -= .5
-        if(millis() - self.oldTime >= speedUpdateMs):
+        self.currentTime = millis()
+        if(self.currentTime - self.oldTime >= speedUpdateMs):
             self.speed = self.pulses-self.oldPulses
             self.oldPulses = self.pulses
-            self.oldTime = millis()
+            self.oldTime = self.currentTime
          
     def encoderHandlerB(self, void):
         a = GPIO.input(self.pinA)
@@ -51,10 +53,11 @@ class encoder:
             self.pulses -= .5
         else:
             self.pulses += .5
-        if(millis() - self.oldTime >= speedUpdateMs):
-            self.speed = self.pulses-self.oldPulses
-            self.oldPulses = self.pulses
-            self.oldTime = millis()
+        #self.currentTime = millis()
+        #if(self.currentTime - self.oldTime >= speedUpdateMs):
+        #    self.speed = self.pulses-self.oldPulses
+        #    self.oldPulses = self.pulses
+        #    self.oldTime = self.currentTime
  
     #returns the accumulated distance in pulses            
     def getPulses(self):

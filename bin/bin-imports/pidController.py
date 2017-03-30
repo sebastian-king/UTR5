@@ -44,7 +44,7 @@ class pidController:
             derivative = 0.0
             derivative = deltaError / dt
             
-            self.previousTime = self.currentTime()
+            self.previousTime = self.currentTime
             self.previousError = error
             
             self.output = P_value + (self.Integral*self.Ki)#+ (derivative*self.Kd) //currently not using derivative 
