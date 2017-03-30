@@ -1,14 +1,13 @@
 #!/usr/bin/env python
 
-import RPi.GPIO as GPIO
-import os, sys, time
-
 #myfolder = os.path.dirname(os.path.realpath(__file__))
-
 #sys.path.append(myfolder + "/bin-imports/")
+
+import os, sys, time
 import pins
 import map_data as md
 from Adafruit_MCP230xx import *
+import RPi.GPIO as GPIO
 
 GPIO.setmode(GPIO.BCM)
 
