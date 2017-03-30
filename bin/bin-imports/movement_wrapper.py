@@ -111,10 +111,10 @@ def strafe_to_block(x, y):
 
 		#y movement
 		distance = 0;
-		if y_diff > 0:
+		if y_diff < 0:
 			dir = map_data.UP
 			distance = blocklength * y_diff
-		elif y_diff < 0:
+		elif y_diff > 0:
 			dir = map_data.DOWN
 			distance = blocklength * y_diff * -1
 		move(distance, dir)
