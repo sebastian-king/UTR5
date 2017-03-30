@@ -187,3 +187,4 @@ sevenSegPinE = 4
 sevenSegPinF = 5
 sevenSegPinG = 6
 sevenSegPinDP = 7
+segments = range(7)

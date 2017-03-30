@@ -71,4 +71,4 @@ def show():
 def showNumber(n):
 	digit = d[int(n)]
 	for x in range(0, 7):
-		GPIO.output(pins.segment[x], digit[x])
+		(pins.mcp23).output(pins.segments[x], digit[x])
