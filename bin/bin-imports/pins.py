@@ -8,10 +8,10 @@ from Adafruit_MCP230xx import *
 #GPIO23 and GPIO6 arent working!
 
 #gpio expander setup
-mcp20 = Adafruit_MCP230XX(busnum = 0, address = 0x20, num_gpios = 16) #Motor drivers
-mcp21 = Adafruit_MCP230XX(busnum = 0, address = 0x21, num_gpios = 16) #Green and row enables 8x8
-mcp22 = Adafruit_MCP230XX(busnum = 0, address = 0x22, num_gpios = 16) #Blue and red 8x8
-mcp23 = Adafruit_MCP230XX(busnum = 0, address = 0x23, num_gpios = 16) #7 segment
+mcp20 = Adafruit_MCP230XX(busnum = 1, address = 0x20, num_gpios = 16) #Motor drivers
+mcp21 = Adafruit_MCP230XX(busnum = 1, address = 0x21, num_gpios = 16) #Green and row enables 8x8
+mcp22 = Adafruit_MCP230XX(busnum = 1, address = 0x22, num_gpios = 16) #Blue and red 8x8
+mcp23 = Adafruit_MCP230XX(busnum = 1, address = 0x23, num_gpios = 16) #7 segment
 
 
 #Left Front Motor Pins
