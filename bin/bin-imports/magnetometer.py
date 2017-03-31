@@ -6,8 +6,6 @@ import os.path, time, math, numpy
 from threading import Thread
 
 pastReadings = [0]
-monitor = Thread(target = readData())
-monitor.start()
 
 def readData():
 	while True:
@@ -17,6 +15,10 @@ def readData():
 		if len(pastReadings) > samples:
 			pastReadings = pastReadings[-samples:]
 		time.sleep(poll_interval*1.0/1000.0)
+
+
+monitor = Thread(target = readData())
+monitor.start()
 
 def getReading():
 	data = imu.getIMUData()
