@@ -29,6 +29,8 @@ class pidController:
         self.setPoint = 0.0
         self.previousError = 0.0
         
+        self.previousOutput = 0
+        
         self.output = 0
     
     def update(self, currentMeasure):
@@ -39,25 +41,27 @@ class pidController:
         if(dt >= self.sampleTime): #only update at specific interval determined by the formula 1000/sampleTime (in Hz)
             
             error = self.setPoint - currentMeasure
-            deltaError = error - self.previousError
+            #deltaError = error - self.previousError
             
             P_value = self.Kp * error
-            self.Integral += ((error + self.previousError)/2) * dt
-            derivative = 0.0
-            derivative = deltaError / dt
+            #self.Integral += ((error + self.previousError)/2) * dt
+            #derivative = 0.0
+            #derivative = deltaError / dt
             
             self.previousTime = self.currentTime
             self.previousError = error
             
-            out = P_value + (self.Integral*self.Ki)#+ (derivative*self.Kd) //currently not using derivative
+            
+            out = P_value #+ (self.Integral*self.Ki)#+ (derivative*self.Kd) //currently not using derivative
             print "pid out VALUE : %s" % (out)
-            self.output = max(0, min((((self.setPoint/127.0)*1000.0) + out),1000))
+            self.output = max(0, min((self.previousOutput + out),1000))
               
         
     def getOutput(self):
         return self.output
          
     def setSetpoint(self, setPoint):
+        self.previousOutput = setPoint      #initial value
         self.setPoint = setPoint
         self.clear()
     

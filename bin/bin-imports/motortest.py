@@ -43,10 +43,10 @@ def initMotors():
     wiringpi.wiringPiSetupGpio()
     io.setmode(io.BCM)
     
-    pidControllers[0] = pidController(0, 0, 0)
-    pidControllers[1] = pidController(.1, 0, 0)
-    pidControllers[2] = pidController(.1, 0, 0)
-    pidControllers[3] = pidController(.1, 0, 0)
+    pidControllers[0] = pidController(1, 0, 0)
+    pidControllers[1] = pidController(1, 0, 0)
+    pidControllers[2] = pidController(1, 0, 0)
+    pidControllers[3] = pidController(1, 0, 0)
     
     for i in range(4):
         mcp.config(pins.motorEnableA[i], pins.OUTPUT)       #set up the h-bridge a and b pins
