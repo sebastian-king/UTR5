@@ -46,7 +46,7 @@ d[9] = [0,0,0,1,1,0,0]
 # we should always have the bottom left lit yellow
 (pins.mcp22).output(pins.display8x8RedCol[0], pins.HIGH) #GPIO.output(pins.matrix[8], GPIO.HIGH)
 (pins.mcp21).output(pins.display8x8GreenCol[0], pins.HIGH) #GPIO.output(pins.matrix[29], GPIO.HIGH)
-(pins.mcp21).output(pins.display8x8Row[7], pins.HIGH) #GPIO.output(pins.matrix[rowpins[6]], GPIO.HIGH)
+(pins.mcp21).output(pins.display8x8Row[7], pins.LOW) #GPIO.output(pins.matrix[rowpins[6]], GPIO.HIGH)
 
 def show():
 	with open(+"/finaldata") as f:
