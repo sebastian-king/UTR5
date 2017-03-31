@@ -43,7 +43,7 @@ def initMotors():
     wiringpi.wiringPiSetupGpio()
     io.setmode(io.BCM)
     
-    pidControllers[0] = pidController(10, 0, 0)
+    pidControllers[0] = pidController(0, 0, 0)
     pidControllers[1] = pidController(.1, 0, 0)
     pidControllers[2] = pidController(.1, 0, 0)
     pidControllers[3] = pidController(.1, 0, 0)
@@ -80,7 +80,7 @@ def runMotor(motor_number, pulses, speed):
     encoders[motor_number].reset()
     pidControllers[motor_number].setSetpoint(speed)
     
-    rotate(motor_number, 800, dir) 
+    rotate(motor_number, 1000, dir) 
     
     print 'runMotor() motor started for %s pulses' % pulses
     
