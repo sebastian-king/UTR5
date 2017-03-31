@@ -27,13 +27,15 @@ count = -1 # this will store the 7-segment count
 
 def main():
 	movement_wrapper.initMotors()
-	moveDirection = find_live_tunnel_perimeter()
+	#moveDirection = find_live_tunnel_perimeter()
 	# we'll move perpendicular to the direction at first
-	moveDirection = (moveDirection + 3) % 4
-	mapOut(moveDirection)
+	#moveDirection = (moveDirection + 3) % 4
+	#mapOut(moveDirection)
 	# and we are done, save and go back to starting location
-	saveResults()
-	movement_wrapper.strafe_to_block(0, 6)
+	#saveResults()
+	#movement_wrapper.strafe_to_block(0, 6)
+	movement_wrapper.strafe_one_block(1)
+	movement_wrapper.strafe_one_block(3)
 
 def mapOut(lastDirection):
 	#lastDirection = map_data.UP # let's just start moving upwards

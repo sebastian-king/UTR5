@@ -10,6 +10,7 @@ SETTINGS_FILE = "RTIMULib"
 threshold = 10
 samples = 20
 
+
 print("Using settings file " + SETTINGS_FILE + ".ini")
 if not os.path.exists(SETTINGS_FILE + ".ini"):
 	print("Settings file does not exist, will be created")
