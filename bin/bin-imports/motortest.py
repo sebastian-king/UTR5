@@ -23,6 +23,7 @@ import time
 from Adafruit_MCP230xx import *
 import RPi.GPIO as io
 import wiringpi
+from pidController import pidController
 
 
 #motor numbers: LF=0 RF=1 LB=2 RB=3
