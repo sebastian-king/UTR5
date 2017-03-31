@@ -76,5 +76,5 @@ class pidController:
         self.Integral = 0
         self.previousError = 0
         self.currentTime = millis()
-        self.previousTime = self.currentTime() 
+        self.previousTime = self.currentTime
          
