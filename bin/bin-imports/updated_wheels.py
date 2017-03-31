@@ -53,6 +53,7 @@ def runMotors(pulses, speed, dirLF, dirRF, dirLB, dirRB):
 
     # stop when right front motor hits pulse number
     moving = True
+    numMotorsRotating = 4
     while numMotorsRotating != 0:
         for i in range(4):
             pidControllers[i].update(encoders[i].getSpeed())
@@ -60,7 +61,7 @@ def runMotors(pulses, speed, dirLF, dirRF, dirLB, dirRB):
 
         time.sleep(.001)
         print "encoder speeds: 0=%s, 1=%s, 2=%s, 3=%s" % (encoders[0].getSpeed(), encoders[1].getSpeed(), encoders[2].getSpeed(), encoders[3].getSpeed())
-        numMotorsRotating = 4
+        
 
         for i in range(4):
             if abs(encoders[i].getPulses()) >= abs(pulses):
