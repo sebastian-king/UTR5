@@ -5,9 +5,10 @@ import RTIMU
 import os.path, time, math, numpy
 from threading import Thread
 
-pastReadings = [0]
+pastReadings = []
 
 def readData():
+	global pastReadings
 	while True:
 		# x, y, z = imu.getFusionData()
 		# print("%f %f %f" % (x,y,z))
@@ -25,6 +26,7 @@ def getReading():
 	return data["fusionPose"][2]
 
 def unusual():
+	global pastReadings
 	median = numpy.median(numpy.array(pastReadings))
 	yaw = getReading()
 	return yaw > median + threshold or yaw < median - threshold
