@@ -26,8 +26,8 @@ else:
 	print("IMU init succeeded")
 
 imu.setSlerpPower(0.02)
-imu.setGyroEnable(False)
-imu.setAccelEnable(False)
+imu.setGyroEnable(True)
+imu.setAccelEnable(True)
 imu.setCompassEnable(True)
 
 poll_interval = imu.IMUGetPollInterval()
