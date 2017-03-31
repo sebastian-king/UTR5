@@ -84,9 +84,9 @@ def lightSingle(x, y, color):
 	(pins.mcp21).output(pins.display8x8Row[y], pins.HIGH)
 	if color is "r":
 		(pins.mcp22).output(pins.display8x8RedCol[x], pins.HIGH)
-	else if color is "g":
+	elif color is "g":
 		(pins.mcp21).output(pins.display8x8GreenCol[x], pins.HIGH)
-	else if color is "b":
+	elif color is "b":
 		(pins.mcp22).output(pins.display8x8BlueCol[x], pins.HIGH)
 
 def showNumber(n):
