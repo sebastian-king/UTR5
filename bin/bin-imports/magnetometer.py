@@ -5,7 +5,7 @@ import RTIMU
 import os.path, time, math, numpy
 from threading import Thread
 
-pastReadings = []
+pastReadings = [0]
 
 def readData():
 	while True:
@@ -23,7 +23,7 @@ def getReading():
 def unusual():
 	median = numpy.median(numpy.array(pastReadings))
 	yaw = getReading()
-	return yaw > median + threshold or yaw < median + threshold
+	return yaw > median + threshold or yaw < median - threshold
 
 
 SETTINGS_FILE = "RTIMULib"
