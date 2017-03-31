@@ -8,6 +8,8 @@
 #TODO-may need to implement windup protection if it becomes an isssue
 
 #returns time since epoch in milliseconds
+import time
+
 def millis():
     return time.time() * 1000
 
