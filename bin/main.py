@@ -27,14 +27,16 @@ count = -1 # this will store the 7-segment count
 
 def main():
 	movement_wrapper.initMotors()
-	find_live_tunnel_perimeter()
-	mapOut()
+	moveDirection = find_live_tunnel_perimeter()
+	# we'll move perpendicular to the direction at first
+	moveDirection = (moveDirection + 3) % 4
+	mapOut(moveDirection)
 	# and we are done, save and go back to starting location
 	saveResults()
 	movement_wrapper.strafe_to_block(0, 6)
 
-def mapOut():
-	lastDirection = map_data.UP # let's just start moving upwards
+def mapOut(lastDirection):
+	#lastDirection = map_data.UP # let's just start moving upwards
 	if map_data.getY() is 0: # uh, if we're at the top, let's not
 		lastDirection = map_data.DOWN
 	exploring = True
@@ -107,6 +109,7 @@ def find_live_tunnel_perimeter():
 			moveDirection = map_data.LEFT
 		elif pos_x == 0 and pos_y == 6: # back at bottom left
 			exploring = False
+	return moveDirection
 
 def checkAndMapObstacles(direction):
 	# check for obstacles above
