@@ -7,11 +7,12 @@ import time
 from Adafruit_MCP230xx import *
 import RPi.GPIO as io
 import wiringpi
+from pidController import pidController
 
 #motor numbers: LF=0 RF=1 LB=2 RB=3
 #array of motor encoders
 encoders = [0 for a in range(4)]
-
+pidControllers = [0 for a in range(4)]
 
 
 

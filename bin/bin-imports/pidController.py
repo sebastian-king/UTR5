@@ -47,7 +47,9 @@ class pidController:
             self.previousTime = self.currentTime
             self.previousError = error
             
-            self.output = P_value + (self.Integral*self.Ki)#+ (derivative*self.Kd) //currently not using derivative 
+            out = P_value + (self.Integral*self.Ki)#+ (derivative*self.Kd) //currently not using derivative
+            self.output = self.setpoint + max(0, min(out, 1000))
+              
         
     def getOutput(self):
         return self.output
