@@ -33,14 +33,15 @@ class encoder:
         GPIO.add_event_detect(self.pinB, GPIO.RISING, callback = self.encoderHandlerB)   
 
     def encoderHandlerA(self, void):
+        t = self.currentTime
         b = GPIO.input(self.pinB)
         if b == 1:
             self.pulses += .5
         else:
             self.pulses -= .5
         self.currentTime = millis()
-        self.frequency = self.currentTime - self.oldTime
-        self.oldTime = self.currentTime
+        self.frequency =  t - self.oldTime
+        self.oldTime = t
          
     def encoderHandlerB(self, void):
         a = GPIO.input(self.pinA)
