@@ -2,18 +2,23 @@
 import RPi.GPIO as GPIO
 import time
 
+
+
+
 def pwm(frequency):
 
     GPIO.setmode(GPIO.BOARD)
 
     GPIO.setup(12, GPIO.OUT)
 
+    # 12 is the pin number of PI
+    # 50 is the frequency
     p = GPIO.PWM(12, 50)
 
     p.start(7.5)
 
 
-#Duty Cycle = length / period
+    #Duty Cycle = length / period
 
     #length is the iwsth of the puulse, which in this case is .5 or 2.5 ms
     # period is you know 1/ frequency
