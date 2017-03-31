@@ -42,6 +42,7 @@ print("Recommended poll interval: %dmS, attempting to connect\n" % poll_interval
 
 def getReading():
 	data = imu.getIMUData()
+	print 'data %s' % data
 	return data["fusionPose"][2]
 
 
