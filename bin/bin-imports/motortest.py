@@ -34,11 +34,18 @@ for i in range(4):
 
 mcp = Adafruit_MCP230XX(busnum = 0, address = 0x20, num_gpios = 16)
 
+pidControllers = [0 for a in range(4)]
+
 #CALL THIS BEFORE RUNMOTOR
 #sets up GPIO, encoders, interrupts
 def initMotors():
     wiringpi.wiringPiSetupGpio()
     io.setmode(io.BCM)
+    
+    pidControllers[0] = pidController(.1, 0, 0)
+    pidControllers[1] = pidController(.1, 0, 0)
+    pidControllers[2] = pidController(.1, 0, 0)
+    pidControllers[3] = pidController(.1, 0, 0)
     
     for i in range(4):
         mcp.config(pins.motorEnableA[i], pins.OUTPUT)       #set up the h-bridge a and b pins
@@ -70,15 +77,19 @@ def runMotor(motor_number, pulses, speed):
     
     #set pulses to 0
     encoders[motor_number].reset()
+    pidControllers[motor_number].setSetpoint(speed)
     
-    rotate(motor_number, speed, dir)
-
+    rotate(motor_number, 800, dir) 
+    
     print 'runMotor() motor started for %s pulses' % pulses
     
     moving = True
             
     while moving == True:
         print 'encoder pulses: %s' % (encoders[motor_number].getPulses())
+        print "encoder speed: %s" % (encoders[motor_number].getSpeed())
+        pidControllers[motor_number].update(encoders[motor_number].getSpeed())
+        setSpeed(motor_number, pidControllers[motor_number].getOutput())
         if abs(encoders[motor_number].getPulses()) >= abs(pulses):
             moving = False
 
