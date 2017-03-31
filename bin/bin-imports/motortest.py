@@ -87,6 +87,7 @@ def runMotor(motor_number, pulses, speed):
     moving = True
             
     while moving == True:
+        time.sleep(.001)
         print 'encoder pulses: %s' % (encoders[motor_number].getPulses())
         print "encoder speed: %s" % (encoders[motor_number].getSpeed())
         pidControllers[motor_number].update(encoders[motor_number].getSpeed())
@@ -116,6 +117,7 @@ def runMotors(pulses, speed):
     
     moving = True         
     while moving == True:
+        time.sleep(.001)
         #print 'encoder pulses: %s' % (encoders[1].getPulses())
         print 'encoder speed: %s' % (encoders[1].getSpeed())
         if abs(encoders[1].getPulses()) >= abs(pulses):
