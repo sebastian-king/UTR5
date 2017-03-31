@@ -7,6 +7,11 @@ from threading import Thread
 
 pastReadings = []
 
+def getReading():
+	data = imu.getIMUData()
+	return data["fusionPose"][2]
+
+
 def readData():
 	global pastReadings
 	while True:
@@ -21,9 +26,6 @@ def readData():
 monitor = Thread(target = readData())
 monitor.start()
 
-def getReading():
-	data = imu.getIMUData()
-	return data["fusionPose"][2]
 
 def unusual():
 	global pastReadings
