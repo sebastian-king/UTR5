@@ -59,9 +59,9 @@ def show():
 	while True: # need to quit this at some point, maybe on button press or after time TODO
 		for y in range(0, len(lines)):
 			for i in range(8):
-				(pins.mcp22).output(display8x8RedCol[i], pins.LOW)
-				(pins.mcp21).output(display8x8GreenCol[i], pins.LOW)
-				(pins.mcp22).output(display8x8BlueCol[i], pins.LOW)
+				(pins.mcp22).output(pins.display8x8RedCol[i], pins.LOW)
+				(pins.mcp21).output(pins.display8x8GreenCol[i], pins.LOW)
+				(pins.mcp22).output(pins.display8x8BlueCol[i], pins.LOW)
 			(pins.mcp21).output(pins.display8x8Row[y], pins.HIGH)
 			for x in range(0, md.gridsize):
 				r = pins.display8x8RedCol[x]		#find the correct pin that corresponds to the color for the led in that column
@@ -78,9 +78,9 @@ def show():
 
 def lightSingle(x, y, color):
 	for i in range(8):
-		(pins.mcp22).output(display8x8RedCol[i], pins.LOW)
-		(pins.mcp21).output(display8x8GreenCol[i], pins.LOW)
-		(pins.mcp22).output(display8x8BlueCol[i], pins.LOW)
+		(pins.mcp22).output(pins.display8x8RedCol[i], pins.LOW)
+		(pins.mcp21).output(pins.display8x8GreenCol[i], pins.LOW)
+		(pins.mcp22).output(pins.display8x8BlueCol[i], pins.LOW)
 	(pins.mcp21).output(pins.display8x8Row[y], pins.HIGH)
 	if color is "r":
 		(pins.mcp22).output(pins.display8x8RedCol[x], pins.HIGH)
