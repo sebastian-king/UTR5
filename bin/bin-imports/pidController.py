@@ -44,15 +44,15 @@ class pidController:
             #deltaError = error - self.previousError
             
             P_value = self.Kp * error
-            self.Integral += ((error + self.previousError)/2) * dt
+            #self.Integral += ((error + self.previousError)/2) * dt
             #derivative = 0.0
             #derivative = deltaError / dt
             
             self.previousTime = self.currentTime
             self.previousError = error
             
-            I_value = self.Integral * self.Ki
-            out = max(0, min((self.previousOutput + P_value + I_value),1000))#+ (derivative*self.Kd) //currently not using derivative
+            #I_value = self.Integral * self.Ki
+            out = max(0, min((self.previousOutput + P_value),1000))#+ (derivative*self.Kd) //currently not using derivative
             print "pid out VALUE : %s" % (out)
             
             self.previousOutput = self.output

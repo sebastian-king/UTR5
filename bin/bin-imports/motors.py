@@ -24,6 +24,11 @@ def initMotors():
     wiringpi.wiringPiSetupGpio()    #wiringpi setup
     io.setmode(io.BCM)              #gpio pinmode
     
+    pidControllers[0] = pidController(1, 0, 0)
+    pidControllers[1] = pidController(1, 0, 0)
+    pidControllers[2] = pidController(1, 0, 0)
+    pidControllers[3] = pidController(1, 0, 0)
+    
     for i in range(4):
         encoders[i] = encoder(pins.motorEncoderA[i], pins.motorEncoderB[i])     #set up encoder object
         (pins.mcp20).config(pins.motorEnableA[i], pins.OUTPUT)       #set up the h-bridge a and b pins
@@ -43,6 +48,7 @@ def runMotors(pulses, speed, dirLF, dirRF, dirLB, dirRB):
     #set pulses to 0
     for i in range(4):
         encoders[i].reset()
+        pidControllers[i].setSetpoint(speed)
     
     #start all motors in desired directions
     rotate(0, speed, dirLF)
@@ -53,10 +59,15 @@ def runMotors(pulses, speed, dirLF, dirRF, dirLB, dirRB):
     #stop when right front motor hits pulse number
     moving = True
     while moving == True:
+        for i in range(4):
+            pidControllers[i].update(encoders[i].getSpeed())
+            setSpeed(i, int(pidControllers[i].getOutput()))
+        
         time.sleep(.001)
         print "encoder speeds: 0=%s, 1=%s, 2=%s, 3=%s" % (encoders[0].getSpeed(), encoders[1].getSpeed(), encoders[2].getSpeed(), encoders[3].getSpeed())
         if abs(encoders[1].getPulses()) >= abs(pulses):
 	       moving = False  
+    
     for i in range(4):
         stop(i)
     

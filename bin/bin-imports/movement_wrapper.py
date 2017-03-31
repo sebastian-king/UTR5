@@ -49,7 +49,7 @@ def move(distance, direction):
 			BL = 1
 			BR = 0
 	
-		speed = 800     #not sure what speed to use for initial speed of each motor
+		speed = 100	#rpm
 		motors.runMotors(num_pulses, speed, FL, FR, BL, BR)
 
 
