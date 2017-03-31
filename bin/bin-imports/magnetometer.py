@@ -5,9 +5,9 @@ import RTIMU
 import os.path, time, math, numpy
 from threading import Thread
 
+pastReadings = [0]
 monitor = Thread(target = readData())
 monitor.start()
-pastReadings = [0]
 
 def readData():
 	while True:
