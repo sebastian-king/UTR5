@@ -32,38 +32,40 @@ imu.setCompassEnable(True)
 
 poll_interval = imu.IMUGetPollInterval()
 print("Recommended poll interval: %dmS, attempting to connect\n" % poll_interval)
-while not imu.IMURead():
-	# waiting...
-	print "."
+
+# while not imu.IMURead():
+# 	# waiting...
+# 	print "."
 
 
-pastReadings = []
+#pastReadings = []
 
 def getReading():
 	data = imu.getIMUData()
 	return data["fusionPose"][2]
 
 
-def readData():
-	global pastReadings
-	while True:
-		# x, y, z = imu.getFusionData()
-		# print("%f %f %f" % (x,y,z))
-		pastReadings.append(getReading())
-		if len(pastReadings) > samples:
-			pastReadings = pastReadings[-samples:]
-		time.sleep(poll_interval*1.0/1000.0)
+
+# def readData():
+# 	global pastReadings
+# 	while True:
+# 		# x, y, z = imu.getFusionData()
+# 		# print("%f %f %f" % (x,y,z))
+# 		pastReadings.append(getReading())
+# 		if len(pastReadings) > samples:
+# 			pastReadings = pastReadings[-samples:]
+# 		time.sleep(poll_interval*1.0/1000.0)
 
 
-monitor = Thread(target = readData())
-monitor.start()
-
-
-def unusual():
-	global pastReadings
-	median = numpy.median(numpy.array(pastReadings))
-	yaw = getReading()
-	return yaw > median + threshold or yaw < median - threshold
+# monitor = Thread(target = readData())
+# monitor.start()
+# 
+# 
+# def unusual():
+# 	global pastReadings
+# 	median = numpy.median(numpy.array(pastReadings))
+# 	yaw = getReading()
+# 	return yaw > median + threshold or yaw < median - threshold
 
 
 
