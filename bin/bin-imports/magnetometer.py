@@ -5,6 +5,8 @@ import RTIMU
 import os.path, time, math, numpy
 from threading import Thread
 
+monitor = Thread(target = readData())
+monitor.start()
 pastReadings = [0]
 
 def readData():
@@ -57,5 +59,4 @@ while not imu.IMURead():
 	# waiting...
 	print "."
 
-monitor = Thread(target = readData())
-monitor.start()
+
