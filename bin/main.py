@@ -34,6 +34,7 @@ def main():
 	#saveResults()
 	#movement_wrapper.strafe_to_block(0, 6)
 	movement_wrapper.strafe_one_block(1)
+	time.sleep(1)
 	movement_wrapper.strafe_one_block(3)
 
 def mapOut(lastDirection):
