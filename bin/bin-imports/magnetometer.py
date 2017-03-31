@@ -5,6 +5,7 @@ import RTIMU
 import os.path, time, math, numpy
 from threading import Thread
 
+pastReadings = []
 
 def readData():
 	while True:
