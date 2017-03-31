@@ -76,12 +76,25 @@ def show():
 					(pins.mcp22).output(r, pins.HIGH)
 			time.sleep(0.001) # need to mess around to find good time TODO
 
+def lightSingle(x, y, color):
+	for i in range(8):
+		(pins.mcp22).output(display8x8RedCol[i], pins.LOW)
+		(pins.mcp21).output(display8x8GreenCol[i], pins.LOW)
+		(pins.mcp22).output(display8x8BlueCol[i], pins.LOW)
+	(pins.mcp21).output(pins.display8x8Row[y], pins.HIGH)
+	if color is "r":
+		(pins.mcp22).output(pins.display8x8RedCol[x], pins.HIGH)
+	else if color is "g":
+		(pins.mcp21).output(pins.display8x8GreenCol[x], pins.HIGH)
+	else if color is "b":
+		(pins.mcp22).output(pins.display8x8BlueCol[x], pins.HIGH)
+
 def showNumber(n):
 	digit = d[int(n)]
 	for x in range(0, 7):
 		(pins.mcp23).output(pins.segments[x], digit[x])
 
-		
+
 def mapDisplay():
 	while True:
 		for row in range(8): #range(n) isn't inclusive so go from row 0 to row 7
