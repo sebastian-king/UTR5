@@ -36,7 +36,7 @@ while not imu.IMURead():
 	# waiting...
 	print "."
 
-monitor = Thread(target = readData)
+monitor = Thread(target = readData())
 monitor.start()
 
 def readData():
