@@ -8,8 +8,10 @@ import time
 def pwm(frequency):
 
     GPIO.setmode(GPIO.BOARD)
+    
+    # pin 13
 
-    GPIO.setup(12, GPIO.OUT)
+    GPIO.setup(13, GPIO.OUT)
 
     # 12 is the pin number of PI
     # 50 is the frequency
