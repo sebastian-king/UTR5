@@ -1,4 +1,4 @@
-import sys, os
+import sys, os, time
 
 myfolder = os.path.dirname(os.path.realpath(__file__))
 
