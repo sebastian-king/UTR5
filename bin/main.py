@@ -1,4 +1,4 @@
-import sys, os, picamera
+import sys, os
 
 myfolder = os.path.dirname(os.path.realpath(__file__))
 
@@ -6,7 +6,6 @@ myfolder = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(myfolder + "/bin-imports/")
 import map_data
 import movement_wrapper
-import vipro
 
 #TUTORIAL FOR USING MOVEMENT FUNCTIONS TO MAKE ALGORITHMS
 
