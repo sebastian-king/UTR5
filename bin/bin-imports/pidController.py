@@ -22,7 +22,7 @@ class pidController:
         self.Kd = kD 
         self.Integral = 0.0
          
-        self.sampleTime = 20 #in milliseconds, this will make the PID update its output at 50Hz default
+        self.sampleTime = 15 #in milliseconds, this will make the PID update its output at 50Hz default
         self.currentTime = millis()
         self.previousTime = self.currentTime
         
@@ -65,6 +65,7 @@ class pidController:
          
     def setSetpoint(self, setPoint):
         self.previousOutput = setPoint      #initial value
+        self.output = setPoint
         self.setPoint = setPoint
         self.clear()
     
