@@ -22,7 +22,7 @@ class encoder:
         self.pinB = pinB        
         self.pulses = 0
         
-        self.frequency = 0
+        self.frequency = 0.0
         self.currentTime = millis()
         self.oldTime = self.currentTime
     
@@ -66,8 +66,9 @@ class encoder:
     #TODO
     #returns the speed in RPM
     def getSpeed(self):
-        return 60.0 / (self.frequency * 90.0)  #60 seconds / (time taken to go one pulse * pulses per one rotation) = RPM
-        
+        if(self.frequency != 0):
+            return 60.0 / (self.frequency * 90.0)  #60 seconds / (time taken to go one pulse * pulses per one rotation) = RPM
+        return 0
 
 
 
