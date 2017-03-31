@@ -5,6 +5,38 @@ import RTIMU
 import os.path, time, math, numpy
 from threading import Thread
 
+
+SETTINGS_FILE = "RTIMULib"
+threshold = 10
+samples = 20
+
+print("Using settings file " + SETTINGS_FILE + ".ini")
+if not os.path.exists(SETTINGS_FILE + ".ini"):
+	print("Settings file does not exist, will be created")
+
+s = RTIMU.Settings(SETTINGS_FILE)
+imu = RTIMU.RTIMU(s)
+
+print("IMU Name: " + imu.IMUName())
+
+if (not imu.IMUInit()):
+	print("IMU init failed")
+	sys.exit(1)
+else:
+	print("IMU init succeeded")
+
+imu.setSlerpPower(0.02)
+imu.setGyroEnable(False)
+imu.setAccelEnable(False)
+imu.setCompassEnable(True)
+
+poll_interval = imu.IMUGetPollInterval()
+print("Recommended poll interval: %dmS, attempting to connect\n" % poll_interval)
+while not imu.IMURead():
+	# waiting...
+	print "."
+
+
 pastReadings = []
 
 def getReading():
@@ -33,36 +65,5 @@ def unusual():
 	yaw = getReading()
 	return yaw > median + threshold or yaw < median - threshold
 
-
-SETTINGS_FILE = "RTIMULib"
-threshold = 10
-samples = 20
-
-print("Using settings file " + SETTINGS_FILE + ".ini")
-if not os.path.exists(SETTINGS_FILE + ".ini"):
-	print("Settings file does not exist, will be created")
-
-s = RTIMU.Settings(SETTINGS_FILE)
-imu = RTIMU.RTIMU(s)
-
-print("IMU Name: " + imu.IMUName())
-
-if (not imu.IMUInit()):
-	print("IMU init failed")
-	sys.exit(1)
-else:
-	print("IMU init succeeded")
-
-imu.setSlerpPower(0.02)
-imu.setGyroEnable(False)
-imu.setAccelEnable(False)
-imu.setCompassEnable(True)
-
-poll_interval = imu.IMUGetPollInterval()
-print("Recommended poll interval: %dmS, attempting to connect\n" % poll_interval)
-
-while not imu.IMURead():
-	# waiting...
-	print "."
 
 
