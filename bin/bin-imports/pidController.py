@@ -41,7 +41,7 @@ class pidController:
             error = self.setPoint - currentMeasure
             deltaError = error - self.previousError
             
-            P_value = self.Kp * self.error
+            P_value = self.Kp * error
             self.Integral += ((error + self.previousError)/2) * dt
             derivative = 0.0
             derivative = deltaError / dt
