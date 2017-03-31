@@ -50,7 +50,7 @@ class pidController:
             self.previousError = error
             
             out = P_value + (self.Integral*self.Ki)#+ (derivative*self.Kd) //currently not using derivative
-            self.output = max(0, min((((self.setpoint/120)*1000) + max(0, min(out, 1000))),1000))
+            self.output = max(0, min((((self.setPoint/120)*1000) + max(0, min(out, 1000))),1000))
               
         
     def getOutput(self):
