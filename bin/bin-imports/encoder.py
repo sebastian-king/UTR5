@@ -67,7 +67,7 @@ class encoder:
     #returns the speed in RPM
     def getSpeed(self):
         if(self.frequency != 0):
-            return 1 / (6000.0 / (self.frequency * 90.0))  #60 seconds / (time taken to go one pulse * pulses per one rotation) = RPM
+            return (60000.0 / (self.frequency * 90.0))  #60 seconds / (time taken to go one pulse * pulses per one rotation) = RPM
         return 0
 
 
