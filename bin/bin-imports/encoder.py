@@ -48,9 +48,9 @@ class encoder:
             self.pulses -= .5
         else:
             self.pulses += .5
-        self.currentTime = millis()
-        self.frequency = self.currentTime - self.oldTime
-        self.oldTime = self.currentTime
+        #self.currentTime = millis()
+        #self.frequency = self.currentTime - self.oldTime
+        #self.oldTime = self.currentTime
  
     #returns the accumulated distance in pulses            
     def getPulses(self):
@@ -67,7 +67,7 @@ class encoder:
     #returns the speed in RPM
     def getSpeed(self):
         if(self.frequency != 0):
-            return 60.0 / (self.frequency * 90.0)  #60 seconds / (time taken to go one pulse * pulses per one rotation) = RPM
+            return 1 / (60.0 / (self.frequency * 90.0))  #60 seconds / (time taken to go one pulse * pulses per one rotation) = RPM
         return 0
 
 
