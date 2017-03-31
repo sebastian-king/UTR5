@@ -5,7 +5,7 @@ import time
 
 
 
-def arm_raise(frequency):
+def arm_raise():
 
     GPIO.setmode(GPIO.BOARD)
     
@@ -32,7 +32,7 @@ def arm_raise(frequency):
 
             
 
-def arm_lower(frequency):
+def arm_lower():
 
     GPIO.setmode(GPIO.BOARD)
     
