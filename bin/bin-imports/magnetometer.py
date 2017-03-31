@@ -5,6 +5,26 @@ import RTIMU
 import os.path, time, math, numpy
 from threading import Thread
 
+
+def readData():
+	while True:
+		# x, y, z = imu.getFusionData()
+		# print("%f %f %f" % (x,y,z))
+		pastReadings.append(getReading())
+		if len(pastReadings) > samples:
+			pastReadings = pastReadings[-samples:]
+		time.sleep(poll_interval*1.0/1000.0)
+
+def getReading():
+	data = imu.getIMUData()
+	return data["fusionPose"][2]
+
+def unusual():
+	median = numpy.median(numpy.array(pastReadings))
+	yaw = getReading()
+	return yaw > median + threshold or yaw < median + threshold
+
+
 SETTINGS_FILE = "RTIMULib"
 threshold = 10
 samples = 20
@@ -38,21 +58,3 @@ while not imu.IMURead():
 
 monitor = Thread(target = readData())
 monitor.start()
-
-def readData():
-	while True:
-		# x, y, z = imu.getFusionData()
-		# print("%f %f %f" % (x,y,z))
-		pastReadings.append(getReading())
-		if len(pastReadings) > samples:
-			pastReadings = pastReadings[-samples:]
-		time.sleep(poll_interval*1.0/1000.0)
-
-def getReading():
-	data = imu.getIMUData()
-	return data["fusionPose"][2]
-
-def unusual():
-	median = numpy.median(numpy.array(pastReadings))
-	yaw = getReading()
-	return yaw > median + threshold or yaw < median + threshold
