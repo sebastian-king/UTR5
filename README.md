@@ -75,13 +75,13 @@ Alternatively, instead of using SFTP you can push your code to a github experime
 
 ## Images for the Raspberry Pi (All Raspbian Jessie-Pi 3 B v1.2):
 
-  All of the custom images can be found at https://sebs.tech/pi-images/r5/
+  All of the custom images can be found at https://www.helpfulseb.com/pi-images/r5/
   
 #### Guide for flashing Pi images:
   First off, a little reason why we need these images is because Pi SD Cards become corrupted a lot, especially when the power input is not stable which is a common problem when on battery power, which a $0.75 voltage regulator is not efficient enough to account for. So don't be surprised when the Pi won't boot because the filesystem has become effectively gibberish. This is why I have created a custom image to run the Pi from a flash drive, while only booting from a 100Mb SD Card, when the card becomes corrupted just re-flash the 67Mb boot partition and away you go.
   The `opencv` image is for compiling on raspbian so a lightweight executable can be run by the robot's script for image processing.
   
-###### Basic image for SD Card-only configurations (1.5Gb): https://sebs.tech/pi-images/r5/2017-01-11-raspbian-jessie-lite-pre-configured-full-min.img
+###### Basic image for SD Card-only configurations (1.5Gb): https://www.helpfulseb.com/pi-images/r5/2017-01-11-raspbian-jessie-lite-pre-configured-full-min.img
   * Serial over UART is enabled + BT is disabled for hardware UART: `raspi-config`, `dtoverlay=pi3-disable-bt >> /boot/config.txt`
   * SSH/SFTP is enabled: `raspi-config`
   * I2C is enabled: `raspi-config`
@@ -96,13 +96,13 @@ Alternatively, instead of using SFTP you can push your code to a github experime
   * update, upgrade, dist-upgrade: yes, 25/2/17
   * TODO: must do something about hciuart service
   
-###### Boot image for SD Card (67Mb): https://sebs.tech/pi-images/r5/2017-01-11-raspbian-jessie-lite-pre-configured-boot-min.img
+###### Boot image for SD Card (67Mb): https://www.helpfulseb.com/pi-images/r5/2017-01-11-raspbian-jessie-lite-pre-configured-boot-min.img
   * Same as above but only the boot partition
   
-###### Root image for Flash Drive (1.5Gb): https://sebs.tech/pi-images/r5/2017-01-11-raspbian-jessie-lite-pre-configured-root-min.img
+###### Root image for Flash Drive (1.5Gb): https://www.helpfulseb.com/pi-images/r5/2017-01-11-raspbian-jessie-lite-pre-configured-root-min.img
   * Same as above but only the root parition, it also unmounts the SD Card to help avoid corruption using `noauto`
   
-###### SD Card-only image for `opencv` (5.8Gb): https://sebs.tech/pi-images/r5/2017-01-11-raspbian-jessie-lite-pre-configured-full-opencv-min.img
+###### SD Card-only image for `opencv` (5.8Gb): https://www.helpfulseb.com/pi-images/r5/2017-01-11-raspbian-jessie-lite-pre-configured-full-opencv-min.img
   * Pre-configured same as the SD Card-only image but with `opencv`, `python3` and related dependencies installed
   * use `export PYTHONPATH=/usr/local/lib/python3/dist-packages/` to find `cv2.so`
   * [Install script](https://gist.githubusercontent.com/willprice/c216fcbeba8d14ad1138/raw/6e9024162b2645989d5eca6db19f81df49a6accd/install-opencv.sh)
