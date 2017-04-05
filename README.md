@@ -4,7 +4,7 @@
 
 --------------------------------------------------------------------------------------------------------------------------
 
-## Guide for using the Pi (work in progress, bare with me):
+## Guide for using the Pi:
 
 *DM me (@seb) in the Slack for help*
 
